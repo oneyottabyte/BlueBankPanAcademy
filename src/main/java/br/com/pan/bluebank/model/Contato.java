@@ -4,7 +4,7 @@ public class Contato {
 	
 	private int idContato;
 	private String telefone_contato;
-	private int _idCliente;
+	private Cliente _idCliente;
 	
 	
 	public Contato(int idContato, String telefone_contato, int _idCliente) {
