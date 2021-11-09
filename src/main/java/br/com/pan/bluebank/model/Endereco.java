@@ -34,18 +34,17 @@ public class Endereco implements Serializable {
     @Column(name = "id_endereco")
     private Long id;
     
-    @NotBlank(message = "Logradouro é um atributo obrigatório.")
+    @NotBlank(message = "Logradouro é um atributo obrigatório")
     @Size(min = 1, max = 100)
     @Column(name = "logradouro")
     private String logradouro;
     
-
-    @NotBlank(message = "Número é um atributo obrigatório.")
+    @NotBlank(message = "Número é um atributo obrigatório")
     @Size(min = 1, max = 10)
     @Column(name = "numero")
     private String numero;
     
-    @NotBlank(message = "CEP é um atributo obrigatório.")
+    @NotBlank(message = "CEP é um atributo obrigatório")
     @Size(min = 1, max = 10)
     @Column(name = "cep")
     private String cep;
@@ -66,9 +65,9 @@ public class Endereco implements Serializable {
     }
 
 	public Endereco(
-			@NotBlank(message = "Logradouro é um atributo obrigatório.") @Size(min = 1, max = 100) String logradouro,
-			@NotBlank(message = "Número é um atributo obrigatório.") @Size(min = 1, max = 10) String numero,
-			@NotBlank(message = "CEP é um atributo obrigatório.") @Size(min = 1, max = 10) String cep,
+			@NotBlank(message = "Logradouro é um atributo obrigatório") @Size(min = 1, max = 100) String logradouro,
+			@NotBlank(message = "Número é um atributo obrigatório") @Size(min = 1, max = 10) String numero,
+			@NotBlank(message = "CEP é um atributo obrigatório") @Size(min = 1, max = 10) String cep,
 			@Size(max = 45) String bairro, @Size(max = 100) String complemento, Cidade cidade) {
 		super();
 		this.logradouro = logradouro;
@@ -131,7 +130,7 @@ public class Endereco implements Serializable {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
