@@ -44,6 +44,10 @@ public class Gerente implements Serializable {
 	@Email
 	@Column(name = "email", unique = true)
 	private String email;
+	
+	@NotBlank(message = "Telefone é um atributo obrigatório") 
+	@Column(name = "telefone", unique = true)
+	private String telefone;
 
 	@NotBlank(message = "Endereço é um atributo obrigatório")
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -53,10 +57,16 @@ public class Gerente implements Serializable {
 	public Gerente() {
 	}
 
-	public Gerente(String nome, String cpf, String email, Endereco endereco) {
+	public Gerente(
+			@NotBlank(message = "Nome é um atributo obrigatório") @Pattern(regexp = "^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}", message = "Nome inválido") String nome,
+			@NotBlank(message = "CPF é um atributo obrigatório") @CPF String cpf,
+			@NotBlank(message = "E-mail é um atributo obrigatório") @Email String email,
+			@NotBlank(message = "Telefone é um atributo obrigatório") String telefone,
+			@NotBlank(message = "Endereço é um atributo obrigatório") Endereco endereco) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
+		this.telefone = telefone;
 		this.endereco = endereco;
 	}
 
@@ -100,6 +110,14 @@ public class Gerente implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	@Override
