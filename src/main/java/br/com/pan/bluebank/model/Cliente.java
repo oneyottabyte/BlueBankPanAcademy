@@ -54,6 +54,10 @@ public class Cliente implements Serializable {
 	@Column(name = "email", unique = true)
 	private String email;
 	
+	@NotBlank(message = "Telefone é um atributo obrigatório") 
+	@Column(name = "telefone", unique = true)
+	private String telefone;
+	
 	@NotBlank(message = "Endereço é um atributo obrigatório")
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_endereco")
@@ -68,11 +72,13 @@ public class Cliente implements Serializable {
 			@NotBlank(message = "CPF é um atributo obrigatório") @CPF String cpf,
 			@NotBlank(message = "Data de Nascimento é um atributo obrigatório") @Size(min = 10, max = 10) @Past(message = "Data de nascimento inválida") LocalDate dataNascimento,
 			@NotBlank(message = "E-mail é um atributo obrigatório") @Email String email,
+			@NotBlank(message = "Telefone é um atributo obrigatório") String telefone,
 			@NotBlank(message = "Endereço é um atributo obrigatório") Endereco endereco) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
+		this.telefone = telefone;
 		this.endereco = endereco;
 	}
 
@@ -114,6 +120,18 @@ public class Cliente implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	@Override
