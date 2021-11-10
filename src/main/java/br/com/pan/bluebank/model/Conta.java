@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -36,16 +37,17 @@ public class Conta implements Serializable {
 	@Column(name = "id_conta")
 	private Long id;
 	
-    @NotBlank(message = "Data de abertura é um atributo obrigatório!")
+    @NotNull(message = "Data de abertura é um atributo obrigatório!")
     @Past(message = "Data de abertura inválida")
     @Column(name = "data_abertura")
     private LocalDateTime dataAbertura;
 	 
     @NotBlank(message = "Número da conta é um atributo obrigatório!")
+    @Size(min = 1, max = 10)
     @Column(name = "numero_da_conta", unique = true)
     private String numeroDaConta;
     
-    @NotBlank(message = "Saldo é um atributo obrigatório!")
+    @NotNull(message = "Saldo é um atributo obrigatório!")
     @Column(name = "saldo")
     private BigDecimal saldo;
     
