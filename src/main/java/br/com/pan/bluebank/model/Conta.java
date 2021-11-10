@@ -42,7 +42,6 @@ public class Conta implements Serializable {
     private LocalDateTime dataAbertura;
 	 
     @NotBlank(message = "Número da conta é um atributo obrigatório!")
-    @Size(min = 1, max = 10)
     @Column(name = "numero_da_conta", unique = true)
     private String numeroDaConta;
     
@@ -154,7 +153,7 @@ public class Conta implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(this.id);
 	}
 
 	@Override
