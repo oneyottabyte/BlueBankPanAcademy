@@ -43,11 +43,11 @@ public class Agencia implements Serializable {
 
 	public Agencia(
 			@Pattern(regexp = "/^[0-9]+$/") @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
-			@Pattern(regexp = "/^[A-Za-z]+$/") @NotBlank(message = "Nome da agência é um atributo obrigatório!") String nome,
+			@Pattern(regexp = "/^[A-Za-z]+$/") @NotBlank(message = "Nome da agência é um atributo obrigatório!") String nomeAgencia,
 			Gerente gerente) {
 		super();
 		this.numeroAgencia = numeroAgencia;
-		this.nome = nome;
+		this.nomeAgencia = nomeAgencia;
 		this.gerente = gerente;
 	}
 
@@ -55,10 +55,10 @@ public class Agencia implements Serializable {
 
 	public Agencia(
 			@Pattern(regexp = "/^[0-9]+$/") @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
-			@Pattern(regexp = "/^[A-Za-z]+$/") @NotBlank(message = "Nome da agência é um atributo obrigatório!") String nome) {
+			@Pattern(regexp = "/^[A-Za-z]+$/") @NotBlank(message = "Nome da agência é um atributo obrigatório!") String nomeAgencia) {
 		super();
 		this.numeroAgencia = numeroAgencia;
-		this.nome = nome;
+		this.nomeAgencia = nomeAgencia;
 	}
 
 
@@ -72,13 +72,13 @@ public class Agencia implements Serializable {
 	}
 
 
-	public String getNome() {
-		return nome;
+	public String getNomeAgencia() {
+		return nomeAgencia;
 	}
 
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeAgencia(String nome) {
+		this.nomeAgencia = nome;
 	}
 
 

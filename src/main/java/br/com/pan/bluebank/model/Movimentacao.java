@@ -22,6 +22,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
+import br.com.pan.bluebank.model.ENUM.TipoMovimentacao;
+
 @Entity
 @Table(name = "tb_movimentacoes")
 public class Movimentacao implements Serializable {
