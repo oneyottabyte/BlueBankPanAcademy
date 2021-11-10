@@ -2,29 +2,29 @@ package br.com.pan.bluebank.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Basic;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+
+import br.com.pan.bluebank.model.ENUM.TipoDeConta;
 
 @Entity
 @Table(name = "tb_conta")
@@ -51,6 +51,11 @@ public class Conta implements Serializable {
     @Column(name = "saldo")
     private BigDecimal saldo;
     
+    @NotBlank(message = "Tipo de conta é um atributo obrigatório!")   
+    @Column(name = "tipo_conta")
+    @Enumerated(EnumType.STRING)
+    private TipoDeConta tipoDeConta;
+    
     @JoinColumn(name = "id_agencia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Agencia agencia;
@@ -59,23 +64,24 @@ public class Conta implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Cliente cliente;
     
-    @JoinColumn(name = "tipo_de_conta")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private TipoDeConta tipoDeConta;
 
 	public Conta() {
 	}
 
 	
+	
+	
 	public Conta(
-			@NotBlank(message = "Data de abertura é um atributo obrigatório!") @Past(message = "Data de abertura inválida") LocalDateTime dataAbertura,
+			@NotNull(message = "Data de abertura é um atributo obrigatório!") @Past(message = "Data de abertura inválida") LocalDateTime dataAbertura,
 			@NotBlank(message = "Número da conta é um atributo obrigatório!") @Size(min = 1, max = 10) String numeroDaConta,
-			@NotBlank(message = "Saldo é um atributo obrigatório!") BigDecimal saldo) {
+			@NotNull(message = "Saldo é um atributo obrigatório!") BigDecimal saldo,
+			@NotBlank(message = "Tipo de conta é um atributo obrigatório!") TipoDeConta tipoDeConta) {
 		this.dataAbertura = dataAbertura;
 		this.numeroDaConta = numeroDaConta;
 		this.saldo = saldo;
+		this.tipoDeConta = tipoDeConta;
 	}
-	
+
 	public Conta(
 			@NotBlank(message = "Data de abertura é um atributo obrigatório!") @Past(message = "Data de abertura inválida") LocalDateTime dataAbertura,
 			@NotBlank(message = "Número da conta é um atributo obrigatório!") @Size(min = 1, max = 10) String numeroDaConta,
