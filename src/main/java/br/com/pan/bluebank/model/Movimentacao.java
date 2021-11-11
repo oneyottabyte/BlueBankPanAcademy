@@ -46,7 +46,6 @@ public class Movimentacao implements Serializable {
     private BigDecimal valorTransacao;    
        
     @Column(name = "data_movimentacao")
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dataMovimentacao;
     
     @JoinColumn(name = "id_conta_origem")

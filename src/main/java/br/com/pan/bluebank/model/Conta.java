@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,12 +23,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.Id;
 
 import br.com.pan.bluebank.model.ENUM.TipoDeConta;
 
 @Entity
-@Table(name = "tb_conta")
+@Table(name = "tb_contas")
 public class Conta implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
