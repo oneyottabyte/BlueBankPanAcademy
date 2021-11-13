@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Size
+import javax.validation.constraints.Size;
 import br.com.pan.bluebank.model.ENUM.TipoDeConta;
 
 @Entity
