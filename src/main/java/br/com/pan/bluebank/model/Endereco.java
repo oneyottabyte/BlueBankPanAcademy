@@ -5,12 +5,9 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -49,25 +46,37 @@ public class Endereco implements Serializable {
     @Column(name = "complemento")
     private String complemento;
     
-    @JoinColumn(name = "id_cidade")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Cidade cidade;
-
+    @NotBlank(message = "Cidade é um atributo obrigatório")
+    @Size(max = 100)
+    @Column(name = "cidade")
+    private String cidade;
+    
+    @NotBlank(message = "Estado é um atributo obrigatório")
+    @Size(max = 100)    
+    @Column(name = "estado")
+    private String estado;
+   
     public Endereco() {
     }
-
+    
 	public Endereco(
 			@NotBlank(message = "Logradouro é um atributo obrigatório") @Size(min = 1, max = 100) String logradouro,
 			@NotBlank(message = "Número é um atributo obrigatório") @Size(min = 1, max = 10) String numero,
 			@NotBlank(message = "CEP é um atributo obrigatório") @Size(min = 1, max = 10) String cep,
-			@Size(max = 45) String bairro, @Size(max = 100) String complemento, Cidade cidade) {
-		super();
+			@Size(max = 45) String bairro, @Size(max = 100) String complemento,
+			@NotBlank(message = "Cidade é um atributo obrigatório") @Size(max = 100) String cidade,
+			@NotBlank(message = "Estado é um atributo obrigatório") @Size(max = 100) String estado) {
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.cep = cep;
 		this.bairro = bairro;
 		this.complemento = complemento;
 		this.cidade = cidade;
+		this.estado = estado;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public String getLogradouro() {
@@ -110,19 +119,22 @@ public class Endereco implements Serializable {
 		this.complemento = complemento;
 	}
 
-	public Cidade getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(Cidade cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+	public String getEstado() {
+		return estado;
 	}
-	
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
