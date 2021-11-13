@@ -20,12 +20,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
-
+import javax.validation.constraints.Size
 import br.com.pan.bluebank.model.ENUM.TipoDeConta;
 
 @Entity
-@Table(name = "tb_conta")
+@Table(name = "tb_contas")
 public class Conta implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

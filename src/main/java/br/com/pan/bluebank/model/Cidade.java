@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "tb_cidade")
+@Table(name = "tb_cidades")
 public class Cidade implements Serializable{
 
 	private static final long serialVersionUID = 1L;

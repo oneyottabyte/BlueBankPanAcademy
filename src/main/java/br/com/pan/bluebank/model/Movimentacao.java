@@ -40,8 +40,8 @@ public class Movimentacao implements Serializable {
     @NotBlank(message = "Valor é um atributo obrigatório!") 
     @Column(name = "valor_transacao")
     private BigDecimal valorTransacao;    
-       
-    @Column(name = "data_movimentacao")    
+
+    @Column(name = "data_movimentacao")
     private LocalDateTime dataMovimentacao;
     
     @JoinColumn(name = "id_conta_origem")
