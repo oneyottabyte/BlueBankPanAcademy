@@ -59,7 +59,7 @@ public class Cliente implements Serializable {
 	private String telefone;
 	
 	@NotBlank(message = "Endereço é um atributo obrigatório")
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
 	

@@ -18,13 +18,17 @@ public class ClienteDTO {
 	
 	}	
 
-	public ClienteDTO(String nome, LocalDate dataNascimento, String email, String telefone, Endereco endereco) {
+	
+	public ClienteDTO(String nome, String cpf, LocalDate dataNascimento, String email, String telefone,
+			Endereco endereco) {
 		this.nome = nome;
+		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.telefone = telefone;
 		this.endereco = endereco;
 	}
+
 
 
 

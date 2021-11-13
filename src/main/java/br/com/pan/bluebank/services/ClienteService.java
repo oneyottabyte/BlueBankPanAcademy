@@ -9,10 +9,8 @@ import br.com.pan.bluebank.dto.ClienteDTO;
 import br.com.pan.bluebank.mappers.ClienteMapper;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Endereco;
-import br.com.pan.bluebank.repositories.CidadeRepository;
 import br.com.pan.bluebank.repositories.ClienteRepository;
 import br.com.pan.bluebank.repositories.EnderecoRepository;
-import br.com.pan.bluebank.repositories.EstadoRepository;
 
 @Service
 public class ClienteService {
@@ -21,9 +19,11 @@ public class ClienteService {
 	private ClienteRepository clienteRepository;
 
 	@Autowired
-	private EnderecoRepository enderecoRepository;
+	public static EnderecoRepository enderecoRepository;
 			
 	public Cliente create(ClienteDTO dto) {	
+		//Endereco endereco2 = new Endereco();
+		//endereco2.set.ce
 		Endereco endereco = enderecoRepository.save(dto.getEndereco());
 		dto.setEndereco(endereco);
 		Cliente entity = ClienteMapper.toEntity(dto);
