@@ -34,8 +34,7 @@ public class ClienteMapper {
 		endereco.setCep(endereco.getCep() != null ? endereco.getCep() : oldEndereco.getCep());
 		endereco.setCidade(endereco.getCidade() != null ? endereco.getCidade() : oldEndereco.getCidade());
 		endereco.setEstado(endereco.getEstado() != null ? endereco.getEstado() : oldEndereco.getEstado());
-		cliente.setEndereco(endereco);
-		cliente.setEndereco(dto.getEndereco());		
+		cliente.setEndereco(endereco);	
 		return cliente;
 	}
 }
