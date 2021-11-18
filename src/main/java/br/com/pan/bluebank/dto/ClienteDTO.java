@@ -8,25 +8,24 @@ public class ClienteDTO {
 	
 	private String nome;	
 	private String cpf;
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 	private String email;
 	private String telefone;
-		
 	private Endereco endereco;
 			
 	public ClienteDTO() {
 	
 	}	
-
-	public ClienteDTO(String nome, LocalDate dataNascimento, String email, String telefone, Endereco endereco) {
+	
+	public ClienteDTO(String nome, String cpf, String dataNascimento, String email, String telefone,
+			Endereco endereco) {
 		this.nome = nome;
+		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.telefone = telefone;
 		this.endereco = endereco;
 	}
-
-
 
 	public String getNome() {
 		return nome;
@@ -44,11 +43,11 @@ public class ClienteDTO {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
