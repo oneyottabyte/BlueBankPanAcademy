@@ -16,7 +16,6 @@ public class ClienteDTO {
 	public ClienteDTO() {
 	
 	}	
-
 	
 	public ClienteDTO(String nome, String cpf, String dataNascimento, String email, String telefone,
 			Endereco endereco) {
@@ -27,9 +26,6 @@ public class ClienteDTO {
 		this.telefone = telefone;
 		this.endereco = endereco;
 	}
-
-
-
 
 	public String getNome() {
 		return nome;
