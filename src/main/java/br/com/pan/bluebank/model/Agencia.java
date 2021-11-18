@@ -1,7 +1,7 @@
 package br.com.pan.bluebank.model;
 
 import java.io.Serializable;
-import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,8 +50,6 @@ public class Agencia implements Serializable {
 		this.nomeAgencia = nomeAgencia;
 		this.gerente = gerente;
 	}
-
-
 
 	public Agencia(
 			@Pattern(regexp = "/^[0-9]+$/") @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
@@ -121,9 +119,4 @@ public class Agencia implements Serializable {
 		return true;
 	}
 	
-	
-    
-    
-	
-
 }
