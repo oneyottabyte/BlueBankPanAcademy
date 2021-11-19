@@ -37,5 +37,4 @@ public class EnderecoService {
 	return enderecoRepository.findById(id).orElseThrow(() -> 
                 new EntityNotFoundException("Adress not found."));
     }
-
 }

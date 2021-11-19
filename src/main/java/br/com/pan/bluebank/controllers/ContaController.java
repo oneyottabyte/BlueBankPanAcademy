@@ -17,7 +17,7 @@ import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.services.ContaService;
 
 @RestController
-@RequestMapping(path = "/contas")
+@RequestMapping(path = "v1/contas")
 public class ContaController {
 	
 	@Autowired

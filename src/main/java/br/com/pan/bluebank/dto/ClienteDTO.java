@@ -1,7 +1,5 @@
 package br.com.pan.bluebank.dto;
 
-import java.time.LocalDate;
-
 import br.com.pan.bluebank.model.Endereco;
 
 public class ClienteDTO {
@@ -74,6 +72,5 @@ public class ClienteDTO {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
 	
 }
