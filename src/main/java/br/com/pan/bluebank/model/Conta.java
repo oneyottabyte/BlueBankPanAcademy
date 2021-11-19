@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,6 +20,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.pan.bluebank.model.ENUM.TipoDeConta;
 
 @Entity
@@ -48,17 +50,19 @@ public class Conta implements Serializable {
     @Column(name = "saldo")
     private BigDecimal saldo;
     
-    @NotBlank(message = "Tipo de conta é um atributo obrigatório!")   
+    @NotNull(message = "Tipo de conta é um atributo obrigatório!")   
     @Column(name = "tipo_conta")
     @Enumerated(EnumType.STRING)
     private TipoDeConta tipoDeConta;
     
+    @JsonIgnore
     @JoinColumn(name = "id_agencia")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Agencia agencia;
     
+    @JsonIgnore
     @JoinColumn(name = "id_cliente")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Cliente cliente;
     
 	public Conta() {		
