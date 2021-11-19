@@ -23,12 +23,12 @@ public class Agencia implements Serializable {
     @Column(name = "id_agencia")
     private Long id;
     
-    @Pattern(regexp = "/^[0-9]+$/")
+//    @Pattern(regexp = "/^[0-9]+$/")
     @NotBlank(message = "Número da agência é um atributo obrigatório!")   
     @Column(name = "numero_agencia")
     private String numeroAgencia;
     
-    @Pattern(regexp = "/^[A-Za-z]+$/")
+//    @Pattern(regexp = "/^[A-Za-z]+$/")
     @NotBlank(message = "Nome da agência é um atributo obrigatório!")   
     @Column(name = "nome_agencia")
     private String nomeAgencia;
@@ -40,12 +40,11 @@ public class Agencia implements Serializable {
     
     public Agencia() {
     }
-
+    
 	public Agencia(
 			@Pattern(regexp = "/^[0-9]+$/") @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
 			@Pattern(regexp = "/^[A-Za-z]+$/") @NotBlank(message = "Nome da agência é um atributo obrigatório!") String nomeAgencia,
 			Gerente gerente) {
-		super();
 		this.numeroAgencia = numeroAgencia;
 		this.nomeAgencia = nomeAgencia;
 		this.gerente = gerente;
@@ -54,11 +53,9 @@ public class Agencia implements Serializable {
 	public Agencia(
 			@Pattern(regexp = "/^[0-9]+$/") @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
 			@Pattern(regexp = "/^[A-Za-z]+$/") @NotBlank(message = "Nome da agência é um atributo obrigatório!") String nomeAgencia) {
-		super();
 		this.numeroAgencia = numeroAgencia;
 		this.nomeAgencia = nomeAgencia;
 	}
-
 
 	public String getNumeroAgencia() {
 		return numeroAgencia;
