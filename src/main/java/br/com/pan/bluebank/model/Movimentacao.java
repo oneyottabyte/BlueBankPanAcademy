@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import br.com.pan.bluebank.model.ENUM.TipoMovimentacao;
@@ -31,13 +32,13 @@ public class Movimentacao implements Serializable {
     @Column(name = "id_movimentacao")
     private Long id;     
     
-    @NotBlank(message = "Tipo de movimentação é um atributo obrigatório!")   
+    @NotNull(message = "Tipo de movimentação é um atributo obrigatório!")   
     @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
     private TipoMovimentacao tipo;
         
     @Positive(message = "O valor da transação tem de ser positivo")
-    @NotBlank(message = "Valor é um atributo obrigatório!") 
+    @NotNull(message = "Valor é um atributo obrigatório!") 
     @Column(name = "valor_transacao")
     private BigDecimal valorTransacao;    
 
@@ -64,6 +65,10 @@ public class Movimentacao implements Serializable {
 		this.dataMovimentacao = dataMovimentacao;
 		this.contaOrigem = contaOrigem;
 		this.contaDestino = contaDestino;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public TipoMovimentacao getTipo() {
