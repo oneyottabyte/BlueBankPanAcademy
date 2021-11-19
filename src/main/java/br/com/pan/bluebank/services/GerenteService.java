@@ -4,8 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import br.com.pan.bluebank.dto.ClienteDTO;
+import br.com.pan.bluebank.dto.GerenteDTO;
+import br.com.pan.bluebank.mappers.ClienteMapper;
+import br.com.pan.bluebank.mappers.GerenteMapper;
+import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.model.Gerente;
+import br.com.pan.bluebank.repositories.EnderecoRepository;
 import br.com.pan.bluebank.repositories.GerenteRepository;
 
 @Service
@@ -13,6 +20,9 @@ public class GerenteService {
 
 	@Autowired
 	private GerenteRepository gerenteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public Gerente findById(Long id) {	
 		return gerenteRepository.findById(id).orElseThrow();
@@ -22,30 +32,18 @@ public class GerenteService {
 		return gerenteRepository.findAll();
 	}	
 	
-	public Gerente create(Gerente gerente) {	
-		return gerenteRepository.save(gerente);	
+	public Gerente create(GerenteDTO gerenteDTO) {	
+		Endereco endereco = enderecoRepository.save(gerenteDTO.getEndereco());
+		gerenteDTO.setEndereco(endereco);
+		Gerente entity = GerenteMapper.toEntity(gerenteDTO);
+		return gerenteRepository.save(entity);	
 	}
 	
-	public Gerente update(Long id, Gerente gerente) {
-		Gerente oldGerente = gerenteRepository.findById(id).orElseThrow();
-		Endereco oldEndereco = oldGerente.getEndereco();
-		Endereco endereco = gerente.getEndereco();
-	
-		gerente.setEmail(gerente.getEmail() != null ? gerente.getEmail() : oldGerente.getEmail());
-		gerente.setEndereco(gerente.getEndereco() != null ? gerente.getEndereco() : oldGerente.getEndereco());
-		gerente.setNome(gerente.getNome() != null ? gerente.getNome() : oldGerente.getNome());
-		gerente.setTelefone(gerente.getTelefone() != null ? gerente.getTelefone() : oldGerente.getTelefone());
-		
-		endereco.setLogradouro(endereco.getLogradouro() != null ? endereco.getLogradouro() : oldEndereco.getLogradouro());
-		endereco.setNumero(endereco.getNumero() != null ? endereco.getNumero() : oldEndereco.getNumero());
-		endereco.setComplemento(endereco.getComplemento() != null ? endereco.getComplemento() : oldEndereco.getComplemento());
-		endereco.setBairro(endereco.getBairro() != null ? endereco.getBairro() : oldEndereco.getBairro());
-		endereco.setCep(endereco.getCep() != null ? endereco.getCep() : oldEndereco.getCep());
-		endereco.setCidade(endereco.getCidade() != null ? endereco.getCidade() : oldEndereco.getCidade());
-		endereco.setEstado(endereco.getEstado() != null ? endereco.getEstado() : oldEndereco.getEstado());
-		gerente.setEndereco(endereco);
-		
-		return gerenteRepository.save(gerente);
+	public Gerente update(Long id, GerenteDTO gerenteDTO) {
+		Gerente gerente = gerenteRepository.findById(id).orElseThrow();
+		Gerente updatedEntity = GerenteMapper.updateEntity(gerente, gerenteDTO);
+		enderecoRepository.save(updatedEntity.getEndereco());
+		return gerenteRepository.save(updatedEntity);
 	}
 	
 	public void delete(Long id) {

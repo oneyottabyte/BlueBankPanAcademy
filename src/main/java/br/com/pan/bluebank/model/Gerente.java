@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -49,7 +50,7 @@ public class Gerente implements Serializable {
 	private String telefone;
 
 	@NotNull(message = "Endereço é um atributo obrigatório")
-	@OneToOne()
+	@OneToOne
 	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
 
@@ -61,7 +62,7 @@ public class Gerente implements Serializable {
 			@NotBlank(message = "CPF é um atributo obrigatório") @CPF String cpf,
 			@NotBlank(message = "E-mail é um atributo obrigatório") @Email String email,
 			@NotBlank(message = "Telefone é um atributo obrigatório") String telefone,
-			@NotBlank(message = "Endereço é um atributo obrigatório") Endereco endereco) {
+			@NotNull(message = "Endereço é um atributo obrigatório") Endereco endereco) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
