@@ -22,8 +22,6 @@ public class ClienteService {
 	public static EnderecoRepository enderecoRepository;
 			
 	public Cliente create(ClienteDTO dto) {	
-		//Endereco endereco2 = new Endereco();
-		//endereco2.set.ce
 		Endereco endereco = enderecoRepository.save(dto.getEndereco());
 		dto.setEndereco(endereco);
 		Cliente entity = ClienteMapper.toEntity(dto);

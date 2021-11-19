@@ -1,25 +1,21 @@
 package br.com.pan.bluebank.dto;
 
-import java.time.LocalDate;
-
 import br.com.pan.bluebank.model.Endereco;
 
 public class ClienteDTO {
 	
 	private String nome;	
 	private String cpf;
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 	private String email;
 	private String telefone;
-		
 	private Endereco endereco;
 			
 	public ClienteDTO() {
 	
 	}	
-
 	
-	public ClienteDTO(String nome, String cpf, LocalDate dataNascimento, String email, String telefone,
+	public ClienteDTO(String nome, String cpf, String dataNascimento, String email, String telefone,
 			Endereco endereco) {
 		this.nome = nome;
 		this.cpf = cpf;
@@ -28,9 +24,6 @@ public class ClienteDTO {
 		this.telefone = telefone;
 		this.endereco = endereco;
 	}
-
-
-
 
 	public String getNome() {
 		return nome;
@@ -48,11 +41,11 @@ public class ClienteDTO {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -79,6 +72,5 @@ public class ClienteDTO {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
 	
 }

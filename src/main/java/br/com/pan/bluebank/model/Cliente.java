@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -43,8 +42,7 @@ public class Cliente implements Serializable {
 	@Column(name = "cpf", unique = true)
 	private String cpf;
 	
-	@NotBlank(message = "Data de Nascimento é um atributo obrigatório")
-	@Size(min = 10, max = 10)
+	@NotNull(message = "Data de Nascimento é um atributo obrigatório")
 	@Past(message = "Data de nascimento inválida")
 	@Column(name = "dataNascimento")
 	private LocalDate dataNascimento;
@@ -58,8 +56,8 @@ public class Cliente implements Serializable {
 	@Column(name = "telefone", unique = true)
 	private String telefone;
 	
-	@NotBlank(message = "Endereço é um atributo obrigatório")
-	@OneToOne(fetch = FetchType.LAZY)
+	@NotNull(message = "Endereço é um atributo obrigatório")
+	@OneToOne()
 	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
 	

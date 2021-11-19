@@ -7,8 +7,7 @@ import br.com.pan.bluebank.repositories.EnderecoRepository;
 
 @Service
 public class EnderecoService {
-	
-	
+		
 	public EnderecoRepository enderecoRepository;
 	
 	@Autowired
@@ -16,7 +15,4 @@ public class EnderecoService {
 		this.enderecoRepository = enderecoRepository;
 		ClienteService.enderecoRepository = this.enderecoRepository;
 	}
-	
-	
-
 }
