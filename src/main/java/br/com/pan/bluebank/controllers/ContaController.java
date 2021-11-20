@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -54,9 +54,10 @@ public class ContaController {
 		}
 	
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<Conta> inactivate(@PathVariable Long id){
-		Conta contaInativa = contaService.inactivate(id);
-		return ResponseEntity.ok(contaInativa);
+	public ResponseEntity<Conta> alterarStatus(@PathVariable Long id, 
+			@RequestParam String status){
+		Conta contaInativada = contaService.alterarStatus(id, status);
+		return ResponseEntity.ok(contaInativada);
 	}
 	
 }

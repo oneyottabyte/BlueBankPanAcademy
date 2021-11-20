@@ -1,5 +1,6 @@
 package br.com.pan.bluebank.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +52,15 @@ public class ContaService {
 		return contaRepository.save(novaConta);
 	}
 	
-	public Conta inactivate(Long id) {
-		Conta contaInativa = contaRepository.findById(id).orElseThrow();
-		contaInativa.setStatusDeConta(StatusDeConta.DESATIVADO);
-		return contaRepository.save(contaInativa);
+	public Conta alterarStatus(Long id, String status) {
+		Conta contaAlterada = contaRepository.findById(id).orElseThrow();
+		if(StatusDeConta.valueOf(status) == StatusDeConta.ATIVADO) {
+			contaAlterada.setStatusDeConta(StatusDeConta.ATIVADO);
+		}else {
+			contaAlterada.setStatusDeConta(StatusDeConta.DESATIVADO);
+			contaAlterada.setSaldo(BigDecimal.ZERO);
+		}
+		return contaRepository.save(contaAlterada);
 	}
 	
 }
