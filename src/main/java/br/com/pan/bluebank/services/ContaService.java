@@ -63,4 +63,8 @@ public class ContaService {
 		return contaRepository.save(contaAlterada);
 	}
 	
+	protected Conta atualizarConta(Conta conta) {
+		return contaRepository.save(conta);
+	}
+	
 }

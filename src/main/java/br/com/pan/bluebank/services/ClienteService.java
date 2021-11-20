@@ -29,7 +29,9 @@ public class ClienteService {
 	}
 	
 	public Cliente update(Long id, ClienteDTO dto) {
-		Cliente cliente = clienteRepository.findById(id).orElseThrow();
+		Cliente cliente = findById(id);		
+		Endereco endereco = enderecoRepository.save(dto.getEndereco());
+		dto.setEndereco(endereco);
 		Cliente updatedEntity = ClienteMapper.updateEntity(cliente, dto);
 		
 		return clienteRepository.save(updatedEntity);
@@ -44,7 +46,7 @@ public class ClienteService {
 	}	
 	
 	public void delete(Long id) {
-		Cliente cliente = clienteRepository.findById(id).orElseThrow();
+		Cliente cliente = findById(id);
 		clienteRepository.delete(cliente);	
 	}
 }
