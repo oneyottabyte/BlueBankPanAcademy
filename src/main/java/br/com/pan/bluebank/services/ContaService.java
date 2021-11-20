@@ -40,10 +40,8 @@ public class ContaService {
 	}	
 
 	public Conta create(ContaDTO dto) {
-
 		Cliente cliente = clienteService.findById(dto.getIdCliente());
 		Agencia agencia = agenciaService.findById(dto.getIdAgencia());
-
 		Conta novaConta = ContaMapper.toEntity(dto, cliente, agencia);
 
 		return contaRepository.save(novaConta);
@@ -51,7 +49,6 @@ public class ContaService {
 
 	public Conta alterarStatus(Long id, String status) {
 		Conta contaAlterada = findById(id);
-
 		try {
 			if (StatusDeConta.valueOf(status) == StatusDeConta.ATIVADO) {
 				contaAlterada.setStatusDeConta(StatusDeConta.ATIVADO);
@@ -62,7 +59,6 @@ public class ContaService {
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Status de conta inválido!");
 		}
-
 		return contaRepository.save(contaAlterada);
 	}
 

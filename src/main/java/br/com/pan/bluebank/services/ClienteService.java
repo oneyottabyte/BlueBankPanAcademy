@@ -20,7 +20,7 @@ public class ClienteService {
 	private ClienteRepository clienteRepository;
 
 	@Autowired
-	public static EnderecoRepository enderecoRepository;
+	private EnderecoRepository enderecoRepository;
 
 	public Cliente create(ClienteDTO dto) {	
 		Endereco endereco = enderecoRepository.save(dto.getEndereco());
