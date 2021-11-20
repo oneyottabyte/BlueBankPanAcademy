@@ -11,8 +11,6 @@ import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.ENUM.StatusDeConta;
-import br.com.pan.bluebank.repositories.AgenciaRepository;
-import br.com.pan.bluebank.repositories.ClienteRepository;
 import br.com.pan.bluebank.repositories.ContaRepository;
 
 @Service
@@ -22,10 +20,10 @@ public class ContaService {
 	private ContaRepository contaRepository;
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteService clienteService;
 	
 	@Autowired
-	private AgenciaRepository agenciaRepository;
+	private AgenciaService agenciaService;
 
 	public List<Conta> findAll() {
 		return contaRepository.findAll();
@@ -45,8 +43,8 @@ public class ContaService {
 	
 	public Conta create(ContaDTO dto) {
 		
-		Cliente cliente = clienteRepository.findById(dto.getIdCliente()).orElseThrow();
-		Agencia agencia = agenciaRepository.findById(dto.getIdAgencia()).orElseThrow();
+		Cliente cliente = clienteService.findById(dto.getIdCliente());
+		Agencia agencia = agenciaService.findById(dto.getIdAgencia());
 		
 		Conta novaConta = ContaMapper.toEntity(dto, cliente, agencia);
 		
