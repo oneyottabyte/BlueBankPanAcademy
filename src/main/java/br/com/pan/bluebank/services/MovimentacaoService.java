@@ -11,6 +11,7 @@ import br.com.pan.bluebank.dto.MovimentacaoDTO;
 import br.com.pan.bluebank.mappers.MovimentacaoMapper;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.Movimentacao;
+import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 import br.com.pan.bluebank.repositories.ContaRepository;
 import br.com.pan.bluebank.repositories.MovimentacaoRepository;
 
@@ -23,24 +24,16 @@ public class MovimentacaoService {
 	@Autowired 
 	public MovimentacaoRepository movimentacaoRepository;
 			
-	public Movimentacao create(Long origemId, Long destinoId, MovimentacaoDTO dto) {	
-		Conta contaOrigem = contaRepository.findById(origemId).orElseThrow();
-		Conta contaDestino = contaRepository.findById(destinoId).orElseThrow();
+	public Movimentacao create(MovimentacaoDTO dto) {	
+		Movimentacao movimentacao = criaMovimentacao(dto);		
 		
-		if(contaOrigem.getSaldo().compareTo(dto.getValorTransacao()) >= 0) {
-			contaOrigem.setSaldo(contaOrigem.getSaldo().subtract(dto.getValorTransacao()));
-			contaDestino.setSaldo(contaDestino.getSaldo().add(dto.getValorTransacao()));
-		} else {
-			throw new Error();
-		}
+		movimentacao = atualizaSaldoContasPorTipo(dto.getTipo(), movimentacao); ;
+							
+		salvaContasMovimentacaoPorTipo(dto.getTipo(), movimentacao);		
 				
-		contaRepository.save(contaOrigem);
-		contaRepository.save(contaDestino);
-		Movimentacao save = movimentacaoRepository.save(MovimentacaoMapper.toEntity(dto, contaOrigem, contaDestino));
-		
-		return save;	
-	}
-		
+		return movimentacaoRepository.save(movimentacao);	
+	}		
+
 	@Transactional
 	public Movimentacao findById(Long id) {	
 		return movimentacaoRepository.findById(id).orElseThrow();
@@ -49,5 +42,27 @@ public class MovimentacaoService {
 	public Page<Movimentacao> findAll(Pageable page) {
 		return movimentacaoRepository.findAll(page);
 	}	
+		
+	private void salvaContasMovimentacaoPorTipo(TipoMovimentacao tipoMovimentacao, Movimentacao movimentacaoAtt) {
+		if(tipoMovimentacao.possuiContaDestino()) {
+			contaRepository.save(movimentacaoAtt.getContaOrigem());
+			contaRepository.save(movimentacaoAtt.getContaDestino());
+		} else {
+			contaRepository.save(movimentacaoAtt.getContaOrigem());
+		}		
+	}
 
+	private Movimentacao criaMovimentacao(MovimentacaoDTO dto) {
+		Conta contaBase = contaRepository.findById(dto.getContaOrigemId()).orElseThrow();		
+		if(dto.getTipo().possuiContaDestino()) {
+			Conta contaDestino = contaRepository.findById(dto.getContaDestinoId()).orElseThrow();			
+			return MovimentacaoMapper.toEntity(dto, contaBase, contaDestino);
+		} else {
+			return MovimentacaoMapper.toEntity(dto, contaBase, contaBase);
+		}		 
+	}
+
+	private Movimentacao atualizaSaldoContasPorTipo(TipoMovimentacao tipo, Movimentacao movimentacao) {		
+		return tipo.atualizaSaldo(movimentacao);
+	}
 }

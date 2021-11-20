@@ -3,7 +3,7 @@ package br.com.pan.bluebank.dto;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import br.com.pan.bluebank.model.ENUM.TipoDeConta;
+import br.com.pan.bluebank.model.enums.TipoDeConta;
 
 public class ContaDTO {
 	

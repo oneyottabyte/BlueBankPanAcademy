@@ -2,7 +2,7 @@ package br.com.pan.bluebank.dto;
 
 import java.math.BigDecimal;
 
-import br.com.pan.bluebank.model.ENUM.TipoMovimentacao;
+import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 
 public class MovimentacaoDTO {
 	
@@ -12,14 +12,22 @@ public class MovimentacaoDTO {
 
     private BigDecimal valorTransacao;
     
+    private Long contaOrigemId;
+    
+    private Long contaDestinoId;
+    
 	public MovimentacaoDTO() {
 	
-	}
+	}	
 
-	public MovimentacaoDTO(Long id, TipoMovimentacao tipo, BigDecimal valorTransacao) {
+	public MovimentacaoDTO(Long id, TipoMovimentacao tipo, BigDecimal valorTransacao, Long contaOrigemId,
+			Long contaDestinoId) {
+		super();
 		this.id = id;
 		this.tipo = tipo;
 		this.valorTransacao = valorTransacao;
+		this.contaOrigemId = contaOrigemId;
+		this.contaDestinoId = contaDestinoId;
 	}
 
 	public Long getId() {
@@ -44,6 +52,22 @@ public class MovimentacaoDTO {
 
 	public void setValorTransacao(BigDecimal valorTransacao) {
 		this.valorTransacao = valorTransacao;
-	}    
+	}
 
+	public Long getContaOrigemId() {
+		return contaOrigemId;
+	}
+
+	public void setContaOrigemId(Long contaOrigemId) {
+		this.contaOrigemId = contaOrigemId;
+	}
+
+	public Long getContaDestinoId() {
+		return contaDestinoId;
+	}
+
+	public void setContaDestinoId(Long contaDestinoId) {
+		this.contaDestinoId = contaDestinoId;
+	}    
+	
 }

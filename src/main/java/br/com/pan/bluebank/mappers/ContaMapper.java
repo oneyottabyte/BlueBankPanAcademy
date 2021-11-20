@@ -6,7 +6,7 @@ import br.com.pan.bluebank.dto.ContaDTO;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Conta;
-import br.com.pan.bluebank.model.ENUM.StatusDeConta;
+import br.com.pan.bluebank.model.enums.StatusDeConta;
 
 public class ContaMapper {
 	

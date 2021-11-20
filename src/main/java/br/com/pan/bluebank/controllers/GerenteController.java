@@ -34,7 +34,7 @@ public class GerenteController {
 
 	@GetMapping
 	public ResponseEntity<List<Gerente>> findAll() {
-		List<Gerente> list = gerenteService.findAll();
+		List<Gerente> list = this.gerenteService.findAll();
 		return ResponseEntity.ok(list);
 	}
 	

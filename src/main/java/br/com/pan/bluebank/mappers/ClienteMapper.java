@@ -1,9 +1,10 @@
 package br.com.pan.bluebank.mappers;
 
-import br.com.pan.bluebank.Utils.Utils;
 import br.com.pan.bluebank.dto.ClienteDTO;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Endereco;
+import br.com.pan.bluebank.utils.Utils;
+
 import java.time.LocalDate;
 
 public class ClienteMapper {

@@ -1,9 +1,9 @@
 package br.com.pan.bluebank.services;
 
-import br.com.pan.bluebank.model.Endereco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.repositories.EnderecoRepository;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
