@@ -3,11 +3,11 @@ package br.com.pan.bluebank.exceptions;
 import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -40,20 +40,20 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}	
 	
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<ValidationError> validation(ConstraintViolationException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 		ValidationError err = new ValidationError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Validation exception");
-		err.setMessage(e.getMessage());
-		err.setPath(request.getRequestURI());
+		err.setError("Unprocessable Entity");
+		err.setMessage("Erro de validação");
+		err.setPath(request.getRequestURI());		
 		
-		for (FieldError f : e.getBindingResult().getFieldErrors()) {
-			err.addError(f.getField(), f.getDefaultMessage());
-		}
-		
+		for (ConstraintViolation<?> f : e.getConstraintViolations()) {
+			err.addError(f.getPropertyPath().toString(), f.getMessage());
+		}		
 		return ResponseEntity.status(status).body(err);
 	}	
+	
 }

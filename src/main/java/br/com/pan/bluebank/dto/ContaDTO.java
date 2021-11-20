@@ -7,7 +7,6 @@ import br.com.pan.bluebank.model.enums.TipoDeConta;
 
 public class ContaDTO {
 	
-
     private String numeroDaConta;
     private BigDecimal saldo;
     private TipoDeConta tipoDeConta;

@@ -18,51 +18,58 @@ import br.com.pan.bluebank.repositories.MovimentacaoRepository;
 public class MovimentacaoService {
 
 	@Autowired
-	private ContaService contaService;	
+	private ContaService contaService;
 
-	@Autowired 
+	@Autowired
 	public MovimentacaoRepository movimentacaoRepository;
-			
-	public Movimentacao create(MovimentacaoDTO dto) {	
-		Movimentacao movimentacao = criaMovimentacao(dto);		
+
+	public Movimentacao create(MovimentacaoDTO dto) {
 		
-		movimentacao = atualizaSaldoContasPorTipo(dto.getTipo(), movimentacao); ;
-							
-		salvaContasMovimentacaoPorTipo(dto.getTipo(), movimentacao);		
-				
-		return movimentacaoRepository.save(movimentacao);	
-	}		
+		Movimentacao movimentacao = criaMovimentacao(dto);
+
+		movimentacao = atualizaSaldoContasPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
+
+		salvaContasMovimentacaoPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
+
+		return movimentacaoRepository.save(movimentacao);
+	}
 
 	@Transactional
-	public Movimentacao findById(Long id) {	
+	public Movimentacao findById(Long id) {
 		return movimentacaoRepository.findById(id).orElseThrow();
 	}
-	
+
 	public Page<Movimentacao> findAll(Pageable page) {
 		return movimentacaoRepository.findAll(page);
-	}	
-		
+	}
+
 	private void salvaContasMovimentacaoPorTipo(TipoMovimentacao tipoMovimentacao, Movimentacao movimentacaoAtt) {
-		if(tipoMovimentacao.possuiContaDestino()) {
+		if (tipoMovimentacao.possuiContaDestino()) {
 			contaService.atualizarConta(movimentacaoAtt.getContaOrigem());
 			contaService.atualizarConta(movimentacaoAtt.getContaDestino());
 		} else {
 			contaService.atualizarConta(movimentacaoAtt.getContaOrigem());
-		}		
+		}
 	}
 
 	private Movimentacao criaMovimentacao(MovimentacaoDTO dto) {
-		Conta contaBase = contaService.findById(dto.getContaOrigemId());		
-		if(dto.getTipo().possuiContaDestino()) {
-			Conta contaDestino = contaService.findById(dto.getContaDestinoId());			
-			return MovimentacaoMapper.toEntity(dto, contaBase, contaDestino);
-		} else {
-			return MovimentacaoMapper.toEntity(dto, contaBase, contaBase);
-		}		 
+		
+		try {
+			Conta contaBase = contaService.findById(dto.getContaOrigemId(), "Conta origem não encontrada!");
+			if (TipoMovimentacao.valueOf(dto.getTipo()).possuiContaDestino()) {
+				Conta contaDestino = contaService.findById(dto.getContaDestinoId(), "Conta destino não encontrada!");
+				return MovimentacaoMapper.toEntity(dto, contaBase, contaDestino);
+			} else {
+				return MovimentacaoMapper.toEntity(dto, contaBase, contaBase);
+			}
+		}catch(IllegalArgumentException e) {
+			throw new IllegalArgumentException("Tipo de movimentação inválido!");
+		} 
+
 	}
 
-	private Movimentacao atualizaSaldoContasPorTipo(TipoMovimentacao tipo, Movimentacao movimentacao) {		
+	private Movimentacao atualizaSaldoContasPorTipo(TipoMovimentacao tipo, Movimentacao movimentacao) {
 		return tipo.atualizaSaldo(movimentacao);
 	}
-		 
+
 }

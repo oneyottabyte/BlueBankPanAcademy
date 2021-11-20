@@ -27,5 +27,10 @@ public class EnderecoService {
 		return enderecoRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado"));
 	}
+	
+	@Transactional()
+	public Endereco create(Endereco endereco) {
+		return enderecoRepository.save(endereco);				
+	}	
 
 }

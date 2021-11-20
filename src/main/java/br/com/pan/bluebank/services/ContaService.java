@@ -36,7 +36,8 @@ public class ContaService {
 	}
 
 	public Conta findById(Long id) {
-		return contaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Conta não encontrada!"));
+		return contaRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Conta não encontrada!"));
 	}	
 
 	public Conta create(ContaDTO dto) {
@@ -68,6 +69,11 @@ public class ContaService {
 	
 	protected Conta findByIdContaAtiva(Long id) {
 		return contaRepository.findByStatusDeContaAndId(StatusDeConta.ATIVADO, id);
+	}
+
+	protected Conta findById(Long id, String texto) {		
+		return contaRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException(texto));
 	}
 
 }
