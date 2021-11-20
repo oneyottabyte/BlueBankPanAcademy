@@ -15,10 +15,10 @@ VALUES (1, '72847519084', 'Carlos Betiol', '1198875483', 1);
 INSERT INTO tb_agencias (id_agencia, nome_agencia, numero_agencia, id_gerente) 
 VALUES (1, 'Agencia Suzano', '1234567890', 1);
 
-INSERT INTO tb_contas (id_conta, data_abertura, numero_da_conta, saldo, tipo_conta, id_agencia, id_cliente) 
-VALUES (1, TO_DATE('11/03/2021', 'DD/MM/YYYY'), '1234567890', '20000.0', 'SALARIO', 1, 1);
-INSERT INTO tb_contas (id_conta, data_abertura, numero_da_conta, saldo, tipo_conta, id_agencia, id_cliente) 
-VALUES (2, TO_DATE('14/04/2021', 'DD/MM/YYYY'), '0987654321', '10000.0', 'SALARIO', 1, 2);
+INSERT INTO tb_contas (id_conta, data_abertura, numero_da_conta, saldo, tipo_conta, status_conta, id_agencia, id_cliente) 
+VALUES (1, TO_DATE('11/03/2021', 'DD/MM/YYYY'), '1234567890', '20000.0', 'SALARIO', 'ATIVADO', 1, 1);
+INSERT INTO tb_contas (id_conta, data_abertura, numero_da_conta, saldo, tipo_conta, status_conta, id_agencia, id_cliente) 
+VALUES (2, TO_DATE('14/04/2021', 'DD/MM/YYYY'), '0987654321', '10000.0', 'SALARIO', 'DESATIVADO', 1, 2);
 
 INSERT INTO tb_movimentacoes (id_movimentacao, data_movimentacao, tipo, valor_transacao, id_conta_destino, id_conta_origem) 
 VALUES (1, TO_DATE('11/09/2021', 'DD/MM/YYYY'), 'TRANSFERENCIA', '5000.0', 1, 2);

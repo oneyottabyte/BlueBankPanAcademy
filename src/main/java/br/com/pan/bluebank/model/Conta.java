@@ -23,6 +23,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.pan.bluebank.model.ENUM.StatusDeConta;
 import br.com.pan.bluebank.model.ENUM.TipoDeConta;
 
 @Entity
@@ -55,6 +56,11 @@ public class Conta implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoDeConta tipoDeConta;
     
+    @NotNull(message = "Status da conta é um atributo obrigatório!")   
+    @Column(name = "status_conta")
+    @Enumerated(EnumType.STRING)
+    private StatusDeConta statusDeConta;
+    
     @JsonIgnore
     @JoinColumn(name = "id_agencia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -68,29 +74,40 @@ public class Conta implements Serializable {
 	public Conta() {		
 	}
 	
+	
+
 	public Conta(
 			@NotNull(message = "Data de abertura é um atributo obrigatório!") @Past(message = "Data de abertura inválida") LocalDateTime dataAbertura,
 			@NotBlank(message = "Número da conta é um atributo obrigatório!") @Size(min = 1, max = 10) String numeroDaConta,
 			@NotNull(message = "Saldo é um atributo obrigatório!") BigDecimal saldo,
-			@NotBlank(message = "Tipo de conta é um atributo obrigatório!") TipoDeConta tipoDeConta) {
+			@NotNull(message = "Tipo de conta é um atributo obrigatório!") TipoDeConta tipoDeConta,
+			@NotNull(message = "Status da conta é um atributo obrigatório!") StatusDeConta statusDeConta) {
 		this.dataAbertura = dataAbertura;
 		this.numeroDaConta = numeroDaConta;
 		this.saldo = saldo;
 		this.tipoDeConta = tipoDeConta;
+		this.statusDeConta = statusDeConta;
 	}
 
+
+
 	public Conta(
-			@NotBlank(message = "Data de abertura é um atributo obrigatório!") @Past(message = "Data de abertura inválida") LocalDateTime dataAbertura,
+			@NotNull(message = "Data de abertura é um atributo obrigatório!") @Past(message = "Data de abertura inválida") LocalDateTime dataAbertura,
 			@NotBlank(message = "Número da conta é um atributo obrigatório!") @Size(min = 1, max = 10) String numeroDaConta,
-			@NotBlank(message = "Saldo é um atributo obrigatório!") BigDecimal saldo, Agencia agencia, Cliente cliente,
-			TipoDeConta tipoDeConta) {
+			@NotNull(message = "Saldo é um atributo obrigatório!") BigDecimal saldo,
+			@NotNull(message = "Tipo de conta é um atributo obrigatório!") TipoDeConta tipoDeConta,
+			@NotNull(message = "Status da conta é um atributo obrigatório!") StatusDeConta statusDeConta,
+			Agencia agencia, Cliente cliente) {
 		this.dataAbertura = dataAbertura;
 		this.numeroDaConta = numeroDaConta;
 		this.saldo = saldo;
+		this.tipoDeConta = tipoDeConta;
+		this.statusDeConta = statusDeConta;
 		this.agencia = agencia;
 		this.cliente = cliente;
-		this.tipoDeConta = tipoDeConta;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -154,6 +171,15 @@ public class Conta implements Serializable {
 	public void setTipoDeConta(TipoDeConta tipoDeConta) {
 		this.tipoDeConta = tipoDeConta;
 	}
+
+	public StatusDeConta getStatusDeConta() {
+		return statusDeConta;
+	}
+
+	public void setStatusDeConta(StatusDeConta statusDeConta) {
+		this.statusDeConta = statusDeConta;
+	}
+
 
 
 	@Override

@@ -6,6 +6,7 @@ import br.com.pan.bluebank.dto.ContaDTO;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Conta;
+import br.com.pan.bluebank.model.ENUM.StatusDeConta;
 
 public class ContaMapper {
 	
@@ -14,9 +15,10 @@ public class ContaMapper {
 				LocalDateTime.now(),
 				dto.getNumeroDaConta(),
 				dto.getSaldo(),
+				dto.getTipoDeConta(),
+				StatusDeConta.ATIVADO,
 				agencia,
-				cliente,
-				dto.getTipoDeConta());
+				cliente);
 	}
 
 }

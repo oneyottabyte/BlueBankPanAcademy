@@ -10,6 +10,7 @@ import br.com.pan.bluebank.mappers.ContaMapper;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Conta;
+import br.com.pan.bluebank.model.ENUM.StatusDeConta;
 import br.com.pan.bluebank.repositories.AgenciaRepository;
 import br.com.pan.bluebank.repositories.ClienteRepository;
 import br.com.pan.bluebank.repositories.ContaRepository;
@@ -30,8 +31,16 @@ public class ContaService {
 		return contaRepository.findAll();
 	}
 	
+	public List<Conta> findAllAtivas() {
+		return contaRepository.findByStatusDeConta(StatusDeConta.ATIVADO);
+	}
+	
 	public Conta findById(Long id) {
 		return contaRepository.findById(id).orElseThrow();
+	}
+	
+	public Conta findByIdContaAtiva(Long id) {
+		return contaRepository.findByStatusDeContaAndId(StatusDeConta.ATIVADO, id);
 	}
 	
 	public Conta create(ContaDTO dto) {
@@ -42,6 +51,12 @@ public class ContaService {
 		Conta novaConta = ContaMapper.toEntity(dto, cliente, agencia);
 		
 		return contaRepository.save(novaConta);
+	}
+	
+	public Conta inactivate(Long id) {
+		Conta contaInativa = contaRepository.findById(id).orElseThrow();
+		contaInativa.setStatusDeConta(StatusDeConta.DESATIVADO);
+		return contaRepository.save(contaInativa);
 	}
 	
 }
