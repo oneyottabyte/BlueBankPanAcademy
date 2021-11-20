@@ -11,6 +11,7 @@ import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.repositories.ClienteRepository;
 import br.com.pan.bluebank.repositories.EnderecoRepository;
+import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClienteService {
@@ -38,7 +39,8 @@ public class ClienteService {
 	}
 	
 	public Cliente findById(Long id) {	
-		return clienteRepository.findById(id).orElseThrow();
+		return clienteRepository.findById(id)
+					.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado!"));
 	}
 	
 	public List<Cliente> findAll() {
