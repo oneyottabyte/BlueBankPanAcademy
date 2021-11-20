@@ -25,22 +25,20 @@ public class MovimentacaoController {
 	@Autowired
 	private MovimentacaoService service;
 	
-	@PostMapping(path = "/{origemId}/to/{destinoId}")
-	public ResponseEntity<Movimentacao> create(
-			@PathVariable Long origemId,
-			@PathVariable Long destinoId,
+	@PostMapping
+	public ResponseEntity<Movimentacao> create(		
 			@RequestBody MovimentacaoDTO dto){
 		
-		Movimentacao newMovimentacao = this.service.create(origemId, destinoId, dto);
+		Movimentacao newMovimentacao = this.service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newMovimentacao.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@GetMapping(path = "/{origemId}")
 	public ResponseEntity<Movimentacao> findById(@PathVariable Long origemId){
 		return ResponseEntity.ok(this.service.findById(origemId));
-	}
+	}	
 
 	@GetMapping
 	public ResponseEntity<Page<Movimentacao>> findAll(Pageable page) {

@@ -11,7 +11,7 @@ import br.com.pan.bluebank.mappers.ContaMapper;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Conta;
-import br.com.pan.bluebank.model.ENUM.StatusDeConta;
+import br.com.pan.bluebank.model.enums.StatusDeConta;
 import br.com.pan.bluebank.repositories.ContaRepository;
 
 @Service

@@ -1,4 +1,4 @@
-package br.com.pan.bluebank.model.ENUM;
+package br.com.pan.bluebank.model.enums;
 
 public enum TipoDeConta {
 	POUPANCA, SALARIO, CORRENTE

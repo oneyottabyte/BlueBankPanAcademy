@@ -23,8 +23,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.pan.bluebank.model.ENUM.StatusDeConta;
-import br.com.pan.bluebank.model.ENUM.TipoDeConta;
+import br.com.pan.bluebank.model.enums.StatusDeConta;
+import br.com.pan.bluebank.model.enums.TipoDeConta;
 
 @Entity
 @Table(name = "tb_contas")

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-import br.com.pan.bluebank.model.ENUM.TipoMovimentacao;
+import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 
 @Entity
 @Table(name = "tb_movimentacoes")

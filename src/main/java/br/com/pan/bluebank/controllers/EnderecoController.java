@@ -12,7 +12,7 @@ import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.services.EnderecoService;
 
 @RestController
-@RequestMapping(path = "v1/Endereco")
+@RequestMapping(path = "v1/enderecos")
 public class EnderecoController {
     
     @Autowired
