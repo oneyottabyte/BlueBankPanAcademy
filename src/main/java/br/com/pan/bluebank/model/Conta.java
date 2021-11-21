@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.pan.bluebank.model.enums.StatusDeConta;
 import br.com.pan.bluebank.model.enums.TipoDeConta;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "tb_contas")
@@ -35,40 +36,48 @@ public class Conta implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_conta")
+	@ApiModelProperty(value = "Código da conta")
 	private Long id;
 	
     @NotNull(message = "Data de abertura é um atributo obrigatório!")
     @Past(message = "Data de abertura inválida")
     @Column(name = "data_abertura")
+	@ApiModelProperty(value = "Data de abertura da conta")
     private LocalDateTime dataAbertura;
 	 
     @NotBlank(message = "Número da conta é um atributo obrigatório!")
     @Size(min = 1, max = 10)
     @Column(name = "numero_da_conta", unique = true)
+	@ApiModelProperty(value = "Número da conta")
     private String numeroDaConta;
     
     @NotNull(message = "Saldo é um atributo obrigatório!")
     @Column(name = "saldo")
+	@ApiModelProperty(value = "Saldo da conta")
     private BigDecimal saldo;
     
     @NotNull(message = "Tipo de conta é um atributo obrigatório!")   
     @Column(name = "tipo_conta")
     @Enumerated(EnumType.STRING)
+	@ApiModelProperty(value = "Tipo da conta")
     private TipoDeConta tipoDeConta;
     
     @NotNull(message = "Status da conta é um atributo obrigatório!")   
     @Column(name = "status_conta")
     @Enumerated(EnumType.STRING)
+	@ApiModelProperty(value = "Status da conta")
     private StatusDeConta statusDeConta;
     
     @JsonIgnore
     @JoinColumn(name = "id_agencia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ApiModelProperty(value = "Agência da conta")
     private Agencia agencia;
     
     @JsonIgnore
     @JoinColumn(name = "id_cliente")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ApiModelProperty(value = "Proprietário da conta")
     private Cliente cliente;
     
 	public Conta() {		

@@ -2,6 +2,10 @@ package br.com.pan.bluebank.controllers;
 
 import java.net.URI;
 import java.util.List;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,36 +28,66 @@ public class ContaController {
 	
 	@Autowired
 	private ContaService contaService;
-	
-	@GetMapping
+
+	@ApiOperation(value = "Retorna uma lista de contas")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna a lista de contas"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@GetMapping(produces = "application/json")
 	public ResponseEntity<List<Conta>> findAll(){
 		List<Conta> listaContas = contaService.findAll();
 		return ResponseEntity.ok(listaContas);
 		
 	}
-	
-	@GetMapping(value = "/ativas")
+
+	@ApiOperation(value = "Retorna uma lista de contas con status ativo")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna a lista de contas"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@GetMapping(value = "/ativas", produces = "application/json")
 	public ResponseEntity<List<Conta>> findAllAtivas(){
 		List<Conta> listaContas = contaService.findAllAtivas();
 		return ResponseEntity.ok(listaContas);
 		
 	}
-	
-	@GetMapping(value = "/{id}")
+
+	@ApiOperation(value = "Retorna uma conta a partir do id")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna a conta"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@GetMapping(value = "/{id}", produces = "application/json")
 	public ResponseEntity<Conta> findById(@PathVariable Long id){
 		Conta conta = contaService.findById(id);
 		return ResponseEntity.ok(conta);
 	}
-	
-	@PostMapping
+
+	@ApiOperation(value = "Salva uma nova conta")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Salva a conta"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PostMapping(consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Conta> create(@RequestBody ContaDTO dto){
 		Conta newConta = contaService.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newConta.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 		}
-	
-	@PatchMapping(value = "/{id}")
+
+	@ApiOperation(value = "Altera o status de uma conta a partir do id")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Altera o status da conta"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PatchMapping(value = "/{id}",produces = "application/json")
 	public ResponseEntity<Conta> alterarStatus(@PathVariable Long id, 
 			@RequestParam String status){
 		Conta contaInativada = contaService.alterarStatus(id, status);

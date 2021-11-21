@@ -2,6 +2,9 @@ package br.com.pan.bluebank.controllers;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +20,14 @@ public class EnderecoController {
     
     @Autowired
     private EnderecoService service;
-    
-  
-    @GetMapping
+
+	@ApiOperation(value = "Retorna uma lista de endereços")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna a lista de endereços"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+    @GetMapping(produces = "application/json")
 	public ResponseEntity<List<Endereco>> findAll() {
 		List<Endereco> list = service.findAll();
 		return ResponseEntity.ok(list);

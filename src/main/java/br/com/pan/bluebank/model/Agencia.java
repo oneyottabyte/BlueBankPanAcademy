@@ -1,17 +1,10 @@
 package br.com.pan.bluebank.model;
 
-import java.io.Serializable;
+import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "tb_agencias")
@@ -21,20 +14,24 @@ public class Agencia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_agencia")
+	@ApiModelProperty(value = "Código da agência")
     private Long id;
     
-//    @Pattern(regexp = "/^[0-9]+$/")
+
     @NotBlank(message = "Número da agência é um atributo obrigatório!")   
     @Column(name = "numero_agencia")
+	@ApiModelProperty(value = "Número da agência")
     private String numeroAgencia;
     
-//    @Pattern(regexp = "/^[A-Za-z]+$/")
+
     @NotBlank(message = "Nome da agência é um atributo obrigatório!")   
     @Column(name = "nome_agencia")
+	@ApiModelProperty(value = "Nome da agência")
     private String nomeAgencia;
     
     @JoinColumn(name = "id_Gerente")
     @OneToOne
+	@ApiModelProperty(value = "Gerente da agência")
     private Gerente gerente;
     
     
@@ -42,8 +39,8 @@ public class Agencia implements Serializable {
     }
     
 	public Agencia(
-			@Pattern(regexp = "/^[0-9]+$/") @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
-			@Pattern(regexp = "/^[A-Za-z]+$/") @NotBlank(message = "Nome da agência é um atributo obrigatório!") String nomeAgencia,
+			 @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
+			@NotBlank(message = "Nome da agência é um atributo obrigatório!") String nomeAgencia,
 			Gerente gerente) {
 		this.numeroAgencia = numeroAgencia;
 		this.nomeAgencia = nomeAgencia;
@@ -51,8 +48,8 @@ public class Agencia implements Serializable {
 	}
 
 	public Agencia(
-			@Pattern(regexp = "/^[0-9]+$/") @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
-			@Pattern(regexp = "/^[A-Za-z]+$/") @NotBlank(message = "Nome da agência é um atributo obrigatório!") String nomeAgencia) {
+			 @NotBlank(message = "Número da agência é um atributo obrigatório!") String numeroAgencia,
+			@NotBlank(message = "Nome da agência é um atributo obrigatório!") String nomeAgencia) {
 		this.numeroAgencia = numeroAgencia;
 		this.nomeAgencia = nomeAgencia;
 	}
@@ -109,11 +106,8 @@ public class Agencia implements Serializable {
 			return false;
 		Agencia other = (Agencia) obj;
 		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+			return other.id == null;
+		} else return id.equals(other.id);
 	}
 	
 }
