@@ -32,7 +32,7 @@ public class MovimentacaoController {
 		Movimentacao newMovimentacao = this.service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newMovimentacao.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(newMovimentacao);
 	}
 
 	@GetMapping(path = "/{origemId}")

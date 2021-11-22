@@ -2,27 +2,20 @@ package br.com.pan.bluebank.dto;
 
 import java.math.BigDecimal;
 
-import br.com.pan.bluebank.model.enums.TipoMovimentacao;
-
 public class MovimentacaoDTO {
 	
-	private Long id;     
-
-    private TipoMovimentacao tipo;
-
-    private BigDecimal valorTransacao;
-    
-    private Long contaOrigemId;
-    
+	private Long id;     	
+    private String tipo;
+    private BigDecimal valorTransacao;    
+    private Long contaOrigemId;    
     private Long contaDestinoId;
     
 	public MovimentacaoDTO() {
 	
 	}	
 
-	public MovimentacaoDTO(Long id, TipoMovimentacao tipo, BigDecimal valorTransacao, Long contaOrigemId,
-			Long contaDestinoId) {
-		super();
+	public MovimentacaoDTO(Long id, String tipo, BigDecimal valorTransacao, Long contaOrigemId,
+			Long contaDestinoId) {	
 		this.id = id;
 		this.tipo = tipo;
 		this.valorTransacao = valorTransacao;
@@ -38,11 +31,11 @@ public class MovimentacaoDTO {
 		this.id = id;
 	}
 
-	public TipoMovimentacao getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoMovimentacao tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 

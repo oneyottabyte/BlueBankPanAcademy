@@ -9,6 +9,7 @@ import br.com.pan.bluebank.dto.AgenciaDTO;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Gerente;
 import br.com.pan.bluebank.repositories.AgenciaRepository;
+import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class AgenciaService {
@@ -25,13 +26,14 @@ public class AgenciaService {
 	}
 	
 	public Agencia update(Long id, AgenciaDTO agenciaDTO) {
-		Agencia updateAgencia = agenciaRepository.findById(id).orElseThrow();
+		Agencia updateAgencia = findById(id);
 		updateAgencia = verifyGerente(agenciaDTO, updateAgencia);	
 		return agenciaRepository.save(updateAgencia);
 	}
 	
 	public Agencia findById(Long id) {	
-		return agenciaRepository.findById(id).orElseThrow();
+		return agenciaRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Agencia não encontrada!"));
 	}
 	
 	public List<Agencia> findAll() {
@@ -39,7 +41,7 @@ public class AgenciaService {
 	}	
 		
 	public void delete(Long id) {
-		Agencia agencia = agenciaRepository.findById(id).orElseThrow();
+		Agencia agencia = findById(id);
 		agenciaRepository.delete(agencia);	
 	}
 	

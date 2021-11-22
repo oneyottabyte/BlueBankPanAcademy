@@ -41,19 +41,19 @@ public class GerenteController {
 	@PutMapping(value = "/{id}")
 		public ResponseEntity<Gerente> update(@PathVariable Long id,
 		@RequestBody GerenteDTO gerenteDTO) {
-		Gerente updatedGerente = gerenteService.update(id, gerenteDTO);
+		Gerente updatedGerente = this.gerenteService.update(id, gerenteDTO);
 		return ResponseEntity.ok(updatedGerente);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		gerenteService.delete(id);
+		this.gerenteService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping
 	public ResponseEntity<Gerente> create(@RequestBody GerenteDTO gerenteDTO){
-		Gerente newGerente = gerenteService.create(gerenteDTO);
+		Gerente newGerente = this.gerenteService.create(gerenteDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newGerente.getId()).toUri();
 		return ResponseEntity.created(uri).build();

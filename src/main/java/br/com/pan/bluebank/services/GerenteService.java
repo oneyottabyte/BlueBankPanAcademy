@@ -9,8 +9,8 @@ import br.com.pan.bluebank.dto.GerenteDTO;
 import br.com.pan.bluebank.mappers.GerenteMapper;
 import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.model.Gerente;
-import br.com.pan.bluebank.repositories.EnderecoRepository;
 import br.com.pan.bluebank.repositories.GerenteRepository;
+import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class GerenteService {
@@ -19,10 +19,11 @@ public class GerenteService {
 	private GerenteRepository gerenteRepository;
 	
 	@Autowired
-	private EnderecoRepository enderecoRepository;
+	private EnderecoService enderecoService;
 	
 	public Gerente findById(Long id) {	
-		return gerenteRepository.findById(id).orElseThrow();
+		return gerenteRepository.findById(id)
+					.orElseThrow(() -> new ResourceNotFoundException("Gerente não encontrado!"));
 	}
 	
 	public List<Gerente> findAll() {
@@ -30,21 +31,21 @@ public class GerenteService {
 	}	
 	
 	public Gerente create(GerenteDTO gerenteDTO) {	
-		Endereco endereco = enderecoRepository.save(gerenteDTO.getEndereco());
+		Endereco endereco = enderecoService.create(gerenteDTO.getEndereco());
 		gerenteDTO.setEndereco(endereco);
 		Gerente entity = GerenteMapper.toEntity(gerenteDTO);
 		return gerenteRepository.save(entity);	
 	}
 	
 	public Gerente update(Long id, GerenteDTO gerenteDTO) {
-		Gerente gerente = gerenteRepository.findById(id).orElseThrow();
+		Gerente gerente = findById(id);
 		Gerente updatedEntity = GerenteMapper.updateEntity(gerente, gerenteDTO);
-		enderecoRepository.save(updatedEntity.getEndereco());
+		enderecoService.create(updatedEntity.getEndereco());
 		return gerenteRepository.save(updatedEntity);
 	}
 	
 	public void delete(Long id) {
-		Gerente gerente = gerenteRepository.findById(id).orElseThrow();
+		Gerente gerente = findById(id);
 		gerenteRepository.delete(gerente);	
 	}
 }
