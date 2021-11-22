@@ -65,12 +65,7 @@ public class ClienteController {
 		return ResponseEntity.ok(updatedCliente);
 	}
 	
-//	@DeleteMapping(value = "/{id}")
-//	public ResponseEntity<Void> delete(@PathVariable Long id) {
-//		service.delete(id);
-//		return ResponseEntity.noContent().build();
-//	}
-
+  
 	@ApiOperation(value = "Salva um novo cliente")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Salva o cliente"),

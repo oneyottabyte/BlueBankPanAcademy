@@ -41,7 +41,7 @@ public class MovimentacaoController {
 		Movimentacao newMovimentacao = this.service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newMovimentacao.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(newMovimentacao);
 	}
 
 	@ApiOperation(value = "Retorna uma movimentaçao a partir do id")

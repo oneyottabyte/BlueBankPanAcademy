@@ -11,6 +11,7 @@ import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.repositories.ClienteRepository;
 import br.com.pan.bluebank.repositories.EnderecoRepository;
+import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClienteService {
@@ -19,7 +20,7 @@ public class ClienteService {
 	private ClienteRepository clienteRepository;
 
 	@Autowired
-	public static EnderecoRepository enderecoRepository;
+	private EnderecoRepository enderecoRepository;
 
 	public Cliente create(ClienteDTO dto) {	
 		Endereco endereco = enderecoRepository.save(dto.getEndereco());
@@ -29,14 +30,17 @@ public class ClienteService {
 	}
 	
 	public Cliente update(Long id, ClienteDTO dto) {
-		Cliente cliente = clienteRepository.findById(id).orElseThrow();
+		Cliente cliente = findById(id);		
+		Endereco endereco = enderecoRepository.save(dto.getEndereco());
+		dto.setEndereco(endereco);
 		Cliente updatedEntity = ClienteMapper.updateEntity(cliente, dto);
 		
 		return clienteRepository.save(updatedEntity);
 	}
 	
 	public Cliente findById(Long id) {	
-		return clienteRepository.findById(id).orElseThrow();
+		return clienteRepository.findById(id)
+					.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado!"));
 	}
 	
 	public List<Cliente> findAll() {
@@ -44,7 +48,7 @@ public class ClienteService {
 	}	
 	
 	public void delete(Long id) {
-		Cliente cliente = clienteRepository.findById(id).orElseThrow();
+		Cliente cliente = findById(id);
 		clienteRepository.delete(cliente);	
 	}
 }
