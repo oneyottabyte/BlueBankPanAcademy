@@ -1,5 +1,7 @@
 package br.com.pan.bluebank.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -21,39 +23,47 @@ public class Endereco implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
+	@ApiModelProperty(value = "Código do endereço")
     private Long id;
     
     @NotBlank(message = "Logradouro é um atributo obrigatório")
     @Size(min = 1, max = 100)
     @Column(name = "logradouro")
+	@ApiModelProperty(value = "Nome do logradouro do endereço")
     private String logradouro;
     
     @NotBlank(message = "Número é um atributo obrigatório")
     @Size(min = 1, max = 10)
     @Column(name = "numero")
+	@ApiModelProperty(value = "Número do endereço")
     private String numero;
     
     @NotBlank(message = "CEP é um atributo obrigatório")
     @Size(min = 1, max = 10)
     @Column(name = "cep")
+	@ApiModelProperty(value = "CEP do endereço")
     private String cep;
     
     @Size(max = 45)
     @Column(name = "bairro")
+	@ApiModelProperty(value = "Bairro do endereço")
     private String bairro;
     
     @Size(max = 100)
     @Column(name = "complemento")
+	@ApiModelProperty(value = "Complemento do endereço")
     private String complemento;
     
     @NotBlank(message = "Cidade é um atributo obrigatório")
     @Size(max = 100)
     @Column(name = "cidade")
+	@ApiModelProperty(value = "Cidade do endereço")
     private String cidade;
     
     @NotBlank(message = "Estado é um atributo obrigatório")
     @Size(max = 100)    
     @Column(name = "estado")
+	@ApiModelProperty(value = "Estado do endereço")
     private String estado;
    
     public Endereco() {

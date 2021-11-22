@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "tb_movimentacoes")
@@ -30,27 +31,33 @@ public class Movimentacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_movimentacao")
+	@ApiModelProperty(value = "Código da movimentação")
     private Long id;     
     
     @NotNull(message = "Tipo de movimentação é um atributo obrigatório!")   
     @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
+	@ApiModelProperty(value = "Tipo da movimentação")
     private TipoMovimentacao tipo;
         
     @Positive(message = "O valor da transação tem de ser positivo")
     @NotNull(message = "Valor é um atributo obrigatório!") 
     @Column(name = "valor_transacao")
+	@ApiModelProperty(value = "Valor da movimentação")
     private BigDecimal valorTransacao;    
 
     @Column(name = "data_movimentacao")
+	@ApiModelProperty(value = "Data da movimentação")
     private LocalDateTime dataMovimentacao;
     
     @JoinColumn(name = "id_conta_origem")
     @ManyToOne(optional = false)
+	@ApiModelProperty(value = "Conta de origem da movimentação")
     private Conta contaOrigem;   
     
     @JoinColumn(name = "id_conta_destino")
     @ManyToOne(optional = false)
+	@ApiModelProperty(value = "Conta de destino da movimentação")
     private Conta contaDestino;
        
     public Movimentacao() {

@@ -19,6 +19,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
@@ -30,35 +31,42 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
+	@ApiModelProperty(value = "Código do cliente")
 	private Long id;
 	
 	@NotBlank(message = "Nome é um atributo obrigatório")
 	@Pattern(regexp = "^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}", message = "Nome inválido")
 	@Column(name = "nome")
+	@ApiModelProperty(value = "Nome do cliente")
 	private String nome;
 	
 	@NotBlank(message = "CPF é um atributo obrigatório")
 	@CPF
 	@Column(name = "cpf", unique = true)
+	@ApiModelProperty(value = "CPF do cliente")
 	private String cpf;
 	
 	@NotNull(message = "Data de Nascimento é um atributo obrigatório")
 	@Past(message = "Data de nascimento inválida")
 	@Column(name = "dataNascimento")
+	@ApiModelProperty(value = "Data de nascimento do cliente")
 	private LocalDate dataNascimento;
 	
 	@NotBlank(message = "E-mail é um atributo obrigatório")
 	@Email
 	@Column(name = "email", unique = true)
+	@ApiModelProperty(value = "Email do cliente")
 	private String email;
 	
 	@NotBlank(message = "Telefone é um atributo obrigatório") 
 	@Column(name = "telefone", unique = true)
+	@ApiModelProperty(value = "Telefone do cliente")
 	private String telefone;
 	
 	@NotNull(message = "Endereço é um atributo obrigatório")
 	@OneToOne()
 	@JoinColumn(name = "id_endereco")
+	@ApiModelProperty(value = "Endereço do cliente")
 	private Endereco endereco;
 	
 	public Cliente() {

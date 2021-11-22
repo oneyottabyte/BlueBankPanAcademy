@@ -3,6 +3,10 @@ package br.com.pan.bluebank.controllers;
 import java.net.URI;
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,39 +23,70 @@ import br.com.pan.bluebank.dto.AgenciaDTO;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.services.AgenciaService;
 
+
 @RestController
 @RequestMapping(path = "v1/agencias")
 public class AgenciaController {
 	
 	@Autowired
 	private AgenciaService agenciaService;
-	
-	@GetMapping(path = "/{id}")
+
+	@ApiOperation(value = "Retorna uma Agência a partir do id informado")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna a agência"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@GetMapping(path = "/{id}", produces="application/json")
 	public ResponseEntity<Agencia> findById(@PathVariable Long id){
 		Agencia obj = this.agenciaService.findById(id);
 		return ResponseEntity.ok(obj);
 	}
 
-	@GetMapping
+	@ApiOperation(value = "Retorna uma lista de agências")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna a lista de agências"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@GetMapping(produces="application/json")
 	public ResponseEntity<List<Agencia>> findAll() {
 		List<Agencia> list = agenciaService.findAll();
 		return ResponseEntity.ok(list);
 	}
-	
-	@PutMapping(value = "/{id}")
+
+	@ApiOperation(value = "Atualiza uma agência")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Atualiza a agência"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 		public ResponseEntity<Agencia> update(@PathVariable Long id,
 		@RequestBody AgenciaDTO dto) {
 		Agencia updatedAgencia = agenciaService.update(id, dto);
 		return ResponseEntity.ok(updatedAgencia);
 	}
-	
-	@DeleteMapping(value = "/{id}")
+
+	@ApiOperation(value = "Apaga uma agência")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Apaga a agência"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@DeleteMapping(value = "/{id}", consumes="application/json")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		agenciaService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@PostMapping
+
+	@ApiOperation(value = "Salva uma agência")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Salva a agência"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity<Agencia> create(@RequestBody AgenciaDTO dto){
 		Agencia newAgencia = agenciaService.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
