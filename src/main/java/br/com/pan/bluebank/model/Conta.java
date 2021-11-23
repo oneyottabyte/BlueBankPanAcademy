@@ -72,13 +72,13 @@ public class Conta implements Serializable {
     
     @JsonIgnore
     @JoinColumn(name = "id_agencia")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@ApiModelProperty(value = "Agência da conta")
     private Agencia agencia;
     
     @JsonIgnore
     @JoinColumn(name = "id_cliente")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@ApiModelProperty(value = "Proprietário da conta")
     private Cliente cliente;
     

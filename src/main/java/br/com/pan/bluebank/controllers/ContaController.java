@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.pan.bluebank.dto.ContaDTO;
+import br.com.pan.bluebank.dto.response.ContaResponseDTO;
+import br.com.pan.bluebank.mappers.ContaMapper;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.services.ContaService;
 
@@ -36,8 +38,8 @@ public class ContaController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping(produces = "application/json")
-	public ResponseEntity<List<Conta>> findAll(){
-		List<Conta> listaContas = contaService.findAll();
+	public ResponseEntity<List<ContaResponseDTO>> findAll(){
+		List<ContaResponseDTO> listaContas = contaService.findAll();
 		return ResponseEntity.ok(listaContas);
 		
 	}
@@ -49,8 +51,8 @@ public class ContaController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping(value = "/ativas", produces = "application/json")
-	public ResponseEntity<List<Conta>> findAllAtivas(){
-		List<Conta> listaContas = contaService.findAllAtivas();
+	public ResponseEntity<List<ContaResponseDTO>> findAllAtivas(){
+		List<ContaResponseDTO> listaContas = contaService.findAllAtivas();
 		return ResponseEntity.ok(listaContas);
 		
 	}
@@ -62,8 +64,8 @@ public class ContaController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Conta> findById(@PathVariable Long id){
-		Conta conta = contaService.findById(id);
+	public ResponseEntity<ContaResponseDTO> findByIdResponse(@PathVariable Long id){
+		ContaResponseDTO conta = contaService.findByIdResponse(id);
 		return ResponseEntity.ok(conta);
 	}
 
@@ -90,8 +92,8 @@ public class ContaController {
 	@PatchMapping(value = "/{id}",produces = "application/json")
 	public ResponseEntity<Conta> alterarStatus(@PathVariable Long id, 
 			@RequestParam String status){
-		Conta contaInativada = contaService.alterarStatus(id, status);
-		return ResponseEntity.ok(contaInativada);
+		Conta contaAlterada = contaService.alterarStatus(id, status);
+		return ResponseEntity.ok(contaAlterada);
 	}
 	
 }
