@@ -19,6 +19,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -47,7 +49,8 @@ public class Movimentacao implements Serializable {
     private BigDecimal valorTransacao;    
 
     @Column(name = "data_movimentacao")
-	@ApiModelProperty(value = "Data da movimentação")
+	@ApiModelProperty(value = "Data da movimentação" , dataType = "java.sql.LocalDateTime")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDateTime dataMovimentacao;
     
     @JoinColumn(name = "id_conta_origem")

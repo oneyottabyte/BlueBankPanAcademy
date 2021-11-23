@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.pan.bluebank.model.enums.StatusDeConta;
@@ -42,7 +43,8 @@ public class Conta implements Serializable {
     @NotNull(message = "Data de abertura é um atributo obrigatório!")
     @Past(message = "Data de abertura inválida")
     @Column(name = "data_abertura")
-	@ApiModelProperty(value = "Data de abertura da conta")
+	@ApiModelProperty(value = "Data de abertura da conta", dataType = "java.sql.LocalDateTime")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDateTime dataAbertura;
 	 
     @NotBlank(message = "Número da conta é um atributo obrigatório!")

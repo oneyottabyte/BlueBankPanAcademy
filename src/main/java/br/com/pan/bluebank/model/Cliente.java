@@ -22,6 +22,8 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_clientes")
 public class Cliente implements Serializable {
@@ -49,7 +51,8 @@ public class Cliente implements Serializable {
 	@NotNull(message = "Data de Nascimento é um atributo obrigatório")
 	@Past(message = "Data de nascimento inválida")
 	@Column(name = "dataNascimento")
-	@ApiModelProperty(value = "Data de nascimento do cliente")
+	@ApiModelProperty(value = "Data de nascimento do cliente", dataType = "java.sql.LocalDate")
+    @JsonFormat(pattern="dd-MM-yyyy")
 	private LocalDate dataNascimento;
 	
 	@NotBlank(message = "E-mail é um atributo obrigatório")
