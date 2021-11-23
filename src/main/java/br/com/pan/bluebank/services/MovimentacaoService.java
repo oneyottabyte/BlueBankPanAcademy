@@ -23,14 +23,10 @@ public class MovimentacaoService {
 	@Autowired
 	public MovimentacaoRepository movimentacaoRepository;
 
-	public Movimentacao create(MovimentacaoDTO dto) {
-		
+	public Movimentacao create(MovimentacaoDTO dto) {		
 		Movimentacao movimentacao = criaMovimentacao(dto);
-
 		movimentacao = atualizaSaldoContasPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
-
 		salvaContasMovimentacaoPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
-
 		return movimentacaoRepository.save(movimentacao);
 	}
 
