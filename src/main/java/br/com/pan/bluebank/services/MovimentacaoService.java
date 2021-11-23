@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.pan.bluebank.dto.MovimentacaoDTO;
+import br.com.pan.bluebank.dto.response.MessageResponse;
 import br.com.pan.bluebank.mappers.MovimentacaoMapper;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.Movimentacao;
@@ -68,4 +69,5 @@ public class MovimentacaoService {
 		return tipo.atualizaSaldo(movimentacao);
 	}
 
+	
 }

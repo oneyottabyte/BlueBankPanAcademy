@@ -2,9 +2,6 @@ package br.com.pan.bluebank.controllers;
 
 import java.net.URI;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,12 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.pan.bluebank.dto.MovimentacaoDTO;
+import br.com.pan.bluebank.dto.response.MessageResponse;
+import br.com.pan.bluebank.dto.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.services.MovimentacaoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(path = "v1/movimentacao")
-public class MovimentacaoController {
+public class MovimentacaoController implements MessageResponse {
 	
 	@Autowired
 	private MovimentacaoService service;
@@ -35,13 +37,16 @@ public class MovimentacaoController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Movimentacao> create(		
+	public ResponseEntity<MessageResponseImpl> create(		
 			@RequestBody MovimentacaoDTO dto){
 		
 		Movimentacao newMovimentacao = this.service.create(dto);
+		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newMovimentacao.getId()).toUri();
-		return ResponseEntity.created(uri).body(newMovimentacao);
+		return ResponseEntity
+				.created(uri)
+				.body(createMessageResponse("Movimentação criada com sucesso"));
 	}
 
 	@ApiOperation(value = "Retorna uma movimentaçao a partir do id")
@@ -64,6 +69,6 @@ public class MovimentacaoController {
 	@GetMapping
 	public ResponseEntity<Page<Movimentacao>> findAll(Pageable page) {
 			return ResponseEntity.ok(this.service.findAll(page));
-	}
-		
+	}		
+	
 }
