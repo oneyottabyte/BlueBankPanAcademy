@@ -2,11 +2,14 @@ package br.com.pan.bluebank.services;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.pan.bluebank.dto.ContaDTO;
+import br.com.pan.bluebank.dto.response.ContaResponseDTO;
 import br.com.pan.bluebank.mappers.ContaMapper;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;
@@ -27,18 +30,29 @@ public class ContaService {
 	@Autowired
 	private AgenciaService agenciaService;
 
-	public List<Conta> findAll() {
-		return contaRepository.findAll();
+	public List<ContaResponseDTO> findAll() {
+		List<Conta> listaConta = contaRepository.findAll();
+		return listaConta.stream()
+				.map(conta -> ContaMapper.toDTO(conta))
+				.collect(Collectors.toList());
 	}
 
-	public List<Conta> findAllAtivas() {
-		return contaRepository.findByStatusDeConta(StatusDeConta.ATIVADO);
+	public List<ContaResponseDTO> findAllAtivas() {
+		List<Conta> listaContaAtiva = contaRepository.
+				findByStatusDeConta(StatusDeConta.ATIVADO);
+		return listaContaAtiva.stream()
+				.map(conta -> ContaMapper.toDTO(conta))
+				.collect(Collectors.toList());
 	}
 
 	public Conta findById(Long id) {
 		return contaRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Conta não encontrada!"));
 	}	
+	
+	public ContaResponseDTO findByIdResponse(Long id) {
+		return ContaMapper.toDTO(findById(id));
+	}
 
 	public Conta create(ContaDTO dto) {
 		Cliente cliente = clienteService.findById(dto.getIdCliente());

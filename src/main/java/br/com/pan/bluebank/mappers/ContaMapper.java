@@ -3,6 +3,7 @@ package br.com.pan.bluebank.mappers;
 import java.time.LocalDateTime;
 
 import br.com.pan.bluebank.dto.ContaDTO;
+import br.com.pan.bluebank.dto.response.ContaResponseDTO;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Conta;
@@ -19,6 +20,18 @@ public class ContaMapper {
 				StatusDeConta.ATIVADO,
 				agencia,
 				cliente);
+	}
+	
+	public static ContaResponseDTO toDTO(Conta conta) {
+		return new ContaResponseDTO(
+				conta.getId(),
+				conta.getNumeroDaConta(),
+				conta.getSaldo(),
+				conta.getDataAbertura(),
+				conta.getTipoDeConta(),
+				conta.getStatusDeConta(),
+				conta.getAgencia().getNumeroAgencia(),
+				conta.getCliente().getNome());
 	}
 
 }
