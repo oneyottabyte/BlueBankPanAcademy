@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.pan.bluebank.dto.ClienteDTO;
+import br.com.pan.bluebank.dto.response.MessageResponse;
+import br.com.pan.bluebank.dto.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.services.ClienteService;
 
 @RestController
 @RequestMapping(path = "v1/clientes")
-public class ClienteController {
+public class ClienteController implements MessageResponse {
 	
 	@Autowired
 	private ClienteService service;
@@ -59,13 +61,12 @@ public class ClienteController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PutMapping(value = "/{id}",consumes="application/json", produces="application/json")
-		public ResponseEntity<Cliente> update(@PathVariable Long id,
+		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody ClienteDTO dto) {
 		Cliente updatedCliente = service.update(id, dto);
-		return ResponseEntity.ok(updatedCliente);
+		return ResponseEntity.ok(createMessageResponse("Cliente atualizado com sucesso!"));
 	}
-	
-  
+	  
 	@ApiOperation(value = "Salva um novo cliente")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Salva o cliente"),
@@ -73,11 +74,11 @@ public class ClienteController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(consumes = "application/json")
-	public ResponseEntity<Cliente> create(@RequestBody ClienteDTO dto){
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody ClienteDTO dto){
 		Cliente newCliente = service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newCliente.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(createMessageResponse("Cliente criado com sucesso!"));
 	}
 
 }

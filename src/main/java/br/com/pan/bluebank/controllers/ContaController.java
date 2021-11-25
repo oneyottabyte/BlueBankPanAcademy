@@ -20,13 +20,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.pan.bluebank.dto.ContaDTO;
 import br.com.pan.bluebank.dto.response.ContaResponseDTO;
+import br.com.pan.bluebank.dto.response.MessageResponse;
+import br.com.pan.bluebank.dto.response.MessageResponseImpl;
 import br.com.pan.bluebank.mappers.ContaMapper;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.services.ContaService;
 
 @RestController
 @RequestMapping(path = "v1/contas")
-public class ContaController {
+public class ContaController implements MessageResponse{
 	
 	@Autowired
 	private ContaService contaService;
@@ -76,11 +78,11 @@ public class ContaController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Conta> create(@RequestBody ContaDTO dto){
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody ContaDTO dto){
 		Conta newConta = contaService.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newConta.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(createMessageResponse("Conta criada com sucesso!"));
 		}
 
 	@ApiOperation(value = "Altera o status de uma conta a partir do id")
@@ -90,10 +92,10 @@ public class ContaController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PatchMapping(value = "/{id}",produces = "application/json")
-	public ResponseEntity<Conta> alterarStatus(@PathVariable Long id, 
+	public ResponseEntity<MessageResponseImpl> alterarStatus(@PathVariable Long id, 
 			@RequestParam String status){
 		Conta contaAlterada = contaService.alterarStatus(id, status);
-		return ResponseEntity.ok(contaAlterada);
+		return ResponseEntity.ok(createMessageResponse("Status da conta alterado com sucesso!"));
 	}
 	
 }

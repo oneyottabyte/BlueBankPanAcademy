@@ -20,13 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.pan.bluebank.dto.AgenciaDTO;
+import br.com.pan.bluebank.dto.response.MessageResponse;
+import br.com.pan.bluebank.dto.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.services.AgenciaService;
 
 
 @RestController
 @RequestMapping(path = "v1/agencias")
-public class AgenciaController {
+public class AgenciaController implements MessageResponse {
 	
 	@Autowired
 	private AgenciaService agenciaService;
@@ -62,10 +64,10 @@ public class AgenciaController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
-		public ResponseEntity<Agencia> update(@PathVariable Long id,
+		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody AgenciaDTO dto) {
 		Agencia updatedAgencia = agenciaService.update(id, dto);
-		return ResponseEntity.ok(updatedAgencia);
+		return ResponseEntity.ok(createMessageResponse("Agência atualizada com sucesso!"));
 	}
 
 	@ApiOperation(value = "Apaga uma agência")
@@ -87,11 +89,11 @@ public class AgenciaController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(produces="application/json", consumes="application/json")
-	public ResponseEntity<Agencia> create(@RequestBody AgenciaDTO dto){
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody AgenciaDTO dto){
 		Agencia newAgencia = agenciaService.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newAgencia.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(createMessageResponse("Agência criada com sucesso!"));
 	}
 
 }

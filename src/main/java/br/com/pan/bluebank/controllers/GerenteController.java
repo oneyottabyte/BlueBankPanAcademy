@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.pan.bluebank.dto.GerenteDTO;
+import br.com.pan.bluebank.dto.response.MessageResponse;
+import br.com.pan.bluebank.dto.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Gerente;
 import br.com.pan.bluebank.services.GerenteService;
 
 @RestController
 @RequestMapping(path = "v1/gerentes")
-public class GerenteController {
+public class GerenteController implements MessageResponse {
 	
 	@Autowired
 	private GerenteService gerenteService;
@@ -60,10 +62,10 @@ public class GerenteController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PutMapping(value = "/{id}", produces = "application/json")
-		public ResponseEntity<Gerente> update(@PathVariable Long id,
+		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody GerenteDTO gerenteDTO) {
-		Gerente updatedGerente = this.gerenteService.update(id, gerenteDTO);
-		return ResponseEntity.ok(updatedGerente);
+		this.gerenteService.update(id, gerenteDTO);
+		return ResponseEntity.ok(createMessageResponse("Gerente alterado com sucesso!"));
 	}
 
 	@ApiOperation(value = "Apaga um gerente a partir do id")
@@ -85,11 +87,11 @@ public class GerenteController {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Gerente> create(@RequestBody GerenteDTO gerenteDTO){
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody GerenteDTO gerenteDTO){
 		Gerente newGerente = this.gerenteService.create(gerenteDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newGerente.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(createMessageResponse("Gerente criado com sucesso!"));
 	}
 
 }
