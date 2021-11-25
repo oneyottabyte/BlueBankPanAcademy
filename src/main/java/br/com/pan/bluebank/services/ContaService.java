@@ -53,14 +53,14 @@ public class ContaService {
 	public ContaResponseDTO findByIdResponse(Long id) {
 		return ContaMapper.toDTO(findById(id));
 	}
-
+	
 	public Conta create(ContaDTO dto) {
-		Cliente cliente = clienteService.findById(dto.getIdCliente());
-		Agencia agencia = agenciaService.findById(dto.getIdAgencia());
-		Conta novaConta = ContaMapper.toEntity(dto, cliente, agencia);
-
-		return contaRepository.save(novaConta);
-	}
+        Cliente cliente = clienteService.findById(dto.getIdCliente());
+        Agencia agencia = agenciaService.findById(dto.getIdAgencia());
+        Conta novaConta = ContaMapper.toEntity(dto, cliente, agencia);
+        novaConta.setNumeroDaConta(setNumeroConta());
+        return contaRepository.save(novaConta);
+    }
 
 	public Conta alterarStatus(Long id, String status) {
 		Conta contaAlterada = findById(id);
@@ -89,5 +89,25 @@ public class ContaService {
 		return contaRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException(texto));
 	}
+	
+	private String setNumeroConta() {
+        String number = numeroAleatorio();
+        Conta nc = contaRepository.findByNumeroDaConta(String.valueOf(number));
+        if (nc == null) {
+            return String.valueOf(number);
+        } else {
+            return setNumeroConta();
+        }
+
+    } 
+
+    public String numeroAleatorio() {
+        
+        long n =  0 + (long) (Math.random() * ((999999999 - 0) + 1));
+        String formatado = String.format("%010d", n);
+        
+        return formatado.substring(0, 8) + "-" + formatado.charAt(9);
+    }
+
 
 }
