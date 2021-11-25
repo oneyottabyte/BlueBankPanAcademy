@@ -46,7 +46,7 @@ public class MovimentacaoController implements MessageResponse {
 				.buildAndExpand(newMovimentacao.getId()).toUri();
 		return ResponseEntity
 				.created(uri)
-				.body(createMessageResponse("Movimentação criada com sucesso"));
+				.body(createMessageResponse("Movimentação realizada com sucesso!"));
 	}
 
 	@ApiOperation(value = "Retorna uma movimentaçao a partir do id")

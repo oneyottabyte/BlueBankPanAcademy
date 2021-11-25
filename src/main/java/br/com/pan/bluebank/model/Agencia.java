@@ -15,14 +15,12 @@ public class Agencia implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_agencia")
 	@ApiModelProperty(value = "Código da agência")
-    private Long id;
-    
+    private Long id;    
 
     @NotBlank(message = "Número da agência é um atributo obrigatório!")   
     @Column(name = "numero_agencia")
 	@ApiModelProperty(value = "Número da agência")
-    private String numeroAgencia;
-    
+    private String numeroAgencia;    
 
     @NotBlank(message = "Nome da agência é um atributo obrigatório!")   
     @Column(name = "nome_agencia")
@@ -32,8 +30,7 @@ public class Agencia implements Serializable {
     @JoinColumn(name = "id_Gerente")
     @OneToOne
 	@ApiModelProperty(value = "Gerente da agência")
-    private Gerente gerente;
-    
+    private Gerente gerente;    
     
     public Agencia() {
     }
