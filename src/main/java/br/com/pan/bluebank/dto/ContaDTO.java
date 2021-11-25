@@ -8,7 +8,6 @@ import br.com.pan.bluebank.model.enums.TipoDeConta;
 public class ContaDTO {
 	
     private String numeroDaConta;
-    private BigDecimal saldo;
     private TipoDeConta tipoDeConta;
     private Long idAgencia;
     private Long idCliente;
@@ -19,7 +18,6 @@ public class ContaDTO {
 	public ContaDTO(String numeroDaConta, BigDecimal saldo, TipoDeConta tipoDeConta,
 			Long idAgencia, Long idCliente) {
 		this.numeroDaConta = numeroDaConta;
-		this.saldo = saldo;
 		this.tipoDeConta = tipoDeConta;
 		this.idAgencia = idAgencia;
 		this.idCliente = idCliente;
@@ -31,14 +29,6 @@ public class ContaDTO {
 
 	public void setNumeroDaConta(String numeroDaConta) {
 		this.numeroDaConta = numeroDaConta;
-	}
-
-	public BigDecimal getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(BigDecimal saldo) {
-		this.saldo = saldo;
 	}
 
 	public TipoDeConta getTipoDeConta() {

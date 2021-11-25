@@ -1,5 +1,6 @@
 package br.com.pan.bluebank.mappers;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import br.com.pan.bluebank.dto.ContaDTO;
@@ -15,7 +16,7 @@ public class ContaMapper {
 		return new Conta(
 				LocalDateTime.now(),
 				dto.getNumeroDaConta(),
-				dto.getSaldo(),
+				BigDecimal.ZERO,
 				dto.getTipoDeConta(),
 				StatusDeConta.ATIVADO,
 				agencia,
