@@ -3,6 +3,7 @@ package br.com.pan.bluebank.mappers;
 import java.time.LocalDateTime;
 
 import br.com.pan.bluebank.dto.MovimentacaoDTO;
+import br.com.pan.bluebank.dto.response.MovimentacaoResponseDTO;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
@@ -17,5 +18,19 @@ public class MovimentacaoMapper {
 								LocalDateTime.now(),
 								contaOrigem,
 								contaDestino);
+	}
+
+	public static MovimentacaoResponseDTO toResponseDTO(Movimentacao movimentacao) {
+		
+		return new MovimentacaoResponseDTO(
+				movimentacao.getId(),
+				movimentacao.getTipo().toString(),
+				movimentacao.getValorTransacao(),
+				movimentacao.getContaOrigem().getId(),
+				movimentacao.getContaOrigem().getCliente().getNome(),
+				movimentacao.getContaDestino().getId(),
+				movimentacao.getContaDestino().getCliente().getNome(),
+				movimentacao.getDataMovimentacao()
+											);
 	}
 }

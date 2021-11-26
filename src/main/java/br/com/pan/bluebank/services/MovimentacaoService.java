@@ -8,12 +8,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.pan.bluebank.dto.MovimentacaoDTO;
-import br.com.pan.bluebank.dto.response.MessageResponse;
+import br.com.pan.bluebank.dto.response.MovimentacaoResponseDTO;
 import br.com.pan.bluebank.mappers.MovimentacaoMapper;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 import br.com.pan.bluebank.repositories.MovimentacaoRepository;
+import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class MovimentacaoService {
@@ -33,11 +34,20 @@ public class MovimentacaoService {
 
 	@Transactional
 	public Movimentacao findById(Long id) {
-		return movimentacaoRepository.findById(id).orElseThrow();
+		return movimentacaoRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Movimentação não encontrada!"));
+	}
+	
+	@Transactional
+	public MovimentacaoResponseDTO findByIdResponse(Long id) {
+		Movimentacao movimentacao = findById(id);			
+								
+		return MovimentacaoMapper.toResponseDTO(movimentacao);
 	}
 
-	public Page<Movimentacao> findAll(Pageable page) {
-		return movimentacaoRepository.findAll(page);
+	public Page<MovimentacaoResponseDTO> findAll(Pageable page) {
+		return movimentacaoRepository.findAll(page)							
+							.map(movimentacacao -> MovimentacaoMapper.toResponseDTO(movimentacacao));
 	}
 
 	private void salvaContasMovimentacaoPorTipo(TipoMovimentacao tipoMovimentacao, Movimentacao movimentacaoAtt) {
@@ -68,6 +78,5 @@ public class MovimentacaoService {
 	private Movimentacao atualizaSaldoContasPorTipo(TipoMovimentacao tipo, Movimentacao movimentacao) {
 		return tipo.atualizaSaldo(movimentacao);
 	}
-
 	
 }
