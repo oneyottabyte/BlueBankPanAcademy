@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.pan.bluebank.dto.AgenciaDTO;
+import br.com.pan.bluebank.dto.response.AgenciaResponseDTO;
 import br.com.pan.bluebank.dto.response.MessageResponse;
 import br.com.pan.bluebank.dto.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Agencia;
@@ -40,8 +41,8 @@ public class AgenciaController implements MessageResponse {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping(path = "/{id}", produces="application/json")
-	public ResponseEntity<Agencia> findById(@PathVariable Long id){
-		Agencia obj = this.agenciaService.findById(id);
+	public ResponseEntity<AgenciaResponseDTO> findById(@PathVariable Long id){
+		AgenciaResponseDTO obj = this.agenciaService.findByIdResponse(id);
 		return ResponseEntity.ok(obj);
 	}
 
@@ -52,8 +53,8 @@ public class AgenciaController implements MessageResponse {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping(produces="application/json")
-	public ResponseEntity<List<Agencia>> findAll() {
-		List<Agencia> list = agenciaService.findAll();
+	public ResponseEntity<List<AgenciaResponseDTO>> findAll() {
+		List<AgenciaResponseDTO> list = agenciaService.findAll();
 		return ResponseEntity.ok(list);
 	}
 
