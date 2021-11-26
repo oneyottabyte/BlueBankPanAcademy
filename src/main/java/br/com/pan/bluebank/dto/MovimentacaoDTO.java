@@ -1,6 +1,7 @@
 package br.com.pan.bluebank.dto;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class MovimentacaoDTO {
 	
@@ -61,6 +62,22 @@ public class MovimentacaoDTO {
 
 	public void setContaDestinoId(Long contaDestinoId) {
 		this.contaDestinoId = contaDestinoId;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MovimentacaoDTO other = (MovimentacaoDTO) obj;
+		return Objects.equals(id, other.id);
 	}    
-	
 }

@@ -1,5 +1,7 @@
 package br.com.pan.bluebank.dto;
 
+import java.util.Objects;
+
 import br.com.pan.bluebank.model.Endereco;
 
 public class ClienteDTO {
@@ -72,5 +74,21 @@ public class ClienteDTO {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cpf);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClienteDTO other = (ClienteDTO) obj;
+		return Objects.equals(cpf, other.cpf);
+	}
 }

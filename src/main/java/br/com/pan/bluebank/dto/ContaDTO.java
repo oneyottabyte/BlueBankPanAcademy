@@ -70,6 +70,5 @@ public class ContaDTO {
 			return false;
 		ContaDTO other = (ContaDTO) obj;
 		return Objects.equals(numeroDaConta, other.numeroDaConta);
-	} 
-
+	}
 }

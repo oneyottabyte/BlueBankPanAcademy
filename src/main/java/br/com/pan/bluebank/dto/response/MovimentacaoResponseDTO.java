@@ -2,6 +2,7 @@ package br.com.pan.bluebank.dto.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -99,6 +100,22 @@ public class MovimentacaoResponseDTO {
 
 	public void setDataMovimentacao(LocalDateTime dataMovimentacao) {
 		this.dataMovimentacao = dataMovimentacao;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MovimentacaoResponseDTO other = (MovimentacaoResponseDTO) obj;
+		return Objects.equals(id, other.id);
 	}	
-	
 }

@@ -26,9 +26,8 @@ public class ContaResponseDTO {
     private String nomeCliente;
 	
     public ContaResponseDTO() {
+    	
 	}
-
-	
 
 	public ContaResponseDTO(Long id, String numeroDaConta, BigDecimal saldo, LocalDateTime dataAbertura,
 			TipoDeConta tipoDeConta, StatusDeConta statusDeConta, String numeroAgencia, String nomeCliente) {
@@ -61,20 +60,14 @@ public class ContaResponseDTO {
 	public BigDecimal getSaldo() {
 		return saldo;
 	}
-
-	
 	
 	public LocalDateTime getDataAbertura() {
 		return dataAbertura;
 	}
 
-
-
 	public void setDataAbertura(LocalDateTime dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
-
-
 
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
@@ -114,7 +107,7 @@ public class ContaResponseDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(numeroDaConta);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -126,8 +119,6 @@ public class ContaResponseDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ContaResponseDTO other = (ContaResponseDTO) obj;
-		return Objects.equals(numeroDaConta, other.numeroDaConta);
-	}
-    
-    
+		return Objects.equals(id, other.id);
+	}  
 }
