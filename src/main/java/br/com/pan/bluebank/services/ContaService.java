@@ -32,7 +32,7 @@ public class ContaService {
 
 	public List<ContaResponseDTO> findAll() {
 		List<Conta> listaConta = contaRepository.findAll();
-		return listaConta.stream()
+		return listaConta.stream()				
 				.map(conta -> ContaMapper.toDTO(conta))
 				.collect(Collectors.toList());
 	}

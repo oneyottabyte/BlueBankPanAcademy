@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.pan.bluebank.dto.MovimentacaoDTO;
 import br.com.pan.bluebank.dto.response.MessageResponse;
 import br.com.pan.bluebank.dto.response.MessageResponseImpl;
+import br.com.pan.bluebank.dto.response.MovimentacaoResponseDTO;
 import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.services.MovimentacaoService;
 import io.swagger.annotations.ApiOperation;
@@ -56,8 +57,8 @@ public class MovimentacaoController implements MessageResponse {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping(path = "/{origemId}", produces = "application/json")
-	public ResponseEntity<Movimentacao> findById(@PathVariable Long origemId){
-		return ResponseEntity.ok(this.service.findById(origemId));
+	public ResponseEntity<MovimentacaoResponseDTO> findById(@PathVariable Long origemId){
+		return ResponseEntity.ok(this.service.findByIdResponse(origemId));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de movimentações")
@@ -67,7 +68,7 @@ public class MovimentacaoController implements MessageResponse {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping
-	public ResponseEntity<Page<Movimentacao>> findAll(Pageable page) {
+	public ResponseEntity<Page<MovimentacaoResponseDTO>> findAll(Pageable page) {
 			return ResponseEntity.ok(this.service.findAll(page));
 	}		
 	
