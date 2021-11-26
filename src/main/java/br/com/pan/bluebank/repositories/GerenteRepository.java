@@ -6,5 +6,4 @@ import br.com.pan.bluebank.model.Gerente;
 
 public interface GerenteRepository extends JpaRepository<Gerente, Long> {
     
-    
 }

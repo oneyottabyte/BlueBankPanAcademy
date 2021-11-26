@@ -94,7 +94,7 @@ public class ContaController implements MessageResponse{
 	@PatchMapping(value = "/{id}",produces = "application/json")
 	public ResponseEntity<MessageResponseImpl> alterarStatus(@PathVariable Long id, 
 			@RequestParam String status){
-		Conta contaAlterada = contaService.alterarStatus(id, status);
+		contaService.alterarStatus(id, status);
 		return ResponseEntity.ok(createMessageResponse("Status da conta alterado com sucesso!"));
 	}
 	

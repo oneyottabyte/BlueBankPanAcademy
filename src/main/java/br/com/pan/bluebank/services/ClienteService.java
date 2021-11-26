@@ -21,6 +21,15 @@ public class ClienteService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	public Cliente findById(Long id) {	
+		return clienteRepository.findById(id)
+					.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado!"));
+	}
+	
+	public List<Cliente> findAll() {
+		return clienteRepository.findAll();
+	}	
 
 	public Cliente create(ClienteDTO dto) {	
 		Endereco endereco = enderecoRepository.save(dto.getEndereco());
@@ -37,16 +46,7 @@ public class ClienteService {
 		
 		return clienteRepository.save(updatedEntity);
 	}
-	
-	public Cliente findById(Long id) {	
-		return clienteRepository.findById(id)
-					.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado!"));
-	}
-	
-	public List<Cliente> findAll() {
-		return clienteRepository.findAll();
-	}	
-	
+		
 	public void delete(Long id) {
 		Cliente cliente = findById(id);
 		clienteRepository.delete(cliente);	

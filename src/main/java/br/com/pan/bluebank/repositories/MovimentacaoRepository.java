@@ -9,7 +9,6 @@ import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long> {
 
-	
 	List<Movimentacao> findAllByIdAndTipo(Long origemId, TipoMovimentacao valueOf);
     
 }

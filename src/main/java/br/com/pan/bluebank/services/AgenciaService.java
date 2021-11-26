@@ -20,6 +20,15 @@ public class AgenciaService {
 	@Autowired
 	private GerenteService gerenteService;
 	
+	public Agencia findById(Long id) {	
+		return agenciaRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Agencia não encontrada!"));
+	}
+	
+	public List<Agencia> findAll() {
+		return agenciaRepository.findAll();
+	}	
+	
 	public Agencia create(AgenciaDTO agenciaDTO) {
 		Agencia createAgencia = verifyGerente(agenciaDTO);
 		return agenciaRepository.save(createAgencia);	
@@ -29,15 +38,6 @@ public class AgenciaService {
 		Agencia updateAgencia = findById(id);
 		updateAgencia = verifyGerente(agenciaDTO, updateAgencia);	
 		return agenciaRepository.save(updateAgencia);
-	}
-	
-	public Agencia findById(Long id) {	
-		return agenciaRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Agencia não encontrada!"));
-	}
-	
-	public List<Agencia> findAll() {
-		return agenciaRepository.findAll();
 	}	
 		
 	public void delete(Long id) {

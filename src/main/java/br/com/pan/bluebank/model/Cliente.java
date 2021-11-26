@@ -72,8 +72,7 @@ public class Cliente implements Serializable {
 	@ApiModelProperty(value = "Endereço do cliente")
 	private Endereco endereco;
 	
-	public Cliente() {
-		
+	public Cliente() {		
 	}
 	
 	public Cliente(
