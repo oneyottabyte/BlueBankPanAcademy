@@ -54,6 +54,20 @@ public class GerenteController implements MessageResponse {
 		List<Gerente> list = this.gerenteService.findAll();
 		return ResponseEntity.ok(list);
 	}
+	
+	@ApiOperation(value = "Salva um novo gerente")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Salva o gerente"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PostMapping(consumes = "application/json", produces = "application/json")
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody GerenteDTO gerenteDTO){
+		Gerente newGerente = this.gerenteService.create(gerenteDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(newGerente.getId()).toUri();
+		return ResponseEntity.created(uri).body(createMessageResponse("Gerente criado com sucesso!"));
+	}
 
 	@ApiOperation(value = "Atualiza um gerente a partir do id")
 	@ApiResponses(value = {
@@ -79,19 +93,4 @@ public class GerenteController implements MessageResponse {
 		this.gerenteService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-
-	@ApiOperation(value = "Salva um novo gerente")
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Salva o gerente"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-	})
-	@PostMapping(consumes = "application/json", produces = "application/json")
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody GerenteDTO gerenteDTO){
-		Gerente newGerente = this.gerenteService.create(gerenteDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(newGerente.getId()).toUri();
-		return ResponseEntity.created(uri).body(createMessageResponse("Gerente criado com sucesso!"));
-	}
-
 }

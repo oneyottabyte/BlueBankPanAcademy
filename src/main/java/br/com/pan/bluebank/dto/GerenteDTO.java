@@ -1,5 +1,7 @@
 package br.com.pan.bluebank.dto;
 
+import java.util.Objects;
+
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Endereco;
 
@@ -72,4 +74,21 @@ public class GerenteDTO {
 	public void setAgencia(Agencia agencia) {
 		this.agencia = agencia;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cpf);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GerenteDTO other = (GerenteDTO) obj;
+		return Objects.equals(cpf, other.cpf);
+	}	
 }

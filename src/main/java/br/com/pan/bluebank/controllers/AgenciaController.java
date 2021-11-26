@@ -57,6 +57,20 @@ public class AgenciaController implements MessageResponse {
 		List<AgenciaResponseDTO> list = agenciaService.findAll();
 		return ResponseEntity.ok(list);
 	}
+	
+	@ApiOperation(value = "Salva uma agência")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Salva a agência"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PostMapping(produces="application/json", consumes="application/json")
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody AgenciaDTO dto){
+		Agencia newAgencia = agenciaService.create(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(newAgencia.getId()).toUri();
+		return ResponseEntity.created(uri).body(createMessageResponse("Agência criada com sucesso!"));
+	}
 
 	@ApiOperation(value = "Atualiza uma agência")
 	@ApiResponses(value = {
@@ -82,19 +96,4 @@ public class AgenciaController implements MessageResponse {
 		agenciaService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-
-	@ApiOperation(value = "Salva uma agência")
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Salva a agência"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-	})
-	@PostMapping(produces="application/json", consumes="application/json")
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody AgenciaDTO dto){
-		Agencia newAgencia = agenciaService.create(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(newAgencia.getId()).toUri();
-		return ResponseEntity.created(uri).body(createMessageResponse("Agência criada com sucesso!"));
-	}
-
 }

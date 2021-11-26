@@ -34,5 +34,4 @@ public class ContaMapper {
 				conta.getAgencia().getNumeroAgencia(),
 				conta.getCliente().getNome());
 	}
-
 }

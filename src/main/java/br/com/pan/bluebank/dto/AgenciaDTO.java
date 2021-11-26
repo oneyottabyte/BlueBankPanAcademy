@@ -1,5 +1,7 @@
 package br.com.pan.bluebank.dto;
 
+import java.util.Objects;
+
 public class AgenciaDTO {
 
 	private String numeroAgencia;
@@ -38,6 +40,23 @@ public class AgenciaDTO {
 
 	public void setIdGerente(Long idGerente) {
 		this.idGerente = idGerente;
-	}	
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numeroAgencia);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AgenciaDTO other = (AgenciaDTO) obj;
+		return Objects.equals(numeroAgencia, other.numeroAgencia);
+	}
 }
 

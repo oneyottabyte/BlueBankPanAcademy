@@ -31,25 +31,6 @@ public class MovimentacaoController implements MessageResponse {
 	@Autowired
 	private MovimentacaoService service;
 
-	@ApiOperation(value = "Salva uma nova movimentaçao")
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Salva a movimentação"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-	})
-	@PostMapping(consumes = "application/json", produces = "application/json")
-	public ResponseEntity<MessageResponseImpl> create(		
-			@RequestBody MovimentacaoDTO dto){
-		
-		Movimentacao newMovimentacao = this.service.create(dto);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(newMovimentacao.getId()).toUri();
-		return ResponseEntity
-				.created(uri)
-				.body(createMessageResponse("Movimentação realizada com sucesso!"));
-	}
-
 	@ApiOperation(value = "Retorna uma movimentaçao a partir do id")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retorna a movimentação"),
@@ -72,4 +53,22 @@ public class MovimentacaoController implements MessageResponse {
 			return ResponseEntity.ok(this.service.findAll(page));
 	}		
 	
+	@ApiOperation(value = "Salva uma nova movimentaçao")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Salva a movimentação"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+	@PostMapping(consumes = "application/json", produces = "application/json")
+	public ResponseEntity<MessageResponseImpl> create(		
+			@RequestBody MovimentacaoDTO dto){
+		
+		Movimentacao newMovimentacao = this.service.create(dto);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(newMovimentacao.getId()).toUri();
+		return ResponseEntity
+				.created(uri)
+				.body(createMessageResponse("Movimentação realizada com sucesso!"));
+	}
 }
