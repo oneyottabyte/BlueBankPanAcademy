@@ -23,7 +23,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_movimentacoes")
 public class Movimentacao implements Serializable {
@@ -63,9 +67,6 @@ public class Movimentacao implements Serializable {
 	@ApiModelProperty(value = "Conta de destino da movimentação")
     private Conta contaDestino;
        
-    public Movimentacao() {
-    }
-
 	public Movimentacao(
 			@NotBlank(message = "Tipo de movimentação é um atributo obrigatório!") TipoMovimentacao tipo,
 			@Positive(message = "O valor da transação tem de ser positivo") @NotBlank(message = "Valor é um atributo obrigatório!") BigDecimal valorTransacao,
@@ -76,74 +77,4 @@ public class Movimentacao implements Serializable {
 		this.contaOrigem = contaOrigem;
 		this.contaDestino = contaDestino;
 	}
-	
-	public Long getId() {
-		return id;
-	}
-
-	public TipoMovimentacao getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoMovimentacao tipo) {
-		this.tipo = tipo;
-	}
-
-	public BigDecimal getValorTransacao() {
-		return valorTransacao;
-	}
-
-	public void setValorTransacao(BigDecimal valorTransacao) {
-		this.valorTransacao = valorTransacao;
-	}
-
-	public LocalDateTime getDataMovimentacao() {
-		return dataMovimentacao;
-	}
-
-	public void setDataMovimentacao(LocalDateTime dataMovimentacao) {
-		this.dataMovimentacao = dataMovimentacao;
-	}
-
-	public Conta getContaOrigem() {
-		return contaOrigem;
-	}
-
-	public void setContaOrigem(Conta contaOrigem) {
-		this.contaOrigem = contaOrigem;
-	}
-
-	public Conta getContaDestino() {
-		return contaDestino;
-	}
-
-	public void setContaDestino(Conta contaDestino) {
-		this.contaDestino = contaDestino;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Movimentacao other = (Movimentacao) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}    
-	
 }
