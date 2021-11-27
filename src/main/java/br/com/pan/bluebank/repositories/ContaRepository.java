@@ -15,5 +15,4 @@ public interface ContaRepository extends JpaRepository<Conta, Long>{
     
 	Conta findByNumeroDaConta(String numero);
 
-
 }

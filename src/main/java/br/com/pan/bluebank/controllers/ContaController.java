@@ -20,7 +20,9 @@ import br.com.pan.bluebank.dto.response.ContaResponseDTO;
 import br.com.pan.bluebank.dto.response.MessageResponse;
 import br.com.pan.bluebank.dto.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Conta;
+import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.services.ContaService;
+import br.com.pan.bluebank.services.MovimentacaoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -31,6 +33,9 @@ public class ContaController implements MessageResponse{
 	
 	@Autowired
 	private ContaService contaService;
+	
+	@Autowired
+	private MovimentacaoService movimentacaoService;
 	
 	@ApiOperation(value = "Retorna uma conta a partir do id")
 	@ApiResponses(value = {
@@ -93,5 +98,12 @@ public class ContaController implements MessageResponse{
 			@RequestParam String status){
 		contaService.alterarStatus(id, status);
 		return ResponseEntity.ok(createMessageResponse("Status da conta alterado com sucesso!"));
-	}	
+	}
+	
+	@GetMapping(value = "/extrato/{id}")
+	public ResponseEntity<List<Movimentacao>> findAllByContaOrigemOrContaDestino(@PathVariable Long id){
+		List<Movimentacao> lista = movimentacaoService.extratoConta(id);
+		return ResponseEntity.ok(lista);
+	}
+
 }
