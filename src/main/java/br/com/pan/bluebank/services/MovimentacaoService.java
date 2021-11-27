@@ -1,5 +1,7 @@
 package br.com.pan.bluebank.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class MovimentacaoService {
 
 	@Autowired
 	public MovimentacaoRepository movimentacaoRepository;
-
+	
 	public Movimentacao create(MovimentacaoDTO dto) {		
 		Movimentacao movimentacao = criaMovimentacao(dto);
 		movimentacao = atualizaSaldoContasPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
@@ -79,4 +81,9 @@ public class MovimentacaoService {
 		return tipo.atualizaSaldo(movimentacao);
 	}
 	
+	public List<Movimentacao> extratoConta(Long contaId){
+		Conta conta = contaService.findById(contaId);
+		List<Movimentacao> lista = movimentacaoRepository.findAllByContaOrigemOrContaDestino(conta, conta);
+		return lista;
+	}
 }

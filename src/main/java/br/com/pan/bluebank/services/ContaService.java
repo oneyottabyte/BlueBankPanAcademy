@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.pan.bluebank.dto.AgenciaDTO;
 import br.com.pan.bluebank.dto.ContaDTO;
 import br.com.pan.bluebank.dto.response.ContaResponseDTO;
 import br.com.pan.bluebank.mappers.ContaMapper;
@@ -18,9 +17,6 @@ import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.enums.StatusDeConta;
 import br.com.pan.bluebank.repositories.ContaRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Service
 public class ContaService {
@@ -33,7 +29,7 @@ public class ContaService {
 
 	@Autowired
 	private AgenciaService agenciaService;
-
+	
 	public List<ContaResponseDTO> findAll() {
 		List<Conta> listaConta = contaRepository.findAll();
 		return listaConta.stream()				
@@ -112,6 +108,5 @@ public class ContaService {
         
         return formatado.substring(0, 8) + "-" + formatado.charAt(9);
     }
-
-
+    
 }
