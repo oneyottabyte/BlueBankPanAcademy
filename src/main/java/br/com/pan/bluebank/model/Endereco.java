@@ -1,9 +1,6 @@
 package br.com.pan.bluebank.model;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +11,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_enderecos")
 public class Endereco implements Serializable {
@@ -66,9 +69,6 @@ public class Endereco implements Serializable {
 	@ApiModelProperty(value = "Estado do endereço")
     private String estado;
    
-    public Endereco() {
-    }
-    
 	public Endereco(
 			@NotBlank(message = "Logradouro é um atributo obrigatório") @Size(min = 1, max = 100) String logradouro,
 			@NotBlank(message = "Número é um atributo obrigatório") @Size(min = 1, max = 10) String numero,
@@ -83,78 +83,6 @@ public class Endereco implements Serializable {
 		this.complemento = complemento;
 		this.cidade = cidade;
 		this.estado = estado;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Endereco other = (Endereco) obj;
-		return Objects.equals(id, other.id);
 	}
 
 }

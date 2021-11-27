@@ -3,7 +3,6 @@ package br.com.pan.bluebank.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +26,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.pan.bluebank.model.enums.StatusDeConta;
 import br.com.pan.bluebank.model.enums.TipoDeConta;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_contas")
 public class Conta implements Serializable {
@@ -82,11 +85,6 @@ public class Conta implements Serializable {
 	@ApiModelProperty(value = "Proprietário da conta")
     private Cliente cliente;
     
-	public Conta() {		
-	}
-	
-	
-
 	public Conta(
 			@NotNull(message = "Data de abertura é um atributo obrigatório!") @Past(message = "Data de abertura inválida") LocalDateTime dataAbertura,
 			@NotBlank(message = "Número da conta é um atributo obrigatório!") @Size(min = 1, max = 10) String numeroDaConta,
@@ -99,8 +97,6 @@ public class Conta implements Serializable {
 		this.tipoDeConta = tipoDeConta;
 		this.statusDeConta = statusDeConta;
 	}
-
-
 
 	public Conta(
 			@NotNull(message = "Data de abertura é um atributo obrigatório!") @Past(message = "Data de abertura inválida") LocalDateTime dataAbertura,
@@ -117,97 +113,4 @@ public class Conta implements Serializable {
 		this.agencia = agencia;
 		this.cliente = cliente;
 	}
-
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public LocalDateTime getDataAbertura() {
-		return dataAbertura;
-	}
-
-
-	public void setDataAbertura(LocalDateTime dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
-
-
-	public String getNumeroDaConta() {
-		return numeroDaConta;
-	}
-
-
-	public void setNumeroDaConta(String numeroDaConta) {
-		this.numeroDaConta = numeroDaConta;
-	}
-
-
-	public BigDecimal getSaldo() {
-		return saldo;
-	}
-
-
-	public void setSaldo(BigDecimal saldo) {
-		this.saldo = saldo;
-	}
-
-
-	public Agencia getAgencia() {
-		return agencia;
-	}
-
-
-	public void setAgencia(Agencia agencia) {
-		this.agencia = agencia;
-	}
-
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-
-	public TipoDeConta getTipoDeConta() {
-		return tipoDeConta;
-	}
-
-
-	public void setTipoDeConta(TipoDeConta tipoDeConta) {
-		this.tipoDeConta = tipoDeConta;
-	}
-
-	public StatusDeConta getStatusDeConta() {
-		return statusDeConta;
-	}
-
-	public void setStatusDeConta(StatusDeConta statusDeConta) {
-		this.statusDeConta = statusDeConta;
-	}
-
-
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(this.id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Conta other = (Conta) obj;
-		return Objects.equals(this.id, other.id);
-	}
-  
 }
