@@ -13,8 +13,6 @@ import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Gerente;
 import br.com.pan.bluebank.repositories.AgenciaRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 @Service
 public class AgenciaService {

@@ -2,13 +2,14 @@ package br.com.pan.bluebank.services;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.pan.bluebank.dto.ContaDTO;
+import br.com.pan.bluebank.dto.ExtratoDTO;
+import br.com.pan.bluebank.dto.ExtratoFilter;
 import br.com.pan.bluebank.dto.response.ContaResponseDTO;
 import br.com.pan.bluebank.mappers.ContaMapper;
 import br.com.pan.bluebank.model.Agencia;
@@ -24,8 +25,11 @@ public class ContaService {
 	@Autowired
 	private ContaRepository contaRepository;
 
-	@Autowired
+	@Autowired	
 	private ClienteService clienteService;
+	
+	@Autowired
+	private ExtratoService extratoService;
 
 	@Autowired
 	private AgenciaService agenciaService;
@@ -90,6 +94,11 @@ public class ContaService {
 				.orElseThrow(() -> new ResourceNotFoundException(texto));
 	}
 	
+	public ExtratoDTO extratoConta(ExtratoFilter filter){
+		Conta conta = findById(filter.getContaId());
+		return extratoService.geraExtrato(conta, filter);
+	}
+	
 	private String setNumeroConta() {
         String number = numeroAleatorio();
         Conta nc = contaRepository.findByNumeroDaConta(String.valueOf(number));
@@ -98,9 +107,8 @@ public class ContaService {
         } else {
             return setNumeroConta();
         }
-
     } 
-
+	
     public String numeroAleatorio() {
         
         long n =  0 + (long) (Math.random() * ((999999999 - 0) + 1));

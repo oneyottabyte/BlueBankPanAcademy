@@ -1,6 +1,7 @@
 package br.com.pan.bluebank.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.pan.bluebank.dto.ExtratoFilter;
 import br.com.pan.bluebank.dto.MovimentacaoDTO;
 import br.com.pan.bluebank.dto.response.MovimentacaoResponseDTO;
 import br.com.pan.bluebank.mappers.MovimentacaoMapper;
@@ -17,13 +19,17 @@ import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 import br.com.pan.bluebank.repositories.MovimentacaoRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
+import br.com.pan.bluebank.specificantions.ExtratoSpecification;
 
 @Service
 public class MovimentacaoService {
 
 	@Autowired
 	private ContaService contaService;
-
+	
+	@Autowired
+	private ExtratoSpecification extratoSpecification;
+	
 	@Autowired
 	public MovimentacaoRepository movimentacaoRepository;
 	
@@ -86,4 +92,13 @@ public class MovimentacaoService {
 		List<Movimentacao> lista = movimentacaoRepository.findAllByContaOrigemOrContaDestino(conta, conta);
 		return lista;
 	}
+
+	public List<MovimentacaoResponseDTO> findAllFilter(ExtratoFilter filter) {
+		List<Movimentacao> movs = movimentacaoRepository.findAll(extratoSpecification.movimentacoes(filter));
+		
+		return movs.stream()
+					.map(x -> MovimentacaoMapper.toResponseDTO(x))
+					.collect(Collectors.toList());		
+	}
+
 }

@@ -3,10 +3,6 @@ package br.com.pan.bluebank.controllers;
 import java.net.URI;
 import java.util.List;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +21,9 @@ import br.com.pan.bluebank.dto.response.MessageResponse;
 import br.com.pan.bluebank.dto.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.services.AgenciaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 
 @RestController
@@ -81,7 +80,7 @@ public class AgenciaController implements MessageResponse {
 	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody AgenciaDTO dto) {
-		Agencia updatedAgencia = agenciaService.update(id, dto);
+		agenciaService.update(id, dto);
 		return ResponseEntity.ok(createMessageResponse("Agência atualizada com sucesso!"));
 	}
 

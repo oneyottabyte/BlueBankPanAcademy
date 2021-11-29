@@ -77,7 +77,7 @@ public class ClienteController implements MessageResponse {
 	@PutMapping(value = "/{id}",consumes="application/json", produces="application/json")
 		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody ClienteDTO dto) {
-		Cliente updatedCliente = service.update(id, dto);
+		service.update(id, dto);
 		return ResponseEntity.ok(createMessageResponse("Cliente atualizado com sucesso!"));
 	}  
 }
