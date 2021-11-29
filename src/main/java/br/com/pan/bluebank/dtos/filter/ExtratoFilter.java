@@ -1,4 +1,4 @@
-package br.com.pan.bluebank.dto;
+package br.com.pan.bluebank.dtos.filter;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package br.com.pan.bluebank.specificantions;
+package br.com.pan.bluebank.specifications;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
-import br.com.pan.bluebank.dto.ExtratoFilter;
+import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
 import br.com.pan.bluebank.model.Movimentacao;
 
 @Component

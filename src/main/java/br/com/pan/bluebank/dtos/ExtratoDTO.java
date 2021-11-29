@@ -1,9 +1,9 @@
-package br.com.pan.bluebank.dto;
+package br.com.pan.bluebank.dtos;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import br.com.pan.bluebank.dto.response.MovimentacaoResponseDTO;
+import br.com.pan.bluebank.dtos.response.MovimentacaoResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

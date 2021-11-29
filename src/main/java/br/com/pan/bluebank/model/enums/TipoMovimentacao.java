@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.Movimentacao;
+import br.com.pan.bluebank.services.exceptions.SaldoInvalidoException;
 
 public enum TipoMovimentacao {
 	
@@ -29,6 +30,7 @@ public enum TipoMovimentacao {
 		@Override
 		public Movimentacao atualizaSaldo(Movimentacao mov) {
 			Conta conta = mov.getContaOrigem();
+			validaSaldo(conta.getSaldo(), mov.getValorTransacao());
 			BigDecimal novoSaldo = conta.getSaldo().subtract(mov.getValorTransacao());
 			mov.getContaOrigem().setSaldo(novoSaldo);			
 			return mov;
@@ -44,10 +46,8 @@ public enum TipoMovimentacao {
 			Conta contaOrigem = mov.getContaOrigem();
 			Conta contaDestino = mov.getContaDestino();
 			BigDecimal valorTransacao = mov.getValorTransacao();	
-			
-			System.out.println(contaOrigem.getSaldo());
-			System.out.println(valorTransacao);
-			validaSeSaldoEhMaiorValorTransacao(contaOrigem.getSaldo(), valorTransacao);
+
+			validaSaldo(contaOrigem.getSaldo(), valorTransacao);
 			
 			mov.getContaOrigem().setSaldo(contaOrigem.getSaldo().subtract(valorTransacao));
 			mov.getContaDestino().setSaldo(contaDestino.getSaldo().add(valorTransacao));		
@@ -59,9 +59,9 @@ public enum TipoMovimentacao {
 
 	public abstract Movimentacao atualizaSaldo(Movimentacao mov);
 	
-	void validaSeSaldoEhMaiorValorTransacao(BigDecimal saldo, BigDecimal valorTransacao) {
-		if(saldo.compareTo(valorTransacao) <= 0)
-			throw new Error();
+	public void validaSaldo(BigDecimal saldo, BigDecimal valorTransacao) {
+		if(saldo.compareTo(valorTransacao) < 0)
+			throw new SaldoInvalidoException("Saldo insuficiente!");
 	}
 	
 }

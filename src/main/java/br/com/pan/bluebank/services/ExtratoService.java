@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.pan.bluebank.dto.ExtratoDTO;
-import br.com.pan.bluebank.dto.ExtratoFilter;
-import br.com.pan.bluebank.dto.response.MovimentacaoResponseDTO;
+import br.com.pan.bluebank.dtos.ExtratoDTO;
+import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
+import br.com.pan.bluebank.dtos.response.MovimentacaoResponseDTO;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 

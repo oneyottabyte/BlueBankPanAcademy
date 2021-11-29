@@ -1,4 +1,4 @@
-package br.com.pan.bluebank.dto.response;
+package br.com.pan.bluebank.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AgenciaResponseDTO {
-	
+public class AgenciaDTO {
+
 	private String numeroAgencia;
 	private String nomeAgencia;
-	private String nomeGerente;
-	
+	private Long idGerente;
+
 }
+

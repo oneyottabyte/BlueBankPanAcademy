@@ -10,16 +10,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.pan.bluebank.dto.ExtratoFilter;
-import br.com.pan.bluebank.dto.MovimentacaoDTO;
-import br.com.pan.bluebank.dto.response.MovimentacaoResponseDTO;
+import br.com.pan.bluebank.dtos.MovimentacaoDTO;
+import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
+import br.com.pan.bluebank.dtos.response.MovimentacaoResponseDTO;
 import br.com.pan.bluebank.mappers.MovimentacaoMapper;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 import br.com.pan.bluebank.repositories.MovimentacaoRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
-import br.com.pan.bluebank.specificantions.ExtratoSpecification;
+import br.com.pan.bluebank.specifications.ExtratoSpecification;
 
 @Service
 public class MovimentacaoService {

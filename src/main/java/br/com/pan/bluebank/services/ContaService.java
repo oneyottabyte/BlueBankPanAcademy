@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.pan.bluebank.dto.ContaDTO;
-import br.com.pan.bluebank.dto.ExtratoDTO;
-import br.com.pan.bluebank.dto.ExtratoFilter;
-import br.com.pan.bluebank.dto.response.ContaResponseDTO;
+import br.com.pan.bluebank.dtos.ContaDTO;
+import br.com.pan.bluebank.dtos.ExtratoDTO;
+import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
+import br.com.pan.bluebank.dtos.response.ContaResponseDTO;
 import br.com.pan.bluebank.mappers.ContaMapper;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;

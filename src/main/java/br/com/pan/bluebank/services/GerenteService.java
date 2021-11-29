@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.pan.bluebank.dto.GerenteDTO;
+import br.com.pan.bluebank.dtos.GerenteDTO;
 import br.com.pan.bluebank.mappers.GerenteMapper;
 import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.model.Gerente;

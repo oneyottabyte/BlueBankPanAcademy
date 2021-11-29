@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.pan.bluebank.dto.AgenciaDTO;
-import br.com.pan.bluebank.dto.response.AgenciaResponseDTO;
-import br.com.pan.bluebank.dto.response.MessageResponse;
-import br.com.pan.bluebank.dto.response.MessageResponseImpl;
+import br.com.pan.bluebank.dtos.AgenciaDTO;
+import br.com.pan.bluebank.dtos.response.AgenciaResponseDTO;
+import br.com.pan.bluebank.dtos.response.MessageResponse;
+import br.com.pan.bluebank.dtos.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.services.AgenciaService;
 import io.swagger.annotations.ApiOperation;

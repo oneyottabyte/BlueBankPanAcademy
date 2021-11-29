@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -56,6 +57,7 @@ public class Conta implements Serializable {
 	@ApiModelProperty(value = "Número da conta")
     private String numeroDaConta;
     
+    @Positive
     @NotNull(message = "Saldo é um atributo obrigatório!")
     @Column(name = "saldo")
 	@ApiModelProperty(value = "Saldo da conta")
