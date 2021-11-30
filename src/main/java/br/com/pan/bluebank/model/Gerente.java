@@ -14,6 +14,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -43,18 +44,21 @@ public class Gerente implements Serializable {
 
 	@NotBlank(message = "CPF é um atributo obrigatório")
 	@CPF
+	@Size(max = 15)
 	@Column(name = "cpf", unique = true)
 	@ApiModelProperty(value = "CPF do gerente")
 	private String cpf;
 
 	@NotBlank(message = "E-mail é um atributo obrigatório")
 	@Email
+	@Size(max = 50)
 	@Column(name = "email", unique = true)
 	@ApiModelProperty(value = "Email do gerente")
 	private String email;
 	
 	@NotBlank(message = "Telefone é um atributo obrigatório") 
 	@Column(name = "telefone", unique = true)
+	@Size(max = 20)
 	@ApiModelProperty(value = "Telefone do gerente")
 	private String telefone;
 
