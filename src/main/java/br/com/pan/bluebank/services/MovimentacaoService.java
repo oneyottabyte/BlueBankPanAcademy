@@ -16,9 +16,12 @@ import br.com.pan.bluebank.dtos.response.MovimentacaoResponseDTO;
 import br.com.pan.bluebank.mappers.MovimentacaoMapper;
 import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.Movimentacao;
+import br.com.pan.bluebank.model.enums.StatusDeConta;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 import br.com.pan.bluebank.repositories.MovimentacaoRepository;
+import br.com.pan.bluebank.services.exceptions.ContaDesativadaException;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
+import br.com.pan.bluebank.services.exceptions.TranferenciaInvalidaException;
 import br.com.pan.bluebank.specifications.ExtratoSpecification;
 
 @Service
@@ -67,20 +70,34 @@ public class MovimentacaoService {
 		}
 	}
 
-	private Movimentacao criaMovimentacao(MovimentacaoDTO dto) {
-		
+	private Movimentacao criaMovimentacao(MovimentacaoDTO dto) {		
 		try {
+			verificaTranfereciaValida(dto);
 			Conta contaBase = contaService.findById(dto.getContaOrigemId(), "Conta origem não encontrada!");
-			if (TipoMovimentacao.valueOf(dto.getTipo()).possuiContaDestino()) {
-				Conta contaDestino = contaService.findById(dto.getContaDestinoId(), "Conta destino não encontrada!");
+			verificaContaAtivada(contaBase.getStatusDeConta(), "Conta origem desativada!");
+			if (TipoMovimentacao.valueOf(dto.getTipo()).possuiContaDestino() ) {
+				Conta contaDestino = contaService.findById(dto.getContaDestinoId(), "Conta destino não encontrada!");				
+				verificaContaAtivada(contaDestino.getStatusDeConta(), "Conta destino desativada!");
+				
 				return MovimentacaoMapper.toEntity(dto, contaBase, contaDestino);
-			} else {
+			} else {				
 				return MovimentacaoMapper.toEntity(dto, contaBase, contaBase);
 			}
 		}catch(IllegalArgumentException e) {
 			throw new IllegalArgumentException("Tipo de movimentação inválido!");
 		} 
+	}
 
+	private void verificaTranfereciaValida(MovimentacaoDTO dto) {
+		if(dto.getTipo().equals(TipoMovimentacao.TRANSFERENCIA.toString()) &&
+		  (dto.getContaDestinoId() == dto.getContaOrigemId())) {
+			throw new TranferenciaInvalidaException("Conta origem é igual a conta destino!");
+		}
+	}
+
+	private void verificaContaAtivada(StatusDeConta statusDeConta, String texto) {
+		if(statusDeConta.equals(StatusDeConta.DESATIVADO))
+			throw new ContaDesativadaException(texto);
 	}
 
 	private Movimentacao atualizaSaldoContasPorTipo(TipoMovimentacao tipo, Movimentacao movimentacao) {

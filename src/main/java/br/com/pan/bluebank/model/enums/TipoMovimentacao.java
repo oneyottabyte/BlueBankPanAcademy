@@ -45,6 +45,7 @@ public enum TipoMovimentacao {
 		public Movimentacao atualizaSaldo(Movimentacao mov) {
 			Conta contaOrigem = mov.getContaOrigem();
 			Conta contaDestino = mov.getContaDestino();
+		
 			BigDecimal valorTransacao = mov.getValorTransacao();	
 
 			validaSaldo(contaOrigem.getSaldo(), valorTransacao);
