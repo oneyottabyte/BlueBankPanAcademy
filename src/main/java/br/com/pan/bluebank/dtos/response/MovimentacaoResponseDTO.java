@@ -1,4 +1,4 @@
-package br.com.pan.bluebank.dto.response;
+package br.com.pan.bluebank.dtos.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

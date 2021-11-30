@@ -1,6 +1,6 @@
 package br.com.pan.bluebank.mappers;
 
-import br.com.pan.bluebank.dto.GerenteDTO;
+import br.com.pan.bluebank.dtos.GerenteDTO;
 import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.model.Gerente;
 

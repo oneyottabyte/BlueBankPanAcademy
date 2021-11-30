@@ -6,15 +6,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.pan.bluebank.dto.AgenciaDTO;
-import br.com.pan.bluebank.dto.response.AgenciaResponseDTO;
+import br.com.pan.bluebank.dtos.AgenciaDTO;
+import br.com.pan.bluebank.dtos.response.AgenciaResponseDTO;
 import br.com.pan.bluebank.mappers.AgenciaMapper;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Gerente;
 import br.com.pan.bluebank.repositories.AgenciaRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 @Service
 public class AgenciaService {

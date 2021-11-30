@@ -1,4 +1,4 @@
-package br.com.pan.bluebank.dto;
+package br.com.pan.bluebank.dtos;
 
 import br.com.pan.bluebank.model.enums.TipoDeConta;
 import lombok.AllArgsConstructor;

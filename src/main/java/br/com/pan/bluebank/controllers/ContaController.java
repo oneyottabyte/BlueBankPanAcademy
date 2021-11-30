@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.pan.bluebank.dto.ContaDTO;
-import br.com.pan.bluebank.dto.response.ContaResponseDTO;
-import br.com.pan.bluebank.dto.response.MessageResponse;
-import br.com.pan.bluebank.dto.response.MessageResponseImpl;
+import br.com.pan.bluebank.dtos.ContaDTO;
+import br.com.pan.bluebank.dtos.ExtratoDTO;
+import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
+import br.com.pan.bluebank.dtos.response.ContaResponseDTO;
+import br.com.pan.bluebank.dtos.response.MessageResponse;
+import br.com.pan.bluebank.dtos.response.MessageResponseImpl;
 import br.com.pan.bluebank.model.Conta;
-import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.services.ContaService;
-import br.com.pan.bluebank.services.MovimentacaoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -33,16 +33,13 @@ public class ContaController implements MessageResponse{
 	
 	@Autowired
 	private ContaService contaService;
-	
-	@Autowired
-	private MovimentacaoService movimentacaoService;
-	
+		
 	@ApiOperation(value = "Retorna uma conta a partir do id")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retorna a conta"),
 			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-	})
+	})	
 	@GetMapping(value = "/{id}", produces = "application/json")
 	public ResponseEntity<ContaResponseDTO> findByIdResponse(@PathVariable Long id){
 		ContaResponseDTO conta = contaService.findByIdResponse(id);
@@ -54,12 +51,18 @@ public class ContaController implements MessageResponse{
 			@ApiResponse(code = 200, message = "Retorna a lista de contas"),
 			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-	})
+	})	
 	@GetMapping(produces = "application/json")
 	public ResponseEntity<List<ContaResponseDTO>> findAll(){
 		List<ContaResponseDTO> listaContas = contaService.findAll();
 		return ResponseEntity.ok(listaContas);	
 	}
+	
+	@GetMapping(value = "extrato", produces = "application/json")
+	public ResponseEntity<ExtratoDTO> findAllFilter(ExtratoFilter filter){
+		ExtratoDTO extratoConta = contaService.extratoConta(filter);
+		return ResponseEntity.ok(extratoConta);	
+	}	
 
 	@ApiOperation(value = "Retorna uma lista de contas con status ativo")
 	@ApiResponses(value = {
@@ -98,12 +101,5 @@ public class ContaController implements MessageResponse{
 			@RequestParam String status){
 		contaService.alterarStatus(id, status);
 		return ResponseEntity.ok(createMessageResponse("Status da conta alterado com sucesso!"));
-	}
-	
-	@GetMapping(value = "/extrato/{id}")
-	public ResponseEntity<List<Movimentacao>> findAllByContaOrigemOrContaDestino(@PathVariable Long id){
-		List<Movimentacao> lista = movimentacaoService.extratoConta(id);
-		return ResponseEntity.ok(lista);
-	}
-
+	}	
 }

@@ -5,17 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.pan.bluebank.dto.AgenciaDTO;
-import br.com.pan.bluebank.dto.ClienteDTO;
+import br.com.pan.bluebank.dtos.ClienteDTO;
 import br.com.pan.bluebank.mappers.ClienteMapper;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Endereco;
 import br.com.pan.bluebank.repositories.ClienteRepository;
 import br.com.pan.bluebank.repositories.EnderecoRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Service
 public class ClienteService {

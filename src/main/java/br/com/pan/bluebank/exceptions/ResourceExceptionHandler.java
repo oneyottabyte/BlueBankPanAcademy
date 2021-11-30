@@ -11,7 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.pan.bluebank.services.exceptions.ContaDesativadaException;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
+import br.com.pan.bluebank.services.exceptions.SaldoInvalidoException;
+import br.com.pan.bluebank.services.exceptions.TranferenciaInvalidaException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -40,6 +43,42 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}	
 	
+	@ExceptionHandler(SaldoInvalidoException.class)
+	public ResponseEntity<StandardError> entityNotFound(SaldoInvalidoException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Saldo inválido");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}	
+	
+	@ExceptionHandler(ContaDesativadaException.class)
+	public ResponseEntity<StandardError> entityNotFound(ContaDesativadaException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Conta desativada");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(TranferenciaInvalidaException.class)
+	public ResponseEntity<StandardError> entityNotFound(TranferenciaInvalidaException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Tranferencia inválida");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}	
+	
 	@ExceptionHandler(ConstraintViolationException.class)
 	public ResponseEntity<ValidationError> validation(ConstraintViolationException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
@@ -55,4 +94,5 @@ public class ResourceExceptionHandler {
 		}		
 		return ResponseEntity.status(status).body(err);
 	}	
+	
 }

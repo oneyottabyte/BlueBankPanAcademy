@@ -1,6 +1,6 @@
 package br.com.pan.bluebank.mappers;
 
-import br.com.pan.bluebank.dto.response.AgenciaResponseDTO;
+import br.com.pan.bluebank.dtos.response.AgenciaResponseDTO;
 import br.com.pan.bluebank.model.Agencia;
 
 public class AgenciaMapper {

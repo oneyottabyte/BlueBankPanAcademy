@@ -54,7 +54,7 @@ public class Movimentacao implements Serializable {
 
     @Column(name = "data_movimentacao")
 	@ApiModelProperty(value = "Data da movimentação" , dataType = "java.sql.LocalDateTime")
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataMovimentacao;
     
     @JoinColumn(name = "id_conta_origem")

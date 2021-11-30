@@ -3,8 +3,8 @@ package br.com.pan.bluebank.mappers;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import br.com.pan.bluebank.dto.ContaDTO;
-import br.com.pan.bluebank.dto.response.ContaResponseDTO;
+import br.com.pan.bluebank.dtos.ContaDTO;
+import br.com.pan.bluebank.dtos.response.ContaResponseDTO;
 import br.com.pan.bluebank.model.Agencia;
 import br.com.pan.bluebank.model.Cliente;
 import br.com.pan.bluebank.model.Conta;
