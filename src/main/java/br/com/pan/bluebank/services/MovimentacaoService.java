@@ -111,10 +111,10 @@ public class MovimentacaoService {
 	}
 
 	public List<MovimentacaoResponseDTO> findAllFilter(ExtratoFilter filter) {
-		List<Movimentacao> movs = movimentacaoRepository.findAll(extratoSpecification.movimentacoes(filter));
+		List<Movimentacao> movimentacoesFiltradas = movimentacaoRepository.findAll(extratoSpecification.movimentacoes(filter));
 		
-		return movs.stream()
-					.map(x -> MovimentacaoMapper.toResponseDTO(x))
+		return movimentacoesFiltradas.stream()
+					.map(movimentacao -> MovimentacaoMapper.toResponseDTO(movimentacao))
 					.collect(Collectors.toList());		
 	}
 

@@ -48,25 +48,28 @@ public class Cliente implements Serializable {
 	
 	@NotBlank(message = "CPF é um atributo obrigatório")
 	@CPF
+	@Size(max = 15)
 	@Column(name = "cpf", unique = true)
 	@ApiModelProperty(value = "CPF do cliente")
 	private String cpf;
 	
 	@NotNull(message = "Data de Nascimento é um atributo obrigatório")
 	@Past(message = "Data de nascimento inválida")
-	@Column(name = "dataNascimento")
+	@Column(name = "data_nascimento")
 	@ApiModelProperty(value = "Data de nascimento do cliente", dataType = "java.sql.LocalDate")
     @JsonFormat(pattern="dd-MM-yyyy")
 	private LocalDate dataNascimento;
 	
 	@NotBlank(message = "E-mail é um atributo obrigatório")
 	@Email
+	@Size(max = 50)
 	@Column(name = "email", unique = true)
 	@ApiModelProperty(value = "Email do cliente")
 	private String email;
 	
 	@NotBlank(message = "Telefone é um atributo obrigatório") 
 	@Column(name = "telefone", unique = true)
+	@Size(max = 20)
 	@ApiModelProperty(value = "Telefone do cliente")
 	private String telefone;
 	

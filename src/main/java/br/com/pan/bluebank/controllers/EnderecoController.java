@@ -29,7 +29,6 @@ public class EnderecoController {
 	})
     @GetMapping(produces = "application/json")
 	public ResponseEntity<List<Endereco>> findAll() {
-		List<Endereco> list = service.findAll();
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok(service.findAll());
 	}
 }

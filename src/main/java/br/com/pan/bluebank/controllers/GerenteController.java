@@ -39,8 +39,7 @@ public class GerenteController implements MessageResponse {
 	})
 	@GetMapping(path = "/{id}", produces = "application/json")
 	public ResponseEntity<Gerente> findById(@PathVariable Long id){
-		Gerente obj = this.gerenteService.findById(id);
-		return ResponseEntity.ok(obj);
+		return ResponseEntity.ok(this.gerenteService.findById(id));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de gerentes")
@@ -51,8 +50,7 @@ public class GerenteController implements MessageResponse {
 	})
 	@GetMapping(produces = "application/json")
 	public ResponseEntity<List<Gerente>> findAll() {
-		List<Gerente> list = this.gerenteService.findAll();
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok(this.gerenteService.findAll());
 	}
 	
 	@ApiOperation(value = "Salva um novo gerente")

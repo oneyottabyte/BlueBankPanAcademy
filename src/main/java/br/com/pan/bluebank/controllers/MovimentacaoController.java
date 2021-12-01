@@ -61,10 +61,8 @@ public class MovimentacaoController implements MessageResponse {
 	})
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	public ResponseEntity<MessageResponseImpl> create(		
-			@RequestBody MovimentacaoDTO dto){
-		
-		Movimentacao newMovimentacao = this.service.create(dto);
-		
+			@RequestBody MovimentacaoDTO dto){		
+		Movimentacao newMovimentacao = this.service.create(dto);		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newMovimentacao.getId()).toUri();
 		return ResponseEntity
