@@ -20,7 +20,7 @@ import br.com.pan.bluebank.services.exceptions.TranferenciaInvalidaException;
 public class ResourceExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+	public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
@@ -32,7 +32,7 @@ public class ResourceExceptionHandler {
 	}	
 	
 	@ExceptionHandler(IllegalArgumentException.class)
-	public ResponseEntity<StandardError> entityNotFound(IllegalArgumentException e, HttpServletRequest request) {
+	public ResponseEntity<StandardError> illegalArgument(IllegalArgumentException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
@@ -44,7 +44,7 @@ public class ResourceExceptionHandler {
 	}	
 	
 	@ExceptionHandler(SaldoInvalidoException.class)
-	public ResponseEntity<StandardError> entityNotFound(SaldoInvalidoException e, HttpServletRequest request) {
+	public ResponseEntity<StandardError> saldoInvalido(SaldoInvalidoException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
@@ -56,7 +56,7 @@ public class ResourceExceptionHandler {
 	}	
 	
 	@ExceptionHandler(ContaDesativadaException.class)
-	public ResponseEntity<StandardError> entityNotFound(ContaDesativadaException e, HttpServletRequest request) {
+	public ResponseEntity<StandardError> contaDesativa(ContaDesativadaException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
@@ -68,7 +68,7 @@ public class ResourceExceptionHandler {
 	}
 	
 	@ExceptionHandler(TranferenciaInvalidaException.class)
-	public ResponseEntity<StandardError> entityNotFound(TranferenciaInvalidaException e, HttpServletRequest request) {
+	public ResponseEntity<StandardError> tranferenciaInvalida(TranferenciaInvalidaException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
@@ -93,6 +93,5 @@ public class ResourceExceptionHandler {
 			err.addError(f.getPropertyPath().toString(), f.getMessage());
 		}		
 		return ResponseEntity.status(status).body(err);
-	}	
-	
+	}		
 }

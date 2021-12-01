@@ -25,7 +25,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-
 @RestController
 @RequestMapping(path = "v1/agencias")
 public class AgenciaController implements MessageResponse {
@@ -41,8 +40,7 @@ public class AgenciaController implements MessageResponse {
 	})
 	@GetMapping(path = "/{id}", produces="application/json")
 	public ResponseEntity<AgenciaResponseDTO> findById(@PathVariable Long id){
-		AgenciaResponseDTO obj = this.agenciaService.findByIdResponse(id);
-		return ResponseEntity.ok(obj);
+		return ResponseEntity.ok(this.agenciaService.findByIdResponse(id));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de agências")
@@ -52,9 +50,8 @@ public class AgenciaController implements MessageResponse {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping(produces="application/json")
-	public ResponseEntity<List<AgenciaResponseDTO>> findAll() {
-		List<AgenciaResponseDTO> list = agenciaService.findAll();
-		return ResponseEntity.ok(list);
+	public ResponseEntity<List<AgenciaResponseDTO>> findAll() {	
+		return ResponseEntity.ok(agenciaService.findAll());
 	}
 	
 	@ApiOperation(value = "Salva uma agência")

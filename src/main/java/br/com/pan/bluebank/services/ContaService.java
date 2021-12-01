@@ -1,6 +1,5 @@
 package br.com.pan.bluebank.services;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +57,15 @@ public class ContaService {
 		return ContaMapper.toDTO(findById(id));
 	}
 	
+	protected Conta findByIdContaAtiva(Long id) {
+		return contaRepository.findByStatusDeContaAndId(StatusDeConta.ATIVADO, id);
+	}
+
+	protected Conta findById(Long id, String texto) {		
+		return contaRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException(texto));
+	}	
+	
 	public Conta create(ContaDTO dto) {
         Cliente cliente = clienteService.findById(dto.getIdCliente());
         Agencia agencia = agenciaService.findById(dto.getIdAgencia());
@@ -66,39 +74,38 @@ public class ContaService {
         return contaRepository.save(novaConta);
     }
 
-	public Conta alterarStatus(Long id, String status) {
-		Conta contaAlterada = findById(id);
-		try {
-			if (StatusDeConta.valueOf(status) == StatusDeConta.ATIVADO) {
-				contaAlterada.setStatusDeConta(StatusDeConta.ATIVADO);
-			} else if (StatusDeConta.valueOf(status) == StatusDeConta.DESATIVADO) {
-				contaAlterada.setStatusDeConta(StatusDeConta.DESATIVADO);
-				contaAlterada.setSaldo(BigDecimal.ZERO);
-			}
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("Status de conta inválido!");
-		}
-		return contaRepository.save(contaAlterada);
-	}
-
-	protected Conta atualizarConta(Conta conta) {
-		return contaRepository.save(conta);
-	}
-	
-	protected Conta findByIdContaAtiva(Long id) {
-		return contaRepository.findByStatusDeContaAndId(StatusDeConta.ATIVADO, id);
-	}
-
-	protected Conta findById(Long id, String texto) {		
-		return contaRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException(texto));
-	}
-	
 	public ExtratoDTO extratoConta(ExtratoFilter filter){
 		Conta conta = findById(filter.getContaId());
 		return extratoService.geraExtrato(conta, filter);
 	}
 	
+	public Conta alterarStatus(Long id, String status) {
+		Conta contaAlterada = findById(id);	
+									
+		try {	
+			verificaStatus(contaAlterada.getStatusDeConta(), status);			
+			contaAlterada.setStatusDeConta(StatusDeConta.valueOf(status));			
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("Status de conta inválido!");
+		} 
+		
+		return contaRepository.save(contaAlterada);
+	}
+
+	private void verificaStatus(StatusDeConta statusDeConta, String status) {
+		if(statusDeConta.equals(StatusDeConta.valueOf(status))
+				&& StatusDeConta.valueOf(status).equals(StatusDeConta.DESATIVADO)) {
+			throw new ResourceNotFoundException("A conta já está desativada!");
+		} else if (statusDeConta.equals(StatusDeConta.valueOf(status))
+				&& StatusDeConta.valueOf(status).equals(StatusDeConta.ATIVADO)){
+			throw new ResourceNotFoundException("A conta já está ativada!");
+		}				
+	}
+
+	protected Conta atualizarConta(Conta conta) {
+		return contaRepository.save(conta);
+	}
+		
 	private String setNumeroConta() {
         String number = numeroAleatorio();
         Conta nc = contaRepository.findByNumeroDaConta(String.valueOf(number));

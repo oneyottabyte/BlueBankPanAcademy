@@ -42,8 +42,7 @@ public class ContaController implements MessageResponse{
 	})	
 	@GetMapping(value = "/{id}", produces = "application/json")
 	public ResponseEntity<ContaResponseDTO> findByIdResponse(@PathVariable Long id){
-		ContaResponseDTO conta = contaService.findByIdResponse(id);
-		return ResponseEntity.ok(conta);
+		return ResponseEntity.ok(this.contaService.findByIdResponse(id));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de contas")
@@ -54,14 +53,18 @@ public class ContaController implements MessageResponse{
 	})	
 	@GetMapping(produces = "application/json")
 	public ResponseEntity<List<ContaResponseDTO>> findAll(){
-		List<ContaResponseDTO> listaContas = contaService.findAll();
-		return ResponseEntity.ok(listaContas);	
+		return ResponseEntity.ok(contaService.findAll());	
 	}
 	
+	@ApiOperation(value = "Retorna um extrato de uma conta")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna o extrato da conta"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
 	@GetMapping(value = "extrato", produces = "application/json")
-	public ResponseEntity<ExtratoDTO> findAllFilter(ExtratoFilter filter){
-		ExtratoDTO extratoConta = contaService.extratoConta(filter);
-		return ResponseEntity.ok(extratoConta);	
+	public ResponseEntity<ExtratoDTO> createExtrato(ExtratoFilter filter){
+		return ResponseEntity.ok(contaService.extratoConta(filter));	
 	}	
 
 	@ApiOperation(value = "Retorna uma lista de contas con status ativo")
@@ -72,8 +75,7 @@ public class ContaController implements MessageResponse{
 	})
 	@GetMapping(value = "/ativas", produces = "application/json")
 	public ResponseEntity<List<ContaResponseDTO>> findAllAtivas(){
-		List<ContaResponseDTO> listaContas = contaService.findAllAtivas();
-		return ResponseEntity.ok(listaContas);	
+		return ResponseEntity.ok(contaService.findAllAtivas());	
 	}
 
 	@ApiOperation(value = "Salva uma nova conta")
