@@ -21,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.pan.bluebank.dtos.GerenteDTO;
 import br.com.pan.bluebank.dtos.response.MessageResponse;
 import br.com.pan.bluebank.dtos.response.MessageResponseImpl;
-import br.com.pan.bluebank.model.Gerente;
+import br.com.pan.bluebank.models.Gerente;
 import br.com.pan.bluebank.services.GerenteService;
 
 @RestController

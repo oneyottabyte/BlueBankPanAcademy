@@ -49,7 +49,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("br.com.pan.bluebank"))
                 .paths(PathSelectors.any())
-                .build()
+                .build()          
+                .apiInfo(metaData())  
                 .useDefaultResponseMessages(false)
                 .globalResponseMessage(RequestMethod.GET, responseMessageForGET());
     }

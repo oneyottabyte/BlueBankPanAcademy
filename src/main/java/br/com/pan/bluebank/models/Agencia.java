@@ -1,4 +1,4 @@
-package br.com.pan.bluebank.model;
+package br.com.pan.bluebank.models;
 
 import java.io.Serializable;
 
@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_agencias")
 public class Agencia implements Serializable {
+	
     private static final long serialVersionUID = 1L;
     
     @Id

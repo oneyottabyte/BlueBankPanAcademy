@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.pan.bluebank.dtos.ClienteDTO;
 import br.com.pan.bluebank.dtos.response.MessageResponse;
 import br.com.pan.bluebank.dtos.response.MessageResponseImpl;
-import br.com.pan.bluebank.model.Cliente;
+import br.com.pan.bluebank.models.Cliente;
 import br.com.pan.bluebank.services.ClienteService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -38,8 +38,7 @@ public class ClienteController implements MessageResponse {
 	})
 	@GetMapping(path = "/{id}", produces="application/json")
 	public ResponseEntity<Cliente> findById(@PathVariable Long id){
-		Cliente obj = this.service.findById(id);
-		return ResponseEntity.ok(obj);
+		return ResponseEntity.ok(this.service.findById(id));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de clientes")
@@ -50,8 +49,7 @@ public class ClienteController implements MessageResponse {
 	})
 	@GetMapping(produces="application/json")
 	public ResponseEntity<List<Cliente>> findAll() {
-		List<Cliente> list = service.findAll();
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok(this.service.findAll());
 	}
 	
 	@ApiOperation(value = "Salva um novo cliente")
@@ -62,7 +60,7 @@ public class ClienteController implements MessageResponse {
 	})
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<MessageResponseImpl> create(@RequestBody ClienteDTO dto){
-		Cliente newCliente = service.create(dto);
+		Cliente newCliente = this.service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newCliente.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Cliente criado com sucesso!"));
@@ -77,7 +75,7 @@ public class ClienteController implements MessageResponse {
 	@PutMapping(value = "/{id}",consumes="application/json", produces="application/json")
 		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody ClienteDTO dto) {
-		service.update(id, dto);
+		this.service.update(id, dto);
 		return ResponseEntity.ok(createMessageResponse("Cliente atualizado com sucesso!"));
 	}  
 }

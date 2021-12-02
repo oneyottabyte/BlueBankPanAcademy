@@ -2,8 +2,8 @@ package br.com.pan.bluebank.model.enums;
 
 import java.math.BigDecimal;
 
-import br.com.pan.bluebank.model.Conta;
-import br.com.pan.bluebank.model.Movimentacao;
+import br.com.pan.bluebank.models.Conta;
+import br.com.pan.bluebank.models.Movimentacao;
 import br.com.pan.bluebank.services.exceptions.SaldoInvalidoException;
 
 public enum TipoMovimentacao {
@@ -30,7 +30,9 @@ public enum TipoMovimentacao {
 		@Override
 		public Movimentacao atualizaSaldo(Movimentacao mov) {
 			Conta conta = mov.getContaOrigem();
-			validaSaldo(conta.getSaldo(), mov.getValorTransacao());
+			
+			validaValorTransacao(conta.getSaldo(), mov.getValorTransacao());
+			
 			BigDecimal novoSaldo = conta.getSaldo().subtract(mov.getValorTransacao());
 			mov.getContaOrigem().setSaldo(novoSaldo);			
 			return mov;
@@ -44,11 +46,10 @@ public enum TipoMovimentacao {
 		@Override
 		public Movimentacao atualizaSaldo(Movimentacao mov) {
 			Conta contaOrigem = mov.getContaOrigem();
-			Conta contaDestino = mov.getContaDestino();
-		
+			Conta contaDestino = mov.getContaDestino();		
 			BigDecimal valorTransacao = mov.getValorTransacao();	
 
-			validaSaldo(contaOrigem.getSaldo(), valorTransacao);
+			validaValorTransacao(contaOrigem.getSaldo(), valorTransacao);
 			
 			mov.getContaOrigem().setSaldo(contaOrigem.getSaldo().subtract(valorTransacao));
 			mov.getContaDestino().setSaldo(contaDestino.getSaldo().add(valorTransacao));		
@@ -60,7 +61,7 @@ public enum TipoMovimentacao {
 
 	public abstract Movimentacao atualizaSaldo(Movimentacao mov);
 	
-	public void validaSaldo(BigDecimal saldo, BigDecimal valorTransacao) {
+	public void validaValorTransacao(BigDecimal saldo, BigDecimal valorTransacao) {
 		if(saldo.compareTo(valorTransacao) < 0)
 			throw new SaldoInvalidoException("Saldo insuficiente!");
 	}

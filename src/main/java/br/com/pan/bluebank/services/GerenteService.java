@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.pan.bluebank.dtos.GerenteDTO;
 import br.com.pan.bluebank.mappers.GerenteMapper;
-import br.com.pan.bluebank.model.Endereco;
-import br.com.pan.bluebank.model.Gerente;
+import br.com.pan.bluebank.models.Endereco;
+import br.com.pan.bluebank.models.Gerente;
 import br.com.pan.bluebank.repositories.GerenteRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 

@@ -1,7 +1,7 @@
 package br.com.pan.bluebank.dtos;
 
-import br.com.pan.bluebank.model.Agencia;
-import br.com.pan.bluebank.model.Endereco;
+import br.com.pan.bluebank.models.Agencia;
+import br.com.pan.bluebank.models.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

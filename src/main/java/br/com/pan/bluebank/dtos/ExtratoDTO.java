@@ -15,4 +15,5 @@ public class ExtratoDTO {
 
 	private BigDecimal valorTotalMovimentacoes;
 	private List<MovimentacaoResponseDTO> movimentacoes;
+	
 }

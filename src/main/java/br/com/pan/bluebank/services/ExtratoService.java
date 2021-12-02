@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import br.com.pan.bluebank.dtos.ExtratoDTO;
 import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
 import br.com.pan.bluebank.dtos.response.MovimentacaoResponseDTO;
-import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
+import br.com.pan.bluebank.models.Conta;
 
 @Service
 public class ExtratoService {

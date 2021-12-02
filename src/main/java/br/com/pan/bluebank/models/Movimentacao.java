@@ -1,5 +1,5 @@
 
-package br.com.pan.bluebank.model;
+package br.com.pan.bluebank.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

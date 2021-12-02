@@ -18,7 +18,7 @@ import br.com.pan.bluebank.dtos.MovimentacaoDTO;
 import br.com.pan.bluebank.dtos.response.MessageResponse;
 import br.com.pan.bluebank.dtos.response.MessageResponseImpl;
 import br.com.pan.bluebank.dtos.response.MovimentacaoResponseDTO;
-import br.com.pan.bluebank.model.Movimentacao;
+import br.com.pan.bluebank.models.Movimentacao;
 import br.com.pan.bluebank.services.MovimentacaoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

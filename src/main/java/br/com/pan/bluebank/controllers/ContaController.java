@@ -21,7 +21,7 @@ import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
 import br.com.pan.bluebank.dtos.response.ContaResponseDTO;
 import br.com.pan.bluebank.dtos.response.MessageResponse;
 import br.com.pan.bluebank.dtos.response.MessageResponseImpl;
-import br.com.pan.bluebank.model.Conta;
+import br.com.pan.bluebank.models.Conta;
 import br.com.pan.bluebank.services.ContaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -53,7 +53,7 @@ public class ContaController implements MessageResponse{
 	})	
 	@GetMapping(produces = "application/json")
 	public ResponseEntity<List<ContaResponseDTO>> findAll(){
-		return ResponseEntity.ok(contaService.findAll());	
+		return ResponseEntity.ok(this.contaService.findAll());	
 	}
 	
 	@ApiOperation(value = "Retorna um extrato de uma conta")
@@ -64,7 +64,7 @@ public class ContaController implements MessageResponse{
 	})
 	@GetMapping(value = "extrato", produces = "application/json")
 	public ResponseEntity<ExtratoDTO> createExtrato(ExtratoFilter filter){
-		return ResponseEntity.ok(contaService.extratoConta(filter));	
+		return ResponseEntity.ok(this.contaService.extratoConta(filter));	
 	}	
 
 	@ApiOperation(value = "Retorna uma lista de contas con status ativo")
@@ -75,7 +75,7 @@ public class ContaController implements MessageResponse{
 	})
 	@GetMapping(value = "/ativas", produces = "application/json")
 	public ResponseEntity<List<ContaResponseDTO>> findAllAtivas(){
-		return ResponseEntity.ok(contaService.findAllAtivas());	
+		return ResponseEntity.ok(this.contaService.findAllAtivas());	
 	}
 
 	@ApiOperation(value = "Salva uma nova conta")
@@ -86,7 +86,7 @@ public class ContaController implements MessageResponse{
 	})
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	public ResponseEntity<MessageResponseImpl> create(@RequestBody ContaDTO dto){
-		Conta newConta = contaService.create(dto);
+		Conta newConta = this.contaService.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newConta.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Conta criada com sucesso!"));
@@ -101,7 +101,7 @@ public class ContaController implements MessageResponse{
 	@PatchMapping(value = "/{id}",produces = "application/json")
 	public ResponseEntity<MessageResponseImpl> alterarStatus(@PathVariable Long id, 
 			@RequestParam String status){
-		contaService.alterarStatus(id, status);
+		this.contaService.alterarStatus(id, status);
 		return ResponseEntity.ok(createMessageResponse("Status da conta alterado com sucesso!"));
 	}	
 }
