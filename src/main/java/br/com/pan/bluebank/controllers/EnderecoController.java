@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.pan.bluebank.model.Endereco;
+import br.com.pan.bluebank.models.Endereco;
 import br.com.pan.bluebank.services.EnderecoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -29,6 +29,6 @@ public class EnderecoController {
 	})
     @GetMapping(produces = "application/json")
 	public ResponseEntity<List<Endereco>> findAll() {
-		return ResponseEntity.ok(service.findAll());
+		return ResponseEntity.ok(this.service.findAll());
 	}
 }

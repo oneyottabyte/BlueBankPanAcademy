@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.enums.StatusDeConta;
+import br.com.pan.bluebank.models.Conta;
 
 public interface ContaRepository extends JpaRepository<Conta, Long>{
 	

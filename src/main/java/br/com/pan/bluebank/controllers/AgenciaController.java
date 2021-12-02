@@ -19,7 +19,7 @@ import br.com.pan.bluebank.dtos.AgenciaDTO;
 import br.com.pan.bluebank.dtos.response.AgenciaResponseDTO;
 import br.com.pan.bluebank.dtos.response.MessageResponse;
 import br.com.pan.bluebank.dtos.response.MessageResponseImpl;
-import br.com.pan.bluebank.model.Agencia;
+import br.com.pan.bluebank.models.Agencia;
 import br.com.pan.bluebank.services.AgenciaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -51,7 +51,7 @@ public class AgenciaController implements MessageResponse {
 	})
 	@GetMapping(produces="application/json")
 	public ResponseEntity<List<AgenciaResponseDTO>> findAll() {	
-		return ResponseEntity.ok(agenciaService.findAll());
+		return ResponseEntity.ok(this.agenciaService.findAll());
 	}
 	
 	@ApiOperation(value = "Salva uma agência")
@@ -62,7 +62,7 @@ public class AgenciaController implements MessageResponse {
 	})
 	@PostMapping(produces="application/json", consumes="application/json")
 	public ResponseEntity<MessageResponseImpl> create(@RequestBody AgenciaDTO dto){
-		Agencia newAgencia = agenciaService.create(dto);
+		Agencia newAgencia = this.agenciaService.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newAgencia.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Agência criada com sucesso!"));
@@ -77,7 +77,7 @@ public class AgenciaController implements MessageResponse {
 	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody AgenciaDTO dto) {
-		agenciaService.update(id, dto);
+		this.agenciaService.update(id, dto);
 		return ResponseEntity.ok(createMessageResponse("Agência atualizada com sucesso!"));
 	}
 
@@ -89,7 +89,7 @@ public class AgenciaController implements MessageResponse {
 	})
 	@DeleteMapping(value = "/{id}", consumes="application/json")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		agenciaService.delete(id);
+		this.agenciaService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }

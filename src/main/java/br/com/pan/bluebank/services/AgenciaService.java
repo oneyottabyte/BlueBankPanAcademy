@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import br.com.pan.bluebank.dtos.AgenciaDTO;
 import br.com.pan.bluebank.dtos.response.AgenciaResponseDTO;
 import br.com.pan.bluebank.mappers.AgenciaMapper;
-import br.com.pan.bluebank.model.Agencia;
-import br.com.pan.bluebank.model.Gerente;
+import br.com.pan.bluebank.models.Agencia;
+import br.com.pan.bluebank.models.Gerente;
 import br.com.pan.bluebank.repositories.AgenciaRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 

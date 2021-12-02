@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.pan.bluebank.model.Endereco;
+import br.com.pan.bluebank.models.Endereco;
 import br.com.pan.bluebank.repositories.EnderecoRepository;
 
 @Service

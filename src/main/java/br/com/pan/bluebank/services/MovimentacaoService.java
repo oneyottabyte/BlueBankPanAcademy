@@ -14,10 +14,10 @@ import br.com.pan.bluebank.dtos.MovimentacaoDTO;
 import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
 import br.com.pan.bluebank.dtos.response.MovimentacaoResponseDTO;
 import br.com.pan.bluebank.mappers.MovimentacaoMapper;
-import br.com.pan.bluebank.model.Conta;
-import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.model.enums.StatusDeConta;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
+import br.com.pan.bluebank.models.Conta;
+import br.com.pan.bluebank.models.Movimentacao;
 import br.com.pan.bluebank.repositories.MovimentacaoRepository;
 import br.com.pan.bluebank.services.exceptions.ContaDesativadaException;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
@@ -36,13 +36,6 @@ public class MovimentacaoService {
 	@Autowired
 	public MovimentacaoRepository movimentacaoRepository;
 	
-	public Movimentacao create(MovimentacaoDTO dto) {		
-		Movimentacao movimentacao = criaMovimentacao(dto);
-		movimentacao = atualizaSaldoContasPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
-		salvaContasMovimentacaoPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
-		return movimentacaoRepository.save(movimentacao);
-	}
-
 	@Transactional
 	public Movimentacao findById(Long id) {
 		return movimentacaoRepository.findById(id)
@@ -59,6 +52,26 @@ public class MovimentacaoService {
 	public Page<MovimentacaoResponseDTO> findAll(Pageable page) {
 		return movimentacaoRepository.findAll(page)							
 							.map(movimentacacao -> MovimentacaoMapper.toResponseDTO(movimentacacao));
+	}
+	
+	public List<MovimentacaoResponseDTO> findAllFilter(ExtratoFilter filter) {
+		List<Movimentacao> movimentacoesFiltradas = movimentacaoRepository.findAll(extratoSpecification.movimentacoes(filter));
+		
+		return movimentacoesFiltradas.stream()
+					.map(movimentacao -> MovimentacaoMapper.toResponseDTO(movimentacao))
+					.collect(Collectors.toList());		
+	}
+	
+	public List<Movimentacao> extratoConta(Long contaId){
+		Conta conta = contaService.findById(contaId);
+		return movimentacaoRepository.findAllByContaOrigemOrContaDestino(conta, conta);		
+	}
+	
+	public Movimentacao create(MovimentacaoDTO dto) {		
+		Movimentacao movimentacao = criaMovimentacao(dto);
+		movimentacao = atualizaSaldoContasPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
+		salvaContasMovimentacaoPorTipo(TipoMovimentacao.valueOf(dto.getTipo()), movimentacao);
+		return movimentacaoRepository.save(movimentacao);
 	}
 
 	private void salvaContasMovimentacaoPorTipo(TipoMovimentacao tipoMovimentacao, Movimentacao movimentacaoAtt) {
@@ -84,14 +97,14 @@ public class MovimentacaoService {
 				return MovimentacaoMapper.toEntity(dto, contaBase, contaBase);
 			}
 		}catch(IllegalArgumentException e) {
-			throw new IllegalArgumentException("Tipo de movimentação inválido!");
+			throw new IllegalArgumentException("Tipo de movimentação inválida!");
 		} 
 	}
 
 	private void verificaTranfereciaValida(MovimentacaoDTO dto) {
 		if(dto.getTipo().equals(TipoMovimentacao.TRANSFERENCIA.toString()) &&
 		  (dto.getContaDestinoId() == dto.getContaOrigemId())) {
-			throw new TranferenciaInvalidaException("Conta origem é igual a conta destino!");
+			throw new TranferenciaInvalidaException("Conta origem não pode ser igual a conta destino!");
 		}
 	}
 
@@ -102,20 +115,5 @@ public class MovimentacaoService {
 
 	private Movimentacao atualizaSaldoContasPorTipo(TipoMovimentacao tipo, Movimentacao movimentacao) {
 		return tipo.atualizaSaldo(movimentacao);
-	}
-	
-	public List<Movimentacao> extratoConta(Long contaId){
-		Conta conta = contaService.findById(contaId);
-		List<Movimentacao> lista = movimentacaoRepository.findAllByContaOrigemOrContaDestino(conta, conta);
-		return lista;
-	}
-
-	public List<MovimentacaoResponseDTO> findAllFilter(ExtratoFilter filter) {
-		List<Movimentacao> movimentacoesFiltradas = movimentacaoRepository.findAll(extratoSpecification.movimentacoes(filter));
-		
-		return movimentacoesFiltradas.stream()
-					.map(movimentacao -> MovimentacaoMapper.toResponseDTO(movimentacao))
-					.collect(Collectors.toList());		
-	}
-
+	}	
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
 import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
-import br.com.pan.bluebank.model.Movimentacao;
+import br.com.pan.bluebank.models.Movimentacao;
 
 @Component
 public class ExtratoSpecification {

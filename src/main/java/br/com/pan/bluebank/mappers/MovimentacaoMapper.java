@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 import br.com.pan.bluebank.dtos.MovimentacaoDTO;
 import br.com.pan.bluebank.dtos.response.MovimentacaoResponseDTO;
-import br.com.pan.bluebank.model.Conta;
-import br.com.pan.bluebank.model.Movimentacao;
 import br.com.pan.bluebank.model.enums.TipoMovimentacao;
+import br.com.pan.bluebank.models.Conta;
+import br.com.pan.bluebank.models.Movimentacao;
 
 
 public class MovimentacaoMapper {

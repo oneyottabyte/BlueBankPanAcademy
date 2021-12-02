@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.pan.bluebank.dtos.ClienteDTO;
 import br.com.pan.bluebank.mappers.ClienteMapper;
-import br.com.pan.bluebank.model.Cliente;
-import br.com.pan.bluebank.model.Endereco;
+import br.com.pan.bluebank.models.Cliente;
+import br.com.pan.bluebank.models.Endereco;
 import br.com.pan.bluebank.repositories.ClienteRepository;
-import br.com.pan.bluebank.repositories.EnderecoRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -20,23 +19,7 @@ public class ClienteService {
 	private ClienteRepository clienteRepository;
 
 	@Autowired
-	private EnderecoRepository enderecoRepository;
-
-	public Cliente create(ClienteDTO dto) {	
-		Endereco endereco = enderecoRepository.save(dto.getEndereco());
-		dto.setEndereco(endereco);
-		Cliente entity = ClienteMapper.toEntity(dto);
-		return clienteRepository.save(entity);	
-	}
-	
-	public Cliente update(Long id, ClienteDTO dto) {
-		Cliente cliente = findById(id);		
-		Endereco endereco = enderecoRepository.save(dto.getEndereco());
-		dto.setEndereco(endereco);
-		Cliente updatedEntity = ClienteMapper.updateEntity(cliente, dto);
-		
-		return clienteRepository.save(updatedEntity);
-	}
+	private EnderecoService enderecoService;
 	
 	public Cliente findById(Long id) {	
 		return clienteRepository.findById(id)
@@ -45,6 +28,22 @@ public class ClienteService {
 	
 	public List<Cliente> findAll() {
 		return clienteRepository.findAll();
+	}	
+
+	public Cliente create(ClienteDTO dto) {	
+		Endereco endereco = enderecoService.create(dto.getEndereco());
+		dto.setEndereco(endereco);
+		Cliente entity = ClienteMapper.toEntity(dto);
+		return clienteRepository.save(entity);	
+	}
+	
+	public Cliente update(Long id, ClienteDTO dto) {
+		Cliente cliente = findById(id);		
+		Endereco endereco = enderecoService.create(dto.getEndereco());
+		dto.setEndereco(endereco);
+		Cliente updatedEntity = ClienteMapper.updateEntity(cliente, dto);
+		
+		return clienteRepository.save(updatedEntity);
 	}	
 	
 	public void delete(Long id) {

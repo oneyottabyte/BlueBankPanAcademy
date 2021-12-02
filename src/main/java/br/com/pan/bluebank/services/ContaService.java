@@ -11,10 +11,10 @@ import br.com.pan.bluebank.dtos.ExtratoDTO;
 import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
 import br.com.pan.bluebank.dtos.response.ContaResponseDTO;
 import br.com.pan.bluebank.mappers.ContaMapper;
-import br.com.pan.bluebank.model.Agencia;
-import br.com.pan.bluebank.model.Cliente;
-import br.com.pan.bluebank.model.Conta;
 import br.com.pan.bluebank.model.enums.StatusDeConta;
+import br.com.pan.bluebank.models.Agencia;
+import br.com.pan.bluebank.models.Cliente;
+import br.com.pan.bluebank.models.Conta;
 import br.com.pan.bluebank.repositories.ContaRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 
@@ -41,8 +41,7 @@ public class ContaService {
 	}
 
 	public List<ContaResponseDTO> findAllAtivas() {
-		List<Conta> listaContaAtiva = contaRepository.
-				findByStatusDeConta(StatusDeConta.ATIVADO);
+		List<Conta> listaContaAtiva = contaRepository.findByStatusDeConta(StatusDeConta.ATIVADO);
 		return listaContaAtiva.stream()
 				.map(conta -> ContaMapper.toDTO(conta))
 				.collect(Collectors.toList());
@@ -79,25 +78,23 @@ public class ContaService {
 		return extratoService.geraExtrato(conta, filter);
 	}
 	
-	public Conta alterarStatus(Long id, String status) {
-		Conta contaAlterada = findById(id);	
-									
+	public Conta alterarStatus(Long id, String novoStatus) {
+		Conta contaAlterada = findById(id);										
 		try {	
-			verificaStatus(contaAlterada.getStatusDeConta(), status);			
-			contaAlterada.setStatusDeConta(StatusDeConta.valueOf(status));			
+			verificaStatus(contaAlterada.getStatusDeConta(), novoStatus);			
+			contaAlterada.setStatusDeConta(StatusDeConta.valueOf(novoStatus));			
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Status de conta inválido!");
-		} 
-		
+		} 		
 		return contaRepository.save(contaAlterada);
 	}
 
-	private void verificaStatus(StatusDeConta statusDeConta, String status) {
-		if(statusDeConta.equals(StatusDeConta.valueOf(status))
-				&& StatusDeConta.valueOf(status).equals(StatusDeConta.DESATIVADO)) {
+	private void verificaStatus(StatusDeConta statusDaConta, String novoStatus) {
+		if(statusDaConta.equals(StatusDeConta.valueOf(novoStatus))
+				&& StatusDeConta.valueOf(novoStatus).equals(StatusDeConta.DESATIVADO)) {
 			throw new ResourceNotFoundException("A conta já está desativada!");
-		} else if (statusDeConta.equals(StatusDeConta.valueOf(status))
-				&& StatusDeConta.valueOf(status).equals(StatusDeConta.ATIVADO)){
+		} else if (statusDaConta.equals(StatusDeConta.valueOf(novoStatus))
+				&& StatusDeConta.valueOf(novoStatus).equals(StatusDeConta.ATIVADO)){
 			throw new ResourceNotFoundException("A conta já está ativada!");
 		}				
 	}
@@ -116,7 +113,7 @@ public class ContaService {
         }
     } 
 	
-    public String numeroAleatorio() {
+    private String numeroAleatorio() {
         
         long n =  0 + (long) (Math.random() * ((999999999 - 0) + 1));
         String formatado = String.format("%010d", n);
