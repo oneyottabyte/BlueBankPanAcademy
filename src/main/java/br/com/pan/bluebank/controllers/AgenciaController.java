@@ -32,7 +32,7 @@ public class AgenciaController implements MessageResponse {
 	@Autowired
 	private AgenciaService agenciaService;
 
-	@ApiOperation(value = "Retorna uma Agência a partir do id informado")
+	@ApiOperation(value = "Retorna uma agência a partir do id informado")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retorna a agência"),
 			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
