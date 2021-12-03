@@ -1,7 +1,9 @@
-
+<!-- 
 <p align="center">  
   <img align="center" src="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/BlueBank_IMG.jpg" width="800px" />
-</p>
+</p> -->
+
+![dscatalog-catalog](https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/logo.gif)
 
 <!-- <h1 align="center">Blue Bank</h1> -->
 
