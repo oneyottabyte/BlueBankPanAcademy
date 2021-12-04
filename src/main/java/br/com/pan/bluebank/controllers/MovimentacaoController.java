@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiResponses;
 public class MovimentacaoController implements MessageResponse {
 	
 	@Autowired
-	private MovimentacaoService service;
+	private MovimentacaoService movimentacaoService;
 
 	@ApiOperation(value = "Retorna uma movimentaçao a partir do id")
 	@ApiResponses(value = {
@@ -39,7 +39,7 @@ public class MovimentacaoController implements MessageResponse {
 	})
 	@GetMapping(path = "/{origemId}", produces = "application/json")
 	public ResponseEntity<MovimentacaoResponseDTO> findById(@PathVariable Long origemId){
-		return ResponseEntity.ok(this.service.findByIdResponse(origemId));
+		return ResponseEntity.ok(this.movimentacaoService.findByIdResponse(origemId));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de movimentações")
@@ -50,7 +50,7 @@ public class MovimentacaoController implements MessageResponse {
 	})
 	@GetMapping
 	public ResponseEntity<Page<MovimentacaoResponseDTO>> findAll(Pageable page) {
-			return ResponseEntity.ok(this.service.findAll(page));
+			return ResponseEntity.ok(this.movimentacaoService.findAll(page));
 	}		
 	
 	@ApiOperation(value = "Salva uma nova movimentaçao")
@@ -61,8 +61,8 @@ public class MovimentacaoController implements MessageResponse {
 	})
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	public ResponseEntity<MessageResponseImpl> create(		
-			@RequestBody MovimentacaoDTO dto){		
-		Movimentacao newMovimentacao = this.service.create(dto);		
+			@RequestBody MovimentacaoDTO movimentacaoDto){		
+		Movimentacao newMovimentacao = this.movimentacaoService.create(movimentacaoDto);		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newMovimentacao.getId()).toUri();
 		return ResponseEntity

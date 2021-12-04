@@ -1,6 +1,5 @@
 package br.com.pan.bluebank.dtos;
 
-import br.com.pan.bluebank.models.Agencia;
 import br.com.pan.bluebank.models.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +14,6 @@ public class GerenteDTO {
 	private String cpf;
 	private String email;
 	private String telefone;
-	private Endereco endereco;
-	private Agencia agencia;
+	private Endereco endereco;	
 
 }

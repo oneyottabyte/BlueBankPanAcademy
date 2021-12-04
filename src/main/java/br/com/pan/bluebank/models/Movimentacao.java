@@ -21,7 +21,7 @@ import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.com.pan.bluebank.model.enums.TipoMovimentacao;
+import br.com.pan.bluebank.models.enums.TipoMovimentacao;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;

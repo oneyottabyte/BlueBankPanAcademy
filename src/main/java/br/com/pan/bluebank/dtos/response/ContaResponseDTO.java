@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.com.pan.bluebank.model.enums.StatusDeConta;
-import br.com.pan.bluebank.model.enums.TipoDeConta;
+import br.com.pan.bluebank.models.enums.StatusDeConta;
+import br.com.pan.bluebank.models.enums.TipoDeConta;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

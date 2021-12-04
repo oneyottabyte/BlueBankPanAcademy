@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiResponses;
 public class ClienteController implements MessageResponse {
 	
 	@Autowired
-	private ClienteService service;
+	private ClienteService clienteService;
 
 	@ApiOperation(value = "Retorna um cliente a partir do id informado")
 	@ApiResponses(value = {
@@ -38,7 +38,7 @@ public class ClienteController implements MessageResponse {
 	})
 	@GetMapping(path = "/{id}", produces="application/json")
 	public ResponseEntity<Cliente> findById(@PathVariable Long id){
-		return ResponseEntity.ok(this.service.findById(id));
+		return ResponseEntity.ok(this.clienteService.findById(id));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de clientes")
@@ -49,7 +49,7 @@ public class ClienteController implements MessageResponse {
 	})
 	@GetMapping(produces="application/json")
 	public ResponseEntity<List<Cliente>> findAll() {
-		return ResponseEntity.ok(this.service.findAll());
+		return ResponseEntity.ok(this.clienteService.findAll());
 	}
 	
 	@ApiOperation(value = "Salva um novo cliente")
@@ -59,8 +59,8 @@ public class ClienteController implements MessageResponse {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(consumes = "application/json")
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody ClienteDTO dto){
-		Cliente newCliente = this.service.create(dto);
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody ClienteDTO clienteDto){
+		Cliente newCliente = this.clienteService.create(clienteDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newCliente.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Cliente criado com sucesso!"));
@@ -74,8 +74,8 @@ public class ClienteController implements MessageResponse {
 	})
 	@PutMapping(value = "/{id}",consumes="application/json", produces="application/json")
 		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
-		@RequestBody ClienteDTO dto) {
-		this.service.update(id, dto);
+		@RequestBody ClienteDTO clienteDto) {
+		this.clienteService.update(id, clienteDto);
 		return ResponseEntity.ok(createMessageResponse("Cliente atualizado com sucesso!"));
 	}  
 }

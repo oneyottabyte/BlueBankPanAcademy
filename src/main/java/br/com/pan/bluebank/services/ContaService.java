@@ -11,10 +11,10 @@ import br.com.pan.bluebank.dtos.ExtratoDTO;
 import br.com.pan.bluebank.dtos.filter.ExtratoFilter;
 import br.com.pan.bluebank.dtos.response.ContaResponseDTO;
 import br.com.pan.bluebank.mappers.ContaMapper;
-import br.com.pan.bluebank.model.enums.StatusDeConta;
 import br.com.pan.bluebank.models.Agencia;
 import br.com.pan.bluebank.models.Cliente;
 import br.com.pan.bluebank.models.Conta;
+import br.com.pan.bluebank.models.enums.StatusDeConta;
 import br.com.pan.bluebank.repositories.ContaRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 

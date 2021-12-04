@@ -1,4 +1,4 @@
-package br.com.pan.bluebank.model.enums;
+package br.com.pan.bluebank.models.enums;
 
 import java.math.BigDecimal;
 

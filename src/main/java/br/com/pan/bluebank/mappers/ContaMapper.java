@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 
 import br.com.pan.bluebank.dtos.ContaDTO;
 import br.com.pan.bluebank.dtos.response.ContaResponseDTO;
-import br.com.pan.bluebank.model.enums.StatusDeConta;
 import br.com.pan.bluebank.models.Agencia;
 import br.com.pan.bluebank.models.Cliente;
 import br.com.pan.bluebank.models.Conta;
+import br.com.pan.bluebank.models.enums.StatusDeConta;
 
 public class ContaMapper {
 	

@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiResponses;
 public class EnderecoController {
     
     @Autowired
-    private EnderecoService service;
+    private EnderecoService enderecoService;
 
 	@ApiOperation(value = "Retorna uma lista de endereços")
 	@ApiResponses(value = {
@@ -29,6 +29,6 @@ public class EnderecoController {
 	})
     @GetMapping(produces = "application/json")
 	public ResponseEntity<List<Endereco>> findAll() {
-		return ResponseEntity.ok(this.service.findAll());
+		return ResponseEntity.ok(this.enderecoService.findAll());
 	}
 }

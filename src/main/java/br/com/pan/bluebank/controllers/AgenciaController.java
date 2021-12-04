@@ -61,8 +61,8 @@ public class AgenciaController implements MessageResponse {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(produces="application/json", consumes="application/json")
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody AgenciaDTO dto){
-		Agencia newAgencia = this.agenciaService.create(dto);
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody AgenciaDTO agenciaDto){
+		Agencia newAgencia = this.agenciaService.create(agenciaDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newAgencia.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Agência criada com sucesso!"));
@@ -76,8 +76,8 @@ public class AgenciaController implements MessageResponse {
 	})
 	@PutMapping(value = "/{id}", produces="application/json", consumes="application/json")
 		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
-		@RequestBody AgenciaDTO dto) {
-		this.agenciaService.update(id, dto);
+		@RequestBody AgenciaDTO AgenciaDto) {
+		this.agenciaService.update(id, AgenciaDto);
 		return ResponseEntity.ok(createMessageResponse("Agência atualizada com sucesso!"));
 	}
 

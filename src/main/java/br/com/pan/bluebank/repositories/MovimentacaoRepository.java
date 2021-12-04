@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import br.com.pan.bluebank.model.enums.TipoMovimentacao;
 import br.com.pan.bluebank.models.Conta;
 import br.com.pan.bluebank.models.Movimentacao;
+import br.com.pan.bluebank.models.enums.TipoMovimentacao;
 
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long>, JpaSpecificationExecutor<Movimentacao> {
 

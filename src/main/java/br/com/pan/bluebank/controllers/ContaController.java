@@ -85,8 +85,8 @@ public class ContaController implements MessageResponse{
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody ContaDTO dto){
-		Conta newConta = this.contaService.create(dto);
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody ContaDTO contaDto){
+		Conta newConta = this.contaService.create(contaDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newConta.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Conta criada com sucesso!"));

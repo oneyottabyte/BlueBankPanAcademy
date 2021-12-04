@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import br.com.pan.bluebank.model.enums.TipoMovimentacao;
+import br.com.pan.bluebank.models.enums.TipoMovimentacao;
 import lombok.Getter;
 import lombok.Setter;
 

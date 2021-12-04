@@ -60,8 +60,8 @@ public class GerenteController implements MessageResponse {
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody GerenteDTO gerenteDTO){
-		Gerente newGerente = this.gerenteService.create(gerenteDTO);
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody GerenteDTO gerenteDto){
+		Gerente newGerente = this.gerenteService.create(gerenteDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newGerente.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Gerente criado com sucesso!"));
@@ -75,8 +75,8 @@ public class GerenteController implements MessageResponse {
 	})
 	@PutMapping(value = "/{id}", produces = "application/json")
 		public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
-		@RequestBody GerenteDTO gerenteDTO) {
-		this.gerenteService.update(id, gerenteDTO);
+		@RequestBody GerenteDTO gerenteDto) {
+		this.gerenteService.update(id, gerenteDto);
 		return ResponseEntity.ok(createMessageResponse("Gerente alterado com sucesso!"));
 	}
 

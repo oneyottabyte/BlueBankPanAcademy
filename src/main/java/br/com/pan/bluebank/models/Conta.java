@@ -23,8 +23,8 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.pan.bluebank.model.enums.StatusDeConta;
-import br.com.pan.bluebank.model.enums.TipoDeConta;
+import br.com.pan.bluebank.models.enums.StatusDeConta;
+import br.com.pan.bluebank.models.enums.TipoDeConta;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
