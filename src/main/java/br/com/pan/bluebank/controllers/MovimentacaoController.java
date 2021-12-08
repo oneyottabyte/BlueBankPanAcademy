@@ -50,7 +50,7 @@ public class MovimentacaoController implements MessageResponse {
 	})
 	@GetMapping
 	public ResponseEntity<Page<MovimentacaoResponseDTO>> findAll(Pageable page) {
-			return ResponseEntity.ok(this.service.findAll(page));
+			return ResponseEntity.ok(this.service.findAllPageable(page));
 	}		
 	
 	@ApiOperation(value = "Salva uma nova movimentaçao")

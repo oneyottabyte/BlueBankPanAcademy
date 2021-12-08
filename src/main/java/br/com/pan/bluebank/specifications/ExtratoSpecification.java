@@ -47,6 +47,5 @@ public class ExtratoSpecification {
 
 			return criteriaBuilder.and(predicateList.toArray(x -> new Predicate[x]));
 		};
-
 	}
 }

@@ -44,12 +44,11 @@ public class MovimentacaoService {
 	
 	@Transactional
 	public MovimentacaoResponseDTO findByIdResponse(Long id) {
-		Movimentacao movimentacao = findById(id);			
-								
+		Movimentacao movimentacao = findById(id);											
 		return MovimentacaoMapper.toResponseDTO(movimentacao);
 	}
 
-	public Page<MovimentacaoResponseDTO> findAll(Pageable page) {
+	public Page<MovimentacaoResponseDTO> findAllPageable(Pageable page) {
 		return movimentacaoRepository.findAll(page)							
 							.map(movimentacacao -> MovimentacaoMapper.toResponseDTO(movimentacacao));
 	}
