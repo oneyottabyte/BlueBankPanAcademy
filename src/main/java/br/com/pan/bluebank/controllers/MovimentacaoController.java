@@ -37,9 +37,9 @@ public class MovimentacaoController implements MessageResponse {
 			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
-	@GetMapping(path = "/{origemId}", produces = "application/json")
-	public ResponseEntity<MovimentacaoResponseDTO> findById(@PathVariable Long origemId){
-		return ResponseEntity.ok(this.service.findByIdResponse(origemId));
+	@GetMapping(path = "/{id}", produces = "application/json")
+	public ResponseEntity<MovimentacaoResponseDTO> findById(@PathVariable Long id){
+		return ResponseEntity.ok(this.service.findByIdResponse(id));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de movimentações")
@@ -50,7 +50,7 @@ public class MovimentacaoController implements MessageResponse {
 	})
 	@GetMapping
 	public ResponseEntity<Page<MovimentacaoResponseDTO>> findAll(Pageable page) {
-			return ResponseEntity.ok(this.service.findAll(page));
+			return ResponseEntity.ok(this.service.findAllPageable(page));
 	}		
 	
 	@ApiOperation(value = "Salva uma nova movimentaçao")

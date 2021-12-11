@@ -8,10 +8,8 @@ import java.time.format.DateTimeFormatter;
 public class Utils {
 
     public static LocalDate toLocalDate(String data) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        //convert String to LocalDate
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");        
         LocalDate localDate = LocalDate.parse(data, formatter);
         return localDate;
-    }
- 
+    } 
 }

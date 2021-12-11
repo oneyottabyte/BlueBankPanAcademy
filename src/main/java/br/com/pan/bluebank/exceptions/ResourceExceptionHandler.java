@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import br.com.pan.bluebank.services.exceptions.ContaDesativadaException;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
 import br.com.pan.bluebank.services.exceptions.SaldoInvalidoException;
+import br.com.pan.bluebank.services.exceptions.StatusContaException;
 import br.com.pan.bluebank.services.exceptions.TranferenciaInvalidaException;
 
 @ControllerAdvice
@@ -75,6 +76,18 @@ public class ResourceExceptionHandler {
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
 		err.setError("Conta desativada");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+		
+	@ExceptionHandler(StatusContaException.class)
+	public ResponseEntity<StandardError> statusConta(StatusContaException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Erro no status");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);

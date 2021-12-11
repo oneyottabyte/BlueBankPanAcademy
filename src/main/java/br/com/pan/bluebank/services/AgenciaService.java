@@ -71,12 +71,10 @@ public class AgenciaService {
 	
 	private Agencia verifyGerente(AgenciaDTO agenciaDTO) {
 		if (agenciaDTO.getIdGerente() != null) {
-			Gerente gerente = gerenteService.findById(agenciaDTO.getIdGerente());
-			Agencia agencia = new Agencia(agenciaDTO.getNumeroAgencia(), agenciaDTO.getNomeAgencia(), gerente);
-			return agencia;
-		} else {
-			Agencia agencia = new Agencia(agenciaDTO.getNumeroAgencia(), agenciaDTO.getNomeAgencia());
-			return agencia;
+			Gerente gerente = gerenteService.findById(agenciaDTO.getIdGerente());			
+			return new Agencia(agenciaDTO.getNumeroAgencia(), agenciaDTO.getNomeAgencia(), gerente);
+		} else {			
+			return new Agencia(agenciaDTO.getNumeroAgencia(), agenciaDTO.getNomeAgencia());
 		}
 	}
 }
