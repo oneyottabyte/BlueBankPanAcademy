@@ -17,6 +17,7 @@ import br.com.pan.bluebank.models.Cliente;
 import br.com.pan.bluebank.models.Conta;
 import br.com.pan.bluebank.repositories.ContaRepository;
 import br.com.pan.bluebank.services.exceptions.ResourceNotFoundException;
+import br.com.pan.bluebank.services.exceptions.StatusContaException;
 
 @Service
 public class ContaService {
@@ -92,10 +93,10 @@ public class ContaService {
 	private void verificaStatus(StatusDeConta statusDaConta, String novoStatus) {
 		if(statusDaConta.equals(StatusDeConta.valueOf(novoStatus))
 				&& StatusDeConta.valueOf(novoStatus).equals(StatusDeConta.DESATIVADO)) {
-			throw new ResourceNotFoundException("A conta já está desativada!");
+			throw new StatusContaException("A conta já está desativada!");
 		} else if (statusDaConta.equals(StatusDeConta.valueOf(novoStatus))
 				&& StatusDeConta.valueOf(novoStatus).equals(StatusDeConta.ATIVADO)){
-			throw new ResourceNotFoundException("A conta já está ativada!");
+			throw new StatusContaException("A conta já está ativada!");
 		}				
 	}
 
