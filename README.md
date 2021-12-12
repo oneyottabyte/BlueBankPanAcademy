@@ -75,6 +75,34 @@ eram transicionados até chegarem a coluna de conclusão.
 </p>
 <br>
 
+
+<h2 id="Endpoints">
+	Endpoints
+</h2>
+
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/contas
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/agencias
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/movimentacao
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/clientes
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/gerentes
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/enderecos
+```
+
+
+<p>
+</p>
+
 <img align="left" src="https://user-images.githubusercontent.com/65415371/124741011-3581be00-df13-11eb-8d9a-b44e6fe248a8.png" width="50px" />
 
 <h2 id="desenvolvedores">
