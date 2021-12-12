@@ -27,6 +27,172 @@
   Descricao
 </h2>
 
+<p align="left"> Em desenvolvimento...
+O projeto foi desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria entre o banco Pan e a GamaAcademy.
+O projeto consiste em uma API para facilitar o gerenciamento de contas e transações de um banco ficticio.
+
+</p>
+
+## Arquitetura do projeto
+
+## Aws e Deploy
+
+Na AWS escolhemos utilzar o serviço EC2 com uma instancia Ec2 linux ubunto 20.3. Para hospedagem do banco de dados utilizamos a AWS RDS com o banco de dados MySql 8.23.
+
+### Passos para o deploy
+
+Após de criados e configurados o EC2 e o banco de dados RDS, relizamos os seguintes passos:
+
+- Criamos um container docker com o aws cli instalado para nos conectarmos em nossa instancia EC2.
+- Instalamos o docker em nossa instância EC2.
+- Realizamos o build de nossa aplicação e e criamos um Dockerfile para subirmos nossa imagem no dockerhub
+- Dentro da nossa maquina virtual, criamos uma instancia da nossa aplicação a partir da nossa imagem no Dockerhub passando as variáveis de ambiente necessárias para a conexão com o banco de dados RDS
+
+## Documentação da API
+
+Utilizamos o swagger para criação da documentação automática da
+A documentação oficial da API com descrição detalhada dos endpoints, classes e respostas pode ser encontrada neste link: [documentação oficial](https://app.swaggerhub.com/apis-docs/fhilips/BlueBankApi/1.0.0#/movimentacao-controller/createUsingPOST_4)
+
+A collection do postman atualizada pode ser importada no link:
+
+### Api Endpoints
+
+Breve descrição dos endpoints da nossa aplicação
+
+<details>
+  <summary>Movimentação Endpoints</summary>
+ <br>
+  
+  Retorna uma lista paginada de movimentações  
+  ``` ruby
+  GET /v1/movimentacao
+  ```   
+  Salva uma nova movimentaçao
+  ``` ruby
+  POST /v1/movimentacao
+  ```
+  Retorna uma movimentaçao a partir do id da conta de origem
+  ``` ruby
+  GET /v1/movimentacao/{origemId}  
+  ```
+  
+</details>
+
+<details>
+  <summary>Conta Endpoints</summary>
+ <br>  
+  
+  Retorna uma lista de contas 
+  ``` ruby
+  GET /v1/contas
+  ```   
+  Salva uma nova conta
+  ``` ruby
+  POST /v1/contas
+  ```
+  Retorna uma lista de contas com status ativo
+  ``` ruby
+  GET /v1/contas/ativas  
+  ```
+  Retorna um extrato filtrado de uma conta
+  ``` ruby
+  GET /v1/contas/extrato  
+  ```
+  Retorna uma conta a partir do id
+  ``` ruby
+  GET /v1/contas/{id}
+  ```
+  Altera o status de uma conta a partir do id
+  ``` ruby
+  PATCH /v1/contas/{id}
+  ```  
+  
+</details>
+
+<details>
+  <summary>Cliente Endpoints</summary>
+ <br>  
+  
+  Retorna uma lista de contas 
+  ``` ruby
+  GET /v1/contas
+  ```   
+  Retorna uma lista de clientes
+  ``` ruby
+  GET /v1/clientes
+  ```  
+  Salva um novo cliente
+  ``` ruby
+  POST /v1/clientes
+  ``` 
+  Retorna um cliente a partir do id informado
+  ``` ruby
+  GET /v1/clientes/{id}
+  ```
+  Atualiza um cliente a partir do id informado
+  ``` ruby
+  PUT /v1/clientes/{id} 
+  ```
+  
+</details>
+
+<details>
+  <summary>Gerente Endpoints</summary>
+ <br>  
+  
+  Retorna uma lista de gerentes 
+  ``` ruby
+  GET /v1/gerentes
+  ```   
+  Salva um novo gerente
+  ``` ruby
+  POST /v1/gerentes
+  ``` 
+  Retorna um gerente a partir do id informado
+  ``` ruby
+  GET /v1/gerentes/{id}
+  ```
+  Atualiza um gerente a partir do id informado
+  ``` ruby
+  PUT /v1/gerentes/{id} 
+  ```
+  
+</details>
+
+<details>
+  <summary>Agência Endpoints</summary>
+ <br>  
+  
+  Retorna uma lista de agencias 
+  ``` ruby
+  GET /v1/agencias
+  ```   
+  Salva uma nova agencia
+  ``` ruby
+  POST /v1/agencias
+  ``` 
+  Retorna uma agencia a partir do id informado
+  ``` ruby
+  GET /v1/agencias/{id}
+  ```
+  Atualiza uma agencia a partir do id informado
+  ``` ruby
+  PUT /v1/agencias/{id} 
+  ```
+  
+</details>
+
+<details>
+  <summary>Endereço Endpoints</summary>
+ <br>  
+  
+  Retorna uma lista de endereços 
+  ``` ruby
+  GET /v1/enderecos
+  ```
+
+</details>
+
 <p align="justify"> &emsp;&emsp;&emsp;O banco fictício BlueBank está construindo uma nova plataforma e precisa de uma API para gerenciar as transações. Utilize suas novas habilidades com Java, Banco de dados e AWS. O sistema deve permitir cadastro de novos clientes, incluindo dados pessoais e dados para contato. O cliente deve ser atrelado a uma conta bancária e registrar histórico de transações entre as contas.
 </p>
 
@@ -107,6 +273,21 @@ http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/enderecos
 </p>
 
 <img align="left" src="https://user-images.githubusercontent.com/65415371/124741011-3581be00-df13-11eb-8d9a-b44e6fe248a8.png" width="50px" />
+
+## Tecnologias e Dependências ⛏️ <a name = "tech_stack"></a>
+
+- [Spring boot](https://nodejs.org/en/) - Server Environment
+- [Java 11](https://nodejs.org/en/) - Versão do Java utilizada
+- [Maven](https://expressjs.com/) - Server Framework
+- [H2 Database](https://www.mongodb.com/) - Database para o ambiente de testes
+- [MySql Database](https://www.mongodb.com/) - Database para o ambiente de produção
+- [Spring Data Jpa](https://www.mongodb.com/) - Abstração orm do spring pra integração com o banco de dados
+- [Swagger](https://vuejs.org/) - Documentação ofcial da API
+- [Postman](https://www.mongodb.com/) - Ferramenta para testes nas requisições
+- [Lombok](https://nodejs.org/en/) - Framework para abstração e melhora na legibilidade do código
+- [Trello](https://nodejs.org/en/) -
+- [AWS](https://nodejs.org/en/) - Serviços para hospedagem e deploy
+- [Docker](https://nodejs.org/en/) - Criação de containers
 
 <h2 id="desenvolvedores">
   Desenvolvedores 🦸
