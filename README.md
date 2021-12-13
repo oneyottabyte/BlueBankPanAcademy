@@ -32,7 +32,7 @@
 </h2>
 
 <p align="left"> Em desenvolvimento...
-Projeto desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria entre o banco Pan e a GamaAcademy. O projeto consiste em uma API que possibilita o gerenciamento de contas e transações em um banco ficticio.
+Projeto desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria entre o banco Pan e a GamaAcademy. O projeto consiste em uma API que possibilita o gerenciamento de contas e transações em um banco fictício.
 
 </p>
 
@@ -44,7 +44,7 @@ Projeto desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria e
   Aws e Deploy
 </h2>
 
-Na AWS, escolhemos utilzar o serviço EC2 com uma instancia EC2 linux ubunto 20.3. Para a hospedagem do banco de dados, utilizamos a AWS RDS com o banco de dados MySql 8.23.
+Na AWS, a squad escolheu utilizar o serviço EC2 com uma instancia EC2 linux ubunto 20.3. Para a hospedagem do banco de dados, foi utilizada a AWS RDS com o banco de dados MySql 8.23.
 
 ### Passos para o deploy
 
@@ -59,7 +59,7 @@ Após a criação e configuração do ECT e do Banco de Dados RDS, foram realiza
   Documentação
 </h2>
 
-Foi utulizado o swagger para criação da documentação automática da API. A documentação oficial com descrição detalhada dos endpoints, classes e respostas pode ser encontrada no link: [documentação oficial](https://app.swaggerhub.com/apis-docs/fhilips/BlueBankApi/1.0.0#/movimentacao-controller/createUsingPOST_4)
+Foi utilizado o swagger para criação da documentação automática da API. A documentação oficial com descrição detalhada dos endpoints, classes e respostas pode ser encontrada no link: [documentação oficial](https://app.swaggerhub.com/apis-docs/fhilips/BlueBankApi/1.0.0#/movimentacao-controller/createUsingPOST_4)
 
 A collection do postman atualizada pode ser importada no link:
 
