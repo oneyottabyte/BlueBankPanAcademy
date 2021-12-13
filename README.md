@@ -1,5 +1,5 @@
-<!-- 
-<p align="center">  
+<!--
+<p align="center">
   <img align="center" src="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/BlueBank_IMG.jpg" width="800px" />
 </p> -->
 
@@ -13,6 +13,7 @@
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/jonaslucenafilho/BlueBankPanAcademy/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+
 </div>
 
 <p align="center">
@@ -32,6 +33,7 @@
 </h2>
 
 <p align="left"> Em desenvolvimento...
+
 Projeto desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria entre o banco Pan e a GamaAcademy. O projeto consiste em uma API que possibilita o gerenciamento de contas e transações em um banco fictício.
 
 </p>
@@ -64,6 +66,7 @@ Foi utilizado o swagger para criação da documentação automática da API. A d
 A collection do postman atualizada pode ser importada no link:
 
 ### Api Endpoints
+
 
 Breve descrição dos endpoints da aplicação.
 
@@ -208,7 +211,8 @@ Breve descrição dos endpoints da aplicação.
 
 <h2 id="metodologias-ageis">
   Metodologias Ágeis
-</h2> 
+</h2>
+
 
 <h3 align="left" id="github">Quadro Kanban</h3>
 
@@ -235,6 +239,7 @@ eram transicionados até chegarem a coluna de conclusão.
 </p>
 
 <h3 align="left" id="github">Versionamento de Código</h3>
+
 <p text-align="justify">&emsp;&emsp;&emsp;O versionamento de código foi feito através do Git, que é um sistema de controle de versão de arquivos. Através deles podemos desenvolver projetos na qual diversas pessoas podem contribuir simultaneamente no mesmo, editando e criando novos arquivos e permitindo que os mesmos possam existir sem o risco de suas alterações serem sobrescritas.
 </p>
 
@@ -296,7 +301,7 @@ http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/enderecos
 
 <h2 id="desenvolvedores">
   Desenvolvedores 🦸
-</h2>  
+</h2>
 
 <table align="center">
   <tr>
