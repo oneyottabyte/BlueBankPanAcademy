@@ -21,6 +21,9 @@ public class ClienteService {
 	@Autowired
 	private EnderecoService enderecoService;
 	
+	@Autowired 
+	private EmailNotificationService notification;
+	
 	public Cliente findById(Long id) {	
 		return clienteRepository.findById(id)
 					.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado!"));
@@ -34,6 +37,7 @@ public class ClienteService {
 		Endereco endereco = enderecoService.create(dto.getEndereco());
 		dto.setEndereco(endereco);
 		Cliente entity = ClienteMapper.toEntity(dto);
+		notification.addSubscription(dto.getEmail());
 		return clienteRepository.save(entity);	
 	}
 	

@@ -19,6 +19,7 @@ import br.com.pan.bluebank.dtos.response.MessageResponse;
 import br.com.pan.bluebank.dtos.response.MessageResponseImpl;
 import br.com.pan.bluebank.models.Cliente;
 import br.com.pan.bluebank.services.ClienteService;
+import br.com.pan.bluebank.services.EmailNotificationService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -30,6 +31,9 @@ public class ClienteController implements MessageResponse {
 	@Autowired
 	private ClienteService service;
 
+	@Autowired
+	private EmailNotificationService notification;
+	
 	@ApiOperation(value = "Retorna um cliente a partir do id informado")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retorna o cliente"),
@@ -77,5 +81,11 @@ public class ClienteController implements MessageResponse {
 		@RequestBody ClienteDTO dto) {
 		this.service.update(id, dto);
 		return ResponseEntity.ok(createMessageResponse("Cliente atualizado com sucesso!"));
-	}  
+	}
+	
+	@GetMapping("/sendnotification")
+	public String publishMessageToTopic(){	
+		 notification.publishMessageToTopic();
+		 return "Notification send successfully !!";
+	}
 }
