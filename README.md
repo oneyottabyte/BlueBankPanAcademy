@@ -81,23 +81,6 @@ eram transicionados até chegarem a coluna de conclusão.
   Arquitetura do Projeto
 </h1>
 
-<h1 id="aws-deploy">
-  Aws e Deploy
-</h1>
-
-<p align="justify"> &emsp;&emsp;&emsp;Na AWS, a squad escolheu utilizar o serviço EC2 com uma instancia EC2 linux ubunto 20.3. Para a hospedagem do banco de dados, foi utilizada a AWS RDS com o banco de dados MySql 8.23.
-</p>
-
-<h3>• Passos para o Deploy</h3>
-
-<p align="justify">Após a criação e configuração do ECT e do Banco de Dados RDS, foram realizados os seguintes passos:
-
-- Criação do container Docker, com o AWS cli instalado, para conexão na instância EC2.
-- Instalação do Docker na instância EC2.
-- Realização do build da API e criação de um Dockerfile para subir a imagem no Dockerhub.
-- Dentro da maquina virtual, foi criada uma instância da aplicação a partir da imagem do Dockerhub, passando as variáveis de ambiente necessárias para a conexão com o banco de dados RDS.
-</p>
-
 <h1 id="documentacao">
   Documentação
 </h1>
@@ -247,6 +230,23 @@ Breve descrição dos endpoints da aplicação.
   ```
 
 </details>
+
+<h1 id="aws-deploy">
+  Aws e Deploy
+</h1>
+
+<p align="justify"> &emsp;&emsp;&emsp;Na AWS, a squad escolheu utilizar o serviço EC2 com uma instancia EC2 linux ubunto 20.3. Para a hospedagem do banco de dados, foi utilizada a AWS RDS com o banco de dados MySql 8.23.
+</p>
+
+<h3>• Passos para o Deploy</h3>
+
+<p align="justify">Após a criação e configuração do ECT e do Banco de Dados RDS, foram realizados os seguintes passos:
+
+- Criação do container Docker, com o AWS cli instalado, para conexão na instância EC2.
+- Instalação do Docker na instância EC2.
+- Realização do build da API e criação de um Dockerfile para subir a imagem no Dockerhub.
+- Dentro da maquina virtual, foi criada uma instância da aplicação a partir da imagem do Dockerhub, passando as variáveis de ambiente necessárias para a conexão com o banco de dados RDS.
+</p>
 
 <h1 id="tecnologias-dependencias">
 	Tecnologias e Dependências
