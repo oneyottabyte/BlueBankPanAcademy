@@ -47,8 +47,13 @@ Após de criados e configurados o EC2 e o banco de dados RDS, relizamos os segui
 - Instalamos o docker em nossa instância EC2.
 - Realizamos o build de nossa aplicação e e criamos um Dockerfile para subirmos nossa imagem no dockerhub
 - Dentro da nossa maquina virtual, criamos uma instancia da nossa aplicação a partir da nossa imagem no Dockerhub passando as variáveis de ambiente necessárias para a conexão com o banco de dados RDS
+</p>  
 
-## Documentação da API
+<img align="left" src="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/icons8-api-48.png" width="50px" />
+
+<h2 id="documentacao">
+  Documentação da API
+</h2>
 
 Utilizamos o swagger para criação da documentação automática da
 A documentação oficial da API com descrição detalhada dos endpoints, classes e respostas pode ser encontrada neste link: [documentação oficial](https://app.swaggerhub.com/apis-docs/fhilips/BlueBankApi/1.0.0#/movimentacao-controller/createUsingPOST_4)
@@ -241,36 +246,6 @@ eram transicionados até chegarem a coluna de conclusão.
 </p>
 <br>
 
-
-<h2 id="Endpoints">
-	Endpoints
-</h2>
-
-```
-http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/contas
-```
-```
-http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/agencias
-```
-```
-http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/movimentacao
-```
-```
-http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/clientes
-```
-```
-http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/gerentes
-```
-```
-http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/enderecos
-```
-
-<h2 id="Documentacao">
-	Documentação
-</h2>
-<p>
-	<a href="https://app.swaggerhub.com/apis/fhilips/BlueBankApi/1.0.0" target="_blank">Link documentação do swagger.</a> </br>
-</p>
 
 <img align="left" src="https://user-images.githubusercontent.com/65415371/124741011-3581be00-df13-11eb-8d9a-b44e6fe248a8.png" width="50px" />
 
