@@ -16,53 +16,56 @@
 </div>
 
 <p align="center">
-  • <a href="#descricao">Descrição</a> •
-  <a href="#metodologias-ageis">Metodologias Ágeis</a> •
-  <a href="#desenvolvedores">Desenvolvedores</a> •
+	• <a href="#descricao">Descrição</a> •
+	<a href="#arquitetura">Arquitetura do Projeto</a> •
+	<a href="#aws-deploy">AWS e Deploy</a> •
+	<a href="#documentacao">Documentação</a> •
+	<a href="#metodologias-ageis">Metodologias Ágeis</a> •
+	<a href="#tecnologias-dependencias">Tecnologias e Dependências</a> •
+	<a href="#desenvolvedores">Desenvolvedores</a> •
 </p>  
 
 <img align="left" src="https://user-images.githubusercontent.com/65415371/124739746-10d91680-df12-11eb-86cd-9aa9494e01bd.png" width="50px" />
 
 <h2 id="descricao">
-  Descricao
+  Descrição
 </h2>
 
 <p align="left"> Em desenvolvimento...
-O projeto foi desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria entre o banco Pan e a GamaAcademy.
-O projeto consiste em uma API para facilitar o gerenciamento de contas e transações de um banco ficticio.
+Projeto desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria entre o banco Pan e a GamaAcademy. O projeto consiste em uma API que possibilita o gerenciamento de contas e transações em um banco ficticio.
 
 </p>
 
-## Arquitetura do projeto
+<h2 id="arquitetura">
+  Arquiterura do Projeto
+</h2>
 
-## Aws e Deploy
+<h2 id="aws-deploy">
+  Aws e Deploy
+</h2>
 
-Na AWS escolhemos utilzar o serviço EC2 com uma instancia Ec2 linux ubunto 20.3. Para hospedagem do banco de dados utilizamos a AWS RDS com o banco de dados MySql 8.23.
+Na AWS, escolhemos utilzar o serviço EC2 com uma instancia EC2 linux ubunto 20.3. Para a hospedagem do banco de dados, utilizamos a AWS RDS com o banco de dados MySql 8.23.
 
 ### Passos para o deploy
 
-Após de criados e configurados o EC2 e o banco de dados RDS, relizamos os seguintes passos:
+Após a criação e configuração do ECT e do Banco de Dados RDS, foram realizados os seguintes passos:
 
-- Criamos um container docker com o aws cli instalado para nos conectarmos em nossa instancia EC2.
-- Instalamos o docker em nossa instância EC2.
-- Realizamos o build de nossa aplicação e e criamos um Dockerfile para subirmos nossa imagem no dockerhub
-- Dentro da nossa maquina virtual, criamos uma instancia da nossa aplicação a partir da nossa imagem no Dockerhub passando as variáveis de ambiente necessárias para a conexão com o banco de dados RDS
-</p>  
-
-<img align="left" src="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/icons8-api-48.png" width="50px" />
+- Criação do container Docker, com o AWS cli instalado, para conexão na instância EC2.
+- Instalação do Docker na instância EC2.
+- Realização do build da API e criação de um Dockerfile para subir a imagem no Dockerhub.
+- Dentro da maquina virtual, foi criada uma instância da aplicação a partir da imagem do Dockerhub, passando as variáveis de ambiente necessárias para a conexão com o banco de dados RDS.
 
 <h2 id="documentacao">
-  Documentação da API
+  Documentação
 </h2>
 
-Utilizamos o swagger para criação da documentação automática da
-A documentação oficial da API com descrição detalhada dos endpoints, classes e respostas pode ser encontrada neste link: [documentação oficial](https://app.swaggerhub.com/apis-docs/fhilips/BlueBankApi/1.0.0#/movimentacao-controller/createUsingPOST_4)
+Foi utulizado o swagger para criação da documentação automática da API. A documentação oficial com descrição detalhada dos endpoints, classes e respostas pode ser encontrada no link: [documentação oficial](https://app.swaggerhub.com/apis-docs/fhilips/BlueBankApi/1.0.0#/movimentacao-controller/createUsingPOST_4)
 
 A collection do postman atualizada pode ser importada no link:
 
 ### Api Endpoints
 
-Breve descrição dos endpoints da nossa aplicação
+Breve descrição dos endpoints da aplicação.
 
 <details>
   <summary>Movimentação Endpoints</summary>
@@ -209,7 +212,7 @@ Breve descrição dos endpoints da nossa aplicação
 
 <h3 align="left" id="github">Quadro Kanban</h3>
 
-<p text-align="justify"> &emsp;&emsp;&emsp;A gestão do projeto foi feita através do método Kanban, que consiste em uma forma de gestão visual de projetos, permitindo às equipes visualizar melhor a sua carga e fluxo de trabalho. Foi utilizada a plataforma <a href="https://www.atlassian.com/br/software/trello">Trello</a> para criação do quadro Kanban, dessa forma o trabalho ficou exibido em um quadro de projetos organizado por colunas. O design das colunas do quadro Kanban, seguiu a seguinte lógica: 
+<p text-align="justify"> &emsp;&emsp;&emsp;A gestão do projeto foi feita através do método Kanban, que consiste em uma forma de gestão visual de projetos, permitindo às equipes visualizar melhor a sua carga e fluxo de trabalho. Foi utilizada a plataforma <a href="https://www.atlassian.com/br/software/trello">Trello</a> para criação do quadro Kanban. Dessa forma, o trabalho ficou exibido em um quadro de projetos organizado por colunas. O design das colunas do quadro Kanban, seguiu a seguinte lógica: 
   <p align="center">
     | Documentação | Backlog | Desenvolvimento | Em Teste | Concluído |
   </p>
@@ -247,22 +250,49 @@ eram transicionados até chegarem a coluna de conclusão.
 <br>
 
 
+<h2 id="Endpoints">
+	Endpoints
+</h2>
+
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/contas
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/agencias
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/movimentacao
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/clientes
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/gerentes
+```
+```
+http://ec2-34-227-114-91.compute-1.amazonaws.com/v1/enderecos
+```
+
 <img align="left" src="https://user-images.githubusercontent.com/65415371/124741011-3581be00-df13-11eb-8d9a-b44e6fe248a8.png" width="50px" />
 
-## Tecnologias e Dependências ⛏️ <a name = "tech_stack"></a>
+<h2 id="tecnologias-dependencias">
+	Tecnologias e Dependências ⛏️
+</h2>
 
-- [Spring boot](https://nodejs.org/en/) - Server Environment
-- [Java 11](https://nodejs.org/en/) - Versão do Java utilizada
-- [Maven](https://expressjs.com/) - Server Framework
-- [H2 Database](https://www.mongodb.com/) - Database para o ambiente de testes
-- [MySql Database](https://www.mongodb.com/) - Database para o ambiente de produção
-- [Spring Data Jpa](https://www.mongodb.com/) - Abstração orm do spring pra integração com o banco de dados
-- [Swagger](https://vuejs.org/) - Documentação ofcial da API
-- [Postman](https://www.mongodb.com/) - Ferramenta para testes nas requisições
-- [Lombok](https://nodejs.org/en/) - Framework para abstração e melhora na legibilidade do código
-- [Trello](https://nodejs.org/en/) -
-- [AWS](https://nodejs.org/en/) - Serviços para hospedagem e deploy
-- [Docker](https://nodejs.org/en/) - Criação de containers
+<a name = "tech_stack"></a>
+
+- [Java 11](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html) - Versão do Java utilizada
+- [Spring boot](https://spring.io/projects/spring-boot) - Server Environment
+- [Maven](https://maven.apache.org/) - Server Framework
+- [H2 Database](https://www.h2database.com/html/main.html) - Database para o ambiente de testes
+- [MySql Database](https://www.mysql.com/) - Database para o ambiente de produção
+- [Spring Data Jpa](https://spring.io/projects/spring-data-jpa) - Abstração orm do spring pra integração com o banco de dados
+- [Swagger](https://swagger.io/) - Documentação ofcial da API
+- [Postman](https://www.postman.com/) - Ferramenta para testes nas requisições
+- [Lombok](https://projectlombok.org/) - Framework para abstração e melhora na legibilidade do código
+- [Trello](https://trello.com/) - Aplicativo de gerenciamento de projeto
+- [AWS](https://aws.amazon.com/) - Serviços para hospedagem e deploy
+- [Docker](https://www.docker.com/) - Criação de containers
 
 <h2 id="desenvolvedores">
   Desenvolvedores 🦸
