@@ -28,13 +28,15 @@
 </p>  
 
 <h1 id="descricao">
+	<img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/000000/external-readme-is-a-easy-to-build-a-developer-hub-that-adapts-to-the-user-logo-color-tal-revivo.png"/>
   Descrição
 </h1>
 
-<p align="justify"> &emsp;&emsp;&emsp;Projeto desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria entre o Banco Pan e a GamaAcademy. Consiste em uma API que possibilita o gerenciamento de contas e transações em um banco fictício. O sistema permite cadastro de novos clientes, incluindo dados pessoais e dados para contato, onde o mesmo é atrelado a uma conta bancária e consegue ter acesso ao hitórico de transações.
+<p align="justify"> &emsp;&emsp;&emsp;Projeto desenvolvido durante a fase final do bootcamp PanAcademy, uma parceria entre o Banco Pan e a GamaAcademy. Consiste em uma API que possibilita o gerenciamento de contas e transações em um banco fictício. O sistema permite cadastro de novos clientes, incluindo dados pessoais e dados para contato, onde o mesmo é atrelado a uma conta bancária e consegue ter acesso ao histórico de transações.
 </p>
 
 <h1 id="gestao-do-projeto">
+	<img height="28" src="https://img.icons8.com/fluency/50/000000/project.png"/>
   Gestão do Projeto
 </h1>
 
@@ -45,7 +47,7 @@
 </p>
 
 <p align="center">  
-  <img align="center" src="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/quadrofinal.png" width="800px" />
+  
 </p>
 
 <p text-align="justify"> &emsp;&emsp;&emsp;Houve um planejamento prévio baseado no diagrama de classes, e a medida que o desenvolvimento ia avançando as taferas/issues eram acrescentadas na coluna de backlog. A abordagem das tarefas foi bem fragmentada, pois a squad priorizou pequena tarefas em que as implementações poderiam acontecer sem que ocorresse algum problema de conflito na hora de realizar os merges na branch principal.
@@ -61,6 +63,7 @@ eram transicionados até chegarem a coluna de conclusão.
 </p>
 
 <h1 id="versionamento">
+<img src="https://img.icons8.com/officel/30/000000/compare-git.png"/>
   Versionamento do Código
 </h1>
 
@@ -78,13 +81,17 @@ eram transicionados até chegarem a coluna de conclusão.
 </p>
 
 <h1 id="arquitetura">
+<img src="https://img.icons8.com/office/30/000000/blueprint.png"/>
   Arquitetura do Projeto
 </h1>
 
-<p text-align="justify"> A arquitetura do projeto segue o padrão MVC, com a adição de uma camada de Service na qual são incluídas as regras de negócio e uma camada de Repository, na qual são criadas as queries executadas no banco de dados. Pacotes auxiliares para tratamentos de exceção, DTO's, mapeamento de entidades e funções auxiliares também foram implementados. <br/> <br/>O diagrama de classes do projeto pode ser encontrado <a href="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/diagrama_de_classe_bluebank.drawio.png">aqui</a>.
+<p text-align="justify">&emsp;&emsp;&emsp;A arquitetura do projeto segue o padrão MVC, com a adição de uma camada de Service na qual são incluídas as regras de negócio e uma camada de Repository, na qual são criadas as queries executadas no banco de dados. Pacotes auxiliares para tratamentos de exceção, DTO's, mapeamento de entidades e funções auxiliares também foram implementados. <br/> <br/>O diagrama de classes do projeto pode ser encontrado <a href="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/diagrama_de_classe_bluebank.drawio.png">aqui</a>.
+</p>	
+O modelo relacional do projeto pode ser encontrado <a href="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/der.png">aqui</a>.
 </p>	
 
 <h1 id="documentacao">
+<img height="30" src="https://img.icons8.com/color/48/000000/documents.png"/>
   Documentação
 </h1>
 
@@ -235,6 +242,7 @@ Breve descrição dos endpoints da aplicação.
 </details>
 
 <h1 id="aws-deploy">
+<img height="30" src="https://img.icons8.com/color/48/000000/amazon-web-services.png"/>
   Aws e Deploy
 </h1>
 
@@ -252,6 +260,7 @@ Breve descrição dos endpoints da aplicação.
 </p>
 
 <h1 id="tecnologias-dependencias">
+<img height="30" src="https://img.icons8.com/fluency/50/000000/administrative-tools.png"/>
 	Tecnologias e Dependências
 </h1>
 
@@ -271,6 +280,7 @@ Breve descrição dos endpoints da aplicação.
 - [Docker](https://www.docker.com/) - Criação de containers
 
 <h1 id="desenvolvedores">
+<img height="30" src="https://img.icons8.com/color/48/000000/devpost.png"/>
   Desenvolvedores
 </h1>
 
