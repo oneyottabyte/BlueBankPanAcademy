@@ -30,9 +30,6 @@ public class ClienteController implements MessageResponse {
 	
 	@Autowired
 	private ClienteService service;
-
-	@Autowired
-	private EmailNotificationService notification;
 	
 	@ApiOperation(value = "Retorna um cliente a partir do id informado")
 	@ApiResponses(value = {
@@ -82,10 +79,5 @@ public class ClienteController implements MessageResponse {
 		this.service.update(id, dto);
 		return ResponseEntity.ok(createMessageResponse("Cliente atualizado com sucesso!"));
 	}
-	
-	@GetMapping("/sendnotification")
-	public String publishMessageToTopic(){	
-		 notification.publishMessageToTopic();
-		 return "Notification send successfully !!";
-	}
+		
 }

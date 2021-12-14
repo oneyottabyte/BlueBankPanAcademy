@@ -28,7 +28,7 @@ public class EmailNotificationService {
 	}
 	
 	public String publishMessageToTopic(){
-		 PublishRequest publishRequest=new PublishRequest(TOPIC_ARN, buildEmailBody(), "Notification: Network connectivity issue");
+		 PublishRequest publishRequest=new PublishRequest(TOPIC_ARN, buildEmailBody(), "Agradecimento aos cliente BluebanK");
 		 snsClient.publish(publishRequest);		
 		 return "Notificação enviada com sucesso !!";
 	}
