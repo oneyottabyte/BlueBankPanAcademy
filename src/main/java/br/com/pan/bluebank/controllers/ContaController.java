@@ -104,4 +104,5 @@ public class ContaController implements MessageResponse{
 		this.contaService.alterarStatus(id, status);
 		return ResponseEntity.ok(createMessageResponse("Status da conta alterado com sucesso!"));
 	}	
+
 }
