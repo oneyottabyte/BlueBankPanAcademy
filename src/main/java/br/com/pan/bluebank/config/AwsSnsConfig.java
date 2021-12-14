@@ -15,10 +15,10 @@ import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 public class AwsSnsConfig {
 	
 	@Value("&{ACCESS_KEY)")
-    public static final String ACCESS_KEY = "AKIARHUOU2AV3DOITZMK";	
+    public String ACCESS_KEY;	
 
 	@Value("&{SECRET_KEY)")
-	public static final String SECRET_KEY = "bcT8kwwmkMsAjmmhPm2U04VQLKfc4+2DHSVI48QZ";
+	public String SECRET_KEY;
 
     @Primary
     @Bean
