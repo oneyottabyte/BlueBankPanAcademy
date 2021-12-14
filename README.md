@@ -86,9 +86,16 @@ eram transicionados até chegarem a coluna de conclusão.
   Arquitetura do Projeto
 </h1>
 
-<p text-align="justify">&emsp;&emsp;&emsp;A arquitetura do projeto segue o padrão MVC, com a adição de uma camada de Service na qual são incluídas as regras de negócio e uma camada de Repository, na qual são criadas as queries executadas no banco de dados. Pacotes auxiliares para tratamentos de exceção, DTO's, mapeamento de entidades e funções auxiliares também foram implementados. <br/> <br/>O diagrama de classes do projeto pode ser encontrado <a href="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/diagrama_de_classe_bluebank.drawio.png">aqui</a>.
-</p>	
-O modelo relacional do projeto pode ser encontrado <a href="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/der.png">aqui</a>.
+<p text-align="justify">&emsp;&emsp;&emsp;A arquitetura do projeto segue o padrão MVC, com a adição de uma camada de Service na qual são incluídas as regras de negócio e uma camada de Repository, na qual são criadas as queries executadas no banco de dados. Pacotes auxiliares para tratamentos de exceção, DTO's, mapeamento de entidades e funções auxiliares também foram implementados. </p>
+
+<p align="center">  
+  <img align="center" src="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/Arquitetura MVC.jpeg" width="500px" />
+</p>
+
+<p text-align="justify">&emsp;&emsp;&emsp;O Diagrama de classes do projeto pode ser encontrado abaixo com as devidas classes abordadas no desenvolvimento da API. </p>
+
+<p align="center">  
+  <img align="center" src="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/der_bluebank.png" width="600px" />
 </p>	
 
 <h1 id="documentacao">
