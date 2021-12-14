@@ -281,7 +281,7 @@ Breve descrição dos endpoints da aplicação.
   <summary>Notification Endpoints</summary>
  <br>  
   
-  Envia uma mensagem estática para todos os email inscritos
+  Envia uma mensagem estática para todos os emails inscritos
   ``` ruby
   GET /v1/notification/sendmessage
   ```
@@ -293,12 +293,12 @@ Breve descrição dos endpoints da aplicação.
   Aws e Deploy
 </h1>
 
-<p align="justify"> &emsp;&emsp;&emsp;Na AWS, a squad escolheu utilizar o serviço EC2 com uma instancia EC2 linux ubunto 20.3. Para a hospedagem do banco de dados, foi utilizada a AWS RDS com o banco de dados MySql 8.23.
+<p align="justify"> &emsp;&emsp;&emsp;Na AWS, a squad escolheu utilizar o serviço EC2 com uma instancia EC2 linux ubunto. Para a hospedagem do banco de dados, foi utilizada a AWS RDS com o banco de dados MySql.
 </p>
 
 <h3>• Passos para o Deploy</h3>
 
-<p align="justify">Após a criação e configuração do ECT e do Banco de Dados RDS, foram realizados os seguintes passos:
+<p align="justify">Após a criação e configuração do EC2 e do Banco de Dados RDS, foram realizados os seguintes passos:
 
 - Criação do container Docker, com o AWS cli instalado, para conexão na instância EC2.
 - Instalação do Docker na instância EC2.
