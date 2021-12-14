@@ -43,6 +43,7 @@
 <p text-align="justify"> &emsp;&emsp;&emsp;A gestão do projeto foi feita através do método Kanban, que consiste em uma forma de gestão visual de projetos, permitindo às equipes visualizar melhor a sua carga e fluxo de trabalho. Foi utilizada a plataforma <a href="https://www.atlassian.com/br/software/trello">Trello</a> para criação do quadro Kanban. Dessa forma, o trabalho ficou exibido em um quadro de projetos organizado por colunas. O design das colunas do quadro Kanban, seguiu a seguinte lógica: 
   <p align="center">
     <b>| Documentação | Backlog | Desenvolvimento | Em Teste | Concluído |</b>
+	 <img height="600" src="https://github.com/jonaslucenafilho/BlueBankPanAcademy/blob/main/assets/quadrofinal.png"/> 	  
   </p>
 </p>
 
@@ -102,6 +103,9 @@ O modelo relacional do projeto pode ser encontrado <a href="https://github.com/j
 
 A collection do postman atualizada pode ser importada no link:
 
+<a href="https://www.getpostman.com/collections/55d368860d8189d4cfcb">Postman Collection</a>
+
+
 ### Api Endpoints
 
 
@@ -115,14 +119,23 @@ Breve descrição dos endpoints da aplicação.
   ``` ruby
   GET /v1/movimentacao
   ```   
+  | Parametro | Tipo | Descrição |
+  | :--- | :--- | :--- |
+  | `size` | `integer` | **Opcional**. Quantidade maxima de itens a serem exibidos |
+  | `sort` | `string` | **Opcional**. Ordena página pelo atributo em ordem ascendente ou descendente |
+	
   Salva uma nova movimentaçao
   ``` ruby
   POST /v1/movimentacao
-  ```
-  Retorna uma movimentaçao a partir do id da conta de origem
+  ```	
+  Retorna uma movimentaçao a partir do id
   ``` ruby
-  GET /v1/movimentacao/{origemId}  
+  GET /v1/movimentacao/{id}  
   ```
+  | Parametro | Tipo | Descrição |
+  | :--- | :--- | :--- |
+  | `id` | `integer` | **Requerido**. id da movimentação |
+
   
 </details>
 
@@ -146,14 +159,30 @@ Breve descrição dos endpoints da aplicação.
   ``` ruby
   GET /v1/contas/extrato  
   ```
+  | Parametro | Tipo | Descrição |
+  | :--- | :--- | :--- |
+  | `contaId ` | `integer` | **Requerido**. Id da conta |
+  | `dataMovimentacao ` | `string`($date-time) | **Opcional**. Data especifica das movimentações |	
+  | `finalDataMovimentacao ` | `string`($date-time) | **Opcional**. Data limite das movimentações da conta |
+  | `tipo ` | `string` | **Opcional**. Tipo desejado da movimentação |
+	
+	
   Retorna uma conta a partir do id
   ``` ruby
   GET /v1/contas/{id}
   ```
+  | Parametro | Tipo | Descrição |
+  | :--- | :--- | :--- |
+  | `id ` | `integer` | **Requerido**. id da conta a ser procurada |
+	
   Altera o status de uma conta a partir do id
   ``` ruby
   PATCH /v1/contas/{id}
   ```  
+  | Parametro | Tipo | Descrição |
+  | :--- | :--- | :--- |
+  | `id ` | `integer` | **Requerido**. id da conta a ser alterada |
+  | `status  ` | `string` | **Requerido**. Valor do status a ser alterado. Valores: ATIVADO, DESATIVADO |	
   
 </details>
 
@@ -241,6 +270,17 @@ Breve descrição dos endpoints da aplicação.
 
 </details>
 
+<details>
+  <summary>Notification Endpoints</summary>
+ <br>  
+  
+  Envia uma mensagem estática para todos os email inscritos
+  ``` ruby
+  GET /v1/notification/sendmessage
+  ```
+
+</details>
+
 <h1 id="aws-deploy">
 <img height="30" src="https://img.icons8.com/color/48/000000/amazon-web-services.png"/>
   Aws e Deploy
@@ -267,8 +307,8 @@ Breve descrição dos endpoints da aplicação.
 <a name = "tech_stack"></a>
 
 - [Java 11](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html) - Versão do Java utilizada
-- [Spring boot](https://spring.io/projects/spring-boot) - Server Environment
-- [Maven](https://maven.apache.org/) - Server Framework
+- [Spring boot](https://spring.io/projects/spring-boot) - Framework de desenvolvimento
+- [Maven](https://maven.apache.org/) - Gerenciador de dependencias
 - [H2 Database](https://www.h2database.com/html/main.html) - Database para o ambiente de testes
 - [MySql Database](https://www.mysql.com/) - Database para o ambiente de produção
 - [Spring Data Jpa](https://spring.io/projects/spring-data-jpa) - Abstração orm do spring pra integração com o banco de dados
