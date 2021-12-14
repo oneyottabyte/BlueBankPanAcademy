@@ -171,6 +171,7 @@ Breve descrição dos endpoints da aplicação.
   | `contaId ` | `integer` | **Requerido**. Id da conta |
   | `dataMovimentacao ` | `string`($date-time) | **Opcional**. Data especifica das movimentações |	
   | `finalDataMovimentacao ` | `string`($date-time) | **Opcional**. Data limite das movimentações da conta |
+  | `inicioDataMovimentacao ` | `string`($date-time) | **Opcional**. Data limite das movimentações da conta |
   | `tipo ` | `string` | **Opcional**. Tipo desejado da movimentação |
 	
 	
