@@ -320,7 +320,7 @@ Breve descrição dos endpoints da aplicação.
 - [H2 Database](https://www.h2database.com/html/main.html) - Database para o ambiente de testes
 - [MySql Database](https://www.mysql.com/) - Database para o ambiente de produção
 - [Spring Data Jpa](https://spring.io/projects/spring-data-jpa) - Abstração orm do spring pra integração com o banco de dados
-- [Swagger](https://swagger.io/) - Documentação ofcial da API
+- [Swagger](https://swagger.io/) - Documentação oficial da API
 - [Postman](https://www.postman.com/) - Ferramenta para testes nas requisições
 - [Lombok](https://projectlombok.org/) - Framework para abstração e melhora na legibilidade do código
 - [Trello](https://trello.com/) - Aplicativo de gerenciamento de projeto
